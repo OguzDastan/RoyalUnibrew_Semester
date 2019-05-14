@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Notifications;
 using Models;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ConsumerUWP.ViewModels
 {
     class Session
     {
         private static Session _activeSession;
-
         public static Session Current {
             get
             {
@@ -24,16 +25,31 @@ namespace ConsumerUWP.ViewModels
 
                 return _activeSession;
             } }
+        public static User CurrentUser
+        {
+            get { return _currUser; }
+        }
         public Session()
         {
         }
 
         private static User _currUser;
-
-        public static User CurrentUser
+         
+        private List<User> getUsersInDb()
         {
-            get { return _currUser; }
+            List<User> users = new List<User>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                Task<string> result = client.GetStringAsync(new Uri("http://localhost:54926/api/Users/"));
+                string jsonString = result.Result;
+                users = JsonConvert.DeserializeObject<List<User>>(jsonString);
+            }
+
+            return users;
         }
+       
+
 
         public bool Login(string UserName, string Password)
         {
