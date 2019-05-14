@@ -10,16 +10,24 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
+            <RowDefinition MaxHeight="55"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
