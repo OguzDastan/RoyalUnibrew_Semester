@@ -11,7 +11,15 @@
         <local:NavigationItem></local:NavigationItem>
     </Page.DataContext>
     <Grid>
+       <StackPanel Margin="100">
+           <Button FontSize="50" Content="Forside" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Tappeoperatør" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Vægtkontrol_PET" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Tap_Kontrolvejledning" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Etiketoperatør" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Færdigvarekontrol" Command="{Binding}"></Button>
+           <Button FontSize="50" Content="Produktionsfølgeseddel" Command="{Binding}"></Button>
+        </StackPanel>
         <TextBlock FontSize="56">K7</TextBlock>
-        <TextBlock FontSize="96" Margin="100">This one is ours baby</TextBlock>
     </Grid>
 </Page>
