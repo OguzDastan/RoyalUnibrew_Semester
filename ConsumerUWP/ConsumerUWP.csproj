@@ -151,7 +151,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationItem.cs" />
+    <Compile Include="ViewModels\NavigationItem.cs" />
     <Compile Include="Operator_Overview.xaml.cs">
       <DependentUpon>Operator_Overview.xaml</DependentUpon>
     </Compile>

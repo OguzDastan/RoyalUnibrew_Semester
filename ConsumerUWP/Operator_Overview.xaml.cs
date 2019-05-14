@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ConsumerUWP.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,10 +57,16 @@ namespace ConsumerUWP
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
+            // TODO: Kill session then navigate back to mainpage
+            //
+            this.Frame.Navigate(typeof(MainPage), null);
+
+            /* // old code //
             if (splitviewContent.CanGoBack)
             {
                 splitviewContent.GoBack();
             }
+            */
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
