@@ -10,29 +10,36 @@ namespace RestService.Managers
 {
     public class UserManager
     {
-
+        //queries
         private const string GET_ONE = "SELECT * FROM users WHERE Uname = @Uname";
 
+        //Look up user by Username.
         public User Get(string Uname)
         {
-            User u = new User();
+            //create empty user object
+            User u = null;
 
+            //query database 
             using(SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
             {
+                //binding of relevent DB parameters
                 cmd.Parameters.AddWithValue("@Uname", Uname);
 
+                //Reader to handle the result
                 SqlDataReader reader = cmd.ExecuteReader();
 
+                //while there's a result
                 while (reader.Read())
                 {
+                    //the empty User object is loaded from the database
                     u.UserName = reader.GetSqlString(0).ToString();
                     u.Password = reader.GetSqlString(1).ToString();
                     u.AccessLevel = reader.GetInt32(2);
                 }
+                //the IO stream of data, comming from database is closed
                 reader.Close();
             }
-
-            Debug.WriteLine($"searching for {Uname}");
+            //Return the User from database, or "null" if no user what Username = Uname
             return u;
         }
     }

@@ -15,7 +15,7 @@ namespace RestService.Controllers
     {
         private static UserManager um = new UserManager();
 
-        // GET: api/Users
+        // GET: api/Users - currently returns empty list
         public IEnumerable<User> Get()
         {
             List<User> users = new List<User>();
@@ -23,9 +23,9 @@ namespace RestService.Controllers
         }
 
         // GET: api/Users/kasper
+        [Route ("api/Users/{Uname}")]
         public User Get(string Uname)
         {
-            Debug.WriteLine("Did the thiiing");
             return um.Get(Uname);
         }
 

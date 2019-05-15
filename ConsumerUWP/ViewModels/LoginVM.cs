@@ -24,7 +24,6 @@ namespace ConsumerUWP.ViewModels
 
         private string _uname;
         private string _pword;
-
         public string Uname
         {
             get { return _uname; }
@@ -34,7 +33,6 @@ namespace ConsumerUWP.ViewModels
                 OnPropertyChanged();
             }
         }
-
         public string Pword {
             get { return _pword; }
             set
@@ -51,18 +49,25 @@ namespace ConsumerUWP.ViewModels
 
         public void login()
         {
-            bool looged = Session.Current.Login(Uname, Pword);
-            Debug.WriteLine("Logging in as: "+Uname+" and curr username = "+Session.CurrentUser.UserName);
-            if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
+            //attempt to login, using the credentials refrenced from the Login.xaml UI
+            bool logged = Session.Current.Login(Uname, Pword);
+
+
+            //if the login was successfull, redirect the user to the correct page
+            if(logged)
             {
-                Frame curr = (Frame) Window.Current.Content;
-                curr.Navigate(typeof(Admin_Overview));
+                if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
+                {
+                    Frame curr = (Frame)Window.Current.Content;
+                    curr.Navigate(typeof(Admin_Overview));
+                }
+                else if (Session.CurrentUser.AccessLevel == User.AccessLevels.USER)
+                {
+                    Frame curr = (Frame)Window.Current.Content;
+                    curr.Navigate(typeof(Operator_Overview));
+                }
             }
-            else if (Session.CurrentUser.AccessLevel == User.AccessLevels.USER)
-            {
-                Frame curr = (Frame)Window.Current.Content;
-               curr.Navigate(typeof(Operator_Overview));
-            }
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

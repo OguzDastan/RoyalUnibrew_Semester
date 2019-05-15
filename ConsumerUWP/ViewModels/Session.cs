@@ -35,32 +35,41 @@ namespace ConsumerUWP.ViewModels
 
         private static User _currUser;
          
-        private List<User> getUsersInDb()
+        private User LookupUser(string UserName)
         {
-            List<User> users = new List<User>();
+            User u = null;
 
+            //Ask the API for a User object, look up by Username (Primary Key)
             using (HttpClient client = new HttpClient())
             {
-                Task<string> result = client.GetStringAsync(new Uri("http://localhost:54926/api/Users/"));
+                //httpGet the api (Ask the rest service)
+                Task<string> result = client.GetStringAsync(new Uri("http://localhost:54926/api/Users/"+UserName));
                 string jsonString = result.Result;
-                users = JsonConvert.DeserializeObject<List<User>>(jsonString);
+                //Convert the resulting JsonString, into a "User" described in the Model.dll lib.
+                u = JsonConvert.DeserializeObject<User>(jsonString);
             }
-
-            return users;
+            return u;
         }
        
 
 
         public bool Login(string UserName, string Password)
         {
-            _currUser = new User(){UserName = UserName, Password = Password, AccessLevel = User.AccessLevels.USER};
+            //get the user login credentials from ui, and look for a match in database
+            _currUser = new User(){UserName = UserName, Password = Password};
 
-            if (CurrentUser.UserName == "admin")
+            User DBUser = LookupUser(UserName); //Chance of null value
+
+            //if the password and username matches the database, return true (login success)
+            if (_currUser.UserName == DBUser.UserName
+                && _currUser.Password == DBUser.Password)
             {
-                CurrentUser.AccessLevel = User.AccessLevels.ADMIN;
+                //Set the logged in user, to have the acceslevel denoted in the database
+                _currUser.AccessLevel = DBUser.AccessLevel;
+                return true;
             }
-
-            return true;
+            //else return false (Login not possible)
+            return false;
         }
     }
 }
