@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="ConsumerUWP.EtiketteArk"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConsumerUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Data="using:Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <GridView Grid.Column="6" ItemsSource="{x:Bind Entries}">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="Data:PalleCheck">
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind LabelNumber}"></TextBlock>
+                        <TextBlock Text="{x:Bind Date}"></TextBlock>
+                        <TextBlock Text="{x:Bind ExpiryDate}"></TextBlock>
+                        <TextBlock Text="{x:Bind ReceiptForTest}"></TextBlock>
+                        <TextBlock Text="{x:Bind SignFromWorker}"></TextBlock>
+                        <TextBlock Text="{x:Bind ControlOfPalletNumber}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        
+        
+    </Grid>
+</Page>

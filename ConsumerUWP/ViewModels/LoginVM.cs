@@ -51,10 +51,9 @@ namespace ConsumerUWP.ViewModels
         {
             //attempt to login, using the credentials refrenced from the Login.xaml UI
             bool logged = Session.Current.Login(Uname, Pword);
-
-
+            
             //if the login was successfull, redirect the user to the correct page
-            if(logged)
+            if (logged)
             {
                 if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
                 {
@@ -67,7 +66,6 @@ namespace ConsumerUWP.ViewModels
                     curr.Navigate(typeof(Operator_Overview));
                 }
             }
-            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
