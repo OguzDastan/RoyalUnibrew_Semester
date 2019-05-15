@@ -31,10 +31,12 @@ namespace RestService.Managers
                 //while there's a result
                 while (reader.Read())
                 {
-                    //the empty User object is loaded from the database
-                    u.UserName = reader.GetSqlString(0).ToString();
-                    u.Password = reader.GetSqlString(1).ToString();
-                    u.AccessLevel = reader.GetInt32(2);
+                    u = new User()
+                    {
+                        UserName = reader.GetSqlString(0).ToString(),
+                        Password = reader.GetSqlString(1).ToString(),
+                        AccessLevel = reader.GetInt32(2),
+                    };
                 }
                 //the IO stream of data, comming from database is closed
                 reader.Close();
