@@ -41,6 +41,7 @@
     <Compile Include="Activity.cs" />
     <Compile Include="BottleCheck.cs" />
     <Compile Include="Etikketering.cs" />
+    <Compile Include="OverviewList.cs" />
     <Compile Include="PalleCheck.cs" />
     <Compile Include="TapCheck.cs" />
     <Compile Include="TapKontrolvejledning.cs" />

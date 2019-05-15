@@ -8,9 +8,45 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
-        <local:NavigationItem></local:NavigationItem>
+        <local:OverviewVM/>
     </Page.DataContext>
-    <Grid>
+    
+    <Grid x:Name="MasterGrid">
+        
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Button Padding="30" Background="Chocolate">
+                        <TextBlock>Opret ny</TextBlock>
+                    </Button>
+                    <Button Padding="30" Background="Chocolate" >
+                        <TextBlock>Opret ny</TextBlock>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- LISTVIEW OVER AKTIVE ARK -->
+            <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="30" Text="{Binding ArkType}" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock FontSize="30" Text="{Binding Title}" HorizontalAlignment="Right"></TextBlock>
+                            <TextBlock FontSize="15" Text="Kontrol: (evt. bool checker flueben/kryds)" HorizontalAlignment="Right"></TextBlock>
+                            <TextBlock FontSize="25" Text="{Binding Controller, Mode=TwoWay}" HorizontalAlignment="Right"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
+
+        <!--
        <StackPanel Margin="100">
            <Button FontSize="50" Content="Forside" Command="{Binding}"></Button>
            <Button FontSize="50" Content="Tappeoperatør" Command="{Binding}"></Button>
@@ -21,5 +57,6 @@
            <Button FontSize="50" Content="Produktionsfølgeseddel" Command="{Binding}"></Button>
         </StackPanel>
         <TextBlock FontSize="56">K7</TextBlock>
+        -->
     </Grid>
 </Page>
