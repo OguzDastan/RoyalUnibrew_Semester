@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!-- LIST MENU FRA MODEL -->
-        <Grid Grid.Row="0" Background="{Binding ElementName=listmenu, Path=SelectedItem.MenuText, Converter={StaticResource backgroundcvt}}">
+        <Grid Grid.Row="0">
 
             <!-- HOVED GRID COLUMNS-->
             <Grid.ColumnDefinitions>
@@ -31,23 +31,24 @@
             </Grid.ColumnDefinitions>
 
             <!-- SIDE VISER (AKTIV SIDE NAVN) -->
-            <Grid Grid.Row="0" Grid.Column="0" Background="Beige">
+            <Grid Grid.Row="0" Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <!-- NY GRID COLUMNS-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250" />
                     <ColumnDefinition Width="1670" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Background="BurlyWood">
-                    <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="30" Margin="110, 10, 0, 50" Height="100" />
-                    <TextBlock FontSize="16" Grid.Column="0" Grid.Row="0" x:Name="logintype" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Operatør" Padding="50" Margin="0, 20,0,0" />
+                <Grid Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,1,0">
+                    <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="30" Margin="110, 10, 0, 50" Height="100"  Foreground="White"/>
+                    <TextBlock FontSize="16" Grid.Column="0" Grid.Row="0" x:Name="logintype" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Operatør" Padding="50" Margin="0, 20,0,0"  Foreground="White"/>
                 </Grid>
 
                 <!-- OVERSIGT TITEL FOR (K?)-->
                 <Grid Grid.Column="1">
                     <TextBlock FontSize="38" Grid.Column="1" Grid.Row="0" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                        <Run>Oversigt for </Run>
-                        <Run Text="{Binding ElementName=listmenu, Path=SelectedItem.MenuText}"></Run>
+                        <Run FontWeight="Bold">Process Oversigt </Run>
+                        <Run>for </Run>
+                        <Run FontWeight="Black" Text="{Binding ElementName=listmenu, Path=SelectedItem.MenuText}"></Run>
                     </TextBlock>
 
                 </Grid>
@@ -56,14 +57,14 @@
         </Grid>
 
         <!-- NAVIGATE PAGE HEADER -->
-        <SplitView Grid.Row="1" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="Aquamarine">
+        <SplitView Grid.Row="1" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="White">
             <SplitView.Pane>
                 <!-- NAV ITEM LIST BLOCK-->
-                <ListView x:Name="listmenu" ItemsSource="{x:Bind menu}" SelectionChanged="ListView_SelectionChanged" Background="Bisque">
+                <ListView x:Name="listmenu" ItemsSource="{x:Bind menu}" SelectionChanged="ListView_SelectionChanged" Background="Bisque" BorderBrush="Black" BorderThickness="0,0,1,0" Margin="0,0,50,0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center" />
+                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" VerticalAlignment="Center" Text="&#xE1A5;" />
                                 <TextBlock Text="{Binding MenuText}" Margin="0" VerticalAlignment="Center" />
                             </StackPanel>
                         </DataTemplate>

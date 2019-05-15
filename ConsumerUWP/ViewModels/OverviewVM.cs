@@ -18,31 +18,32 @@ namespace ConsumerUWP.ViewModels
 
         private string _controller;
 
-        // her huskes den valgte bog :-)
-        private OverviewList _selectedBook;
+        private OverviewList _selectedark;
 
-        // Her gemmes alle bøger - observable coolection betyder at den kan notificere GUI om ændringer
         private ObservableCollection<OverviewList> _overviewlist = new ObservableCollection<OverviewList>();
 
         public OverviewVM()
         {
-            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 7.30"));
+            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 07.30"));
             _overviewlist.Add(new OverviewList("Tappe Operatør", "15-05-2019 / 11.30"));
             _overviewlist.Add(new OverviewList("Trykkontrol", "15-05-2019 / 14.30"));
+            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 15.45"));
             _overviewlist.Add(new OverviewList("Færdigvare Kontrol", "15-05-2019 / 18.30"));
+            _overviewlist.Add(new OverviewList("Tappe Operatør", "16-05-2019 / 07.30"));
+            _overviewlist.Add(new OverviewList("Trykkontrol", "16-05-2019 / 08.00"));
 
-            LoanBookCommand = new RelayCommand(
-                addLoanertoSelectedBook);
+            ControlArkCommand = new RelayCommand(
+                AddControllerToArk);
 
         }
 
-        public OverviewList SelectedBook
+        public OverviewList SelectedArk
         {
-            get { return _selectedBook; }
+            get { return _selectedark; }
             set
             {
-                _selectedBook = value;
-                OnPropertyChanged(); // fortæller XAML at property er opdateret
+                _selectedark = value;
+                OnPropertyChanged();
             }
         }
 
@@ -63,20 +64,17 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
-        public RelayCommand LoanBookCommand
+        public RelayCommand ControlArkCommand
         {
             get;
             private set;
         }
 
-        private void addLoanertoSelectedBook()
+        private void AddControllerToArk()
         {
-            Debug.WriteLine("add loaner");
-            //Debug.WriteLine("Loaner: " + Loaner);
-            //Debug.WriteLine("SelectedBook_: "+ SelectedBook.Title);
-            Debug.WriteLine(SelectedBook);
-            SelectedBook.Controller = Controller;
-            //OnPropertyChanged("SelectedBook");
+            Debug.WriteLine("add control");
+            Debug.WriteLine(SelectedArk);
+            SelectedArk.Controller = Controller;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

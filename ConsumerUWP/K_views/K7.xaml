@@ -10,39 +10,129 @@
     <Page.DataContext>
         <local:OverviewVM/>
     </Page.DataContext>
-    
+    <Page.Resources>
+        <local:BoolToVisiableConverter x:Key="visiblecvt" />
+        <local:BackgroundConverter x:Key="backgroundcvt" />
+    </Page.Resources>
+
     <Grid x:Name="MasterGrid">
-        
+
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Button Padding="30" Background="Chocolate">
-                        <TextBlock>Opret ny</TextBlock>
-                    </Button>
-                    <Button Padding="30" Background="Chocolate" >
-                        <TextBlock>Opret ny</TextBlock>
-                    </Button>
-                </StackPanel>
-            </StackPanel>
-            
-            <!-- LISTVIEW OVER AKTIVE ARK -->
-            <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate >
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock FontSize="30" Text="{Binding ArkType}" HorizontalAlignment="Left"></TextBlock>
-                            <TextBlock FontSize="30" Text="{Binding Title}" HorizontalAlignment="Right"></TextBlock>
-                            <TextBlock FontSize="15" Text="Kontrol: (evt. bool checker flueben/kryds)" HorizontalAlignment="Right"></TextBlock>
-                            <TextBlock FontSize="25" Text="{Binding Controller, Mode=TwoWay}" HorizontalAlignment="Right"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+
+
+            <Grid x:Name="InnerGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <Grid BorderBrush="Black" BorderThickness="0,0,0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Padding="10" >
+                        <TextBlock FontSize="30" FontWeight="Medium" ToolTipService.ToolTip="Her kan du se oversigten af de aktive ark. For at ryde op på oversigten, skal admin logge på og arkivere arkene."> 
+                        <Run Text="Aktive ark" />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
+                        <Button Padding="5" Background="ForestGreen" Click="Button_Click" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
+                            <Button.Content>
+                                <TextBlock Text="Kontrollere ark" FontSize="18"
+                                           ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
+                            </Button.Content>
+                        </Button>
+
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center">
+                        <Button Padding="5" Background="MidnightBlue" Click="Button_Click2" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
+                            <Button.Content>
+                                <TextBlock Text="Gå til ark" FontSize="18"
+                                           ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
+                            </Button.Content>
+                        </Button>
+
+
+                    </StackPanel>
+
+
+                    <StackPanel HorizontalAlignment="Right" Grid.Column="3" VerticalAlignment="Center" >
+                        <Button Padding="5" Background="ForestGreen" HorizontalAlignment="Center" Margin="0,0,10,5" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
+                            <Button.Content>
+                                <TextBlock Text="Opret Ny" FontSize="18" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <!-- LISTVIEW OVER AKTIVE ARK -->
+                <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" SelectedItem="{Binding SelectedArk, Mode=TwoWay}" Grid.Row="1" Grid.Column="1">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <Grid Padding="10" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,1" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="0.2*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="20" Text="{Binding ArkType}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Foreground="Black"/>
+                                <TextBlock FontSize="15" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="Gray"/>
+                                <TextBlock FontSize="15" Text="Kontrol: (evt. bool checker flueben/kryds)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Foreground="Gray"/>
+                                <TextBlock FontSize="15" Text="{Binding Controller, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3" Foreground="ForestGreen"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
+
+                <!-- LORTET GIDER IKKE????? aq -->
+                <Grid Grid.Row="2" Grid.Column="1" Background="LightGray" Padding="20" x:Name="ControlPopUp">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Bold" Grid.Row="0  "  Text="{Binding SelectedArk.ArkType}" Margin="10"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedArk.Title}" Margin="10"/>
+                    <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding Controller, Mode=TwoWay}" Width="100" PlaceholderText="Kontrollør" Margin="10" ToolTipService.ToolTip="Skriv dine initialer her"/>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Godkend" Command="{Binding ControlArkCommand}" Margin="10" Background="ForestGreen" Foreground="White"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" Background="LightGray" Padding="20" x:Name="GaaTilArk">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Medium" Grid.Row="0"  Text="Vælge ark" Margin="10"/>
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Gå til"  Margin="10" Background="ForestGreen" Foreground="White"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.ArkType}" Margin="10"/>
+            </Grid>
 
         </StackPanel>
 

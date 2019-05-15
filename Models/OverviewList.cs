@@ -13,11 +13,17 @@ namespace Models
         private string _arktype;
         private string _title;
         private string _controller;
+        private bool _isChecked;
 
         public OverviewList(string arktype, string title)
         {
             _arktype = arktype;
             _title = title;
+        }
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set { _isChecked = value; }
         }
 
         public string ArkType

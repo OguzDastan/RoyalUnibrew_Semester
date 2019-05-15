@@ -26,6 +26,35 @@ namespace ConsumerUWP.K_views
         public K7()
         {
             this.InitializeComponent();
+            ControlPopUp.Visibility = Visibility.Collapsed;
+            GaaTilArk.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            /// TODO: session check for admin clearence
+            if (ControlPopUp.Visibility == Visibility.Collapsed)
+            {
+                ControlPopUp.Visibility = Visibility.Visible;
+                GaaTilArk.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ControlPopUp.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            /// TODO: session check for admin clearence
+            if (GaaTilArk.Visibility == Visibility.Collapsed)
+            {
+                GaaTilArk.Visibility = Visibility.Visible;
+                ControlPopUp.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                GaaTilArk.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
