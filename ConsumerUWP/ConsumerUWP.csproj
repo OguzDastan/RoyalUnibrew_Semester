@@ -121,9 +121,6 @@
     </Compile>
     <Compile Include="App.xaml.cs">
     </Compile>
-    <Compile Include="Etiketoperatør.xaml.cs">
-      <DependentUpon>Etiketoperatør.xaml</DependentUpon>
-    </Compile>
     <Compile Include="K_views\K11.xaml.cs">
       <DependentUpon>K11.xaml</DependentUpon>
     </Compile>
@@ -186,10 +183,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Admin_Overview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Etiketoperatør.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
