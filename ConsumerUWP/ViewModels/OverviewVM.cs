@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using ConsumerUWP.Annotations;
 using GalaSoft.MvvmLight.Command;
 using Models;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace ConsumerUWP.ViewModels
 {
@@ -34,6 +36,7 @@ namespace ConsumerUWP.ViewModels
 
             ControlArkCommand = new RelayCommand(
                 AddControllerToArk);
+
 
         }
 
@@ -72,8 +75,6 @@ namespace ConsumerUWP.ViewModels
 
         private void AddControllerToArk()
         {
-            Debug.WriteLine("add control");
-            Debug.WriteLine(SelectedArk);
             SelectedArk.Controller = Controller;
         }
 

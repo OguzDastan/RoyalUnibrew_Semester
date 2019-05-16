@@ -11,21 +11,33 @@
 
     <Grid>
 
-        <GridView Grid.Column="6" ItemsSource="{x:Bind Entries}">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="Data:PalleCheck">
-                    <StackPanel>
-                        <TextBlock Text="{x:Bind LabelNumber}"></TextBlock>
-                        <TextBlock Text="{x:Bind Date}"></TextBlock>
-                        <TextBlock Text="{x:Bind ExpiryDate}"></TextBlock>
-                        <TextBlock Text="{x:Bind ReceiptForTest}"></TextBlock>
-                        <TextBlock Text="{x:Bind SignFromWorker}"></TextBlock>
-                        <TextBlock Text="{x:Bind ControlOfPalletNumber}"></TextBlock>
+
+        <ListView Name="MyListView" ItemsSource="{x:Bind Entries}">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Label Nummer" Width="200" />
+                        <TextBlock  Text="Dato" Width="200" />
+                        <TextBlock Text="Udløbs Dato" Width="200" />
+                        <TextBlock  Text="Test-Kvittering" Width="200" />
+                        <TextBlock Text="Opperatør Underskrift" Width="200" />
+                        <TextBlock  Text="Palle Nummer Kontrol" Width="200" />
                     </StackPanel>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-        
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="Data:PalleCheck">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="200" Text="{x:Bind LabelNumber}"></TextBlock>
+                        <TextBlock Width="200" Text="{x:Bind Date}"></TextBlock>
+                        <TextBlock Width="200" Text="{x:Bind ExpiryDate}"></TextBlock>
+                        <TextBlock Width="200" Text="{x:Bind ReceiptForTest}"></TextBlock>
+                        <TextBlock Width="200" Text="{x:Bind SignFromWorker}"></TextBlock>
+                        <TextBlock Width="200" Text="{x:Bind ControlOfPalletNumber}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         
     </Grid>
 </Page>
