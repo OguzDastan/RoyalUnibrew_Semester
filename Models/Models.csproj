@@ -43,6 +43,7 @@
     <Compile Include="Etikketering.cs" />
     <Compile Include="OverviewList.cs" />
     <Compile Include="PalleCheck.cs" />
+    <Compile Include="ProcessOrdre.cs" />
     <Compile Include="TapCheck.cs" />
     <Compile Include="TapKontrolvejledning.cs" />
     <Compile Include="TappeOperator.cs" />
