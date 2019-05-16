@@ -14,6 +14,7 @@ using Models;
 using User = Models.User;
 using ConsumerUWP;
 using ConsumerUWP.Annotations;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace ConsumerUWP.ViewModels
@@ -24,6 +25,7 @@ namespace ConsumerUWP.ViewModels
 
         private string _uname;
         private string _pword;
+        private string _message;
         public string Uname
         {
             get { return _uname; }
@@ -42,19 +44,41 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value; 
+                OnPropertyChanged();
+            }
+
+        }
+
         public LoginVM()
         {
             LoginCommand = new RelayCommand(login);
+            Message = "";
         }
 
         public void login()
         {
-            //attempt to login, using the credentials refrenced from the Login.xaml UI
+            //attempt to login, using the credentials referenced from the Login.xaml UI
             bool logged = Session.Current.Login(Uname, Pword);
+            // if statement checking for incorrect username or password
+            if (Session.Current.LookupUser(Uname) == null)
             
-            //if the login was successfull, redirect the user to the correct page
+                Message = "Fejl i brugernavn";
+            
+            else
+            {
+                Message = "Fejl i password";
+            }
+
+            //if the login was successful, redirect the user to the correct page
             if (logged)
             {
+                Message = "";
                 if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
                 {
                     Frame curr = (Frame)Window.Current.Content;
@@ -66,6 +90,7 @@ namespace ConsumerUWP.ViewModels
                     curr.Navigate(typeof(Operator_Overview));
                 }
             }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

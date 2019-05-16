@@ -35,7 +35,7 @@ namespace ConsumerUWP.ViewModels
 
         private static User _currUser;
          
-        private User LookupUser(string UserName)
+        public User LookupUser(string UserName)
         {
             User u = null;
 
@@ -59,6 +59,7 @@ namespace ConsumerUWP.ViewModels
             _currUser = new User(){UserName = UserName, Password = Password};
 
             User DBUser = LookupUser(UserName); //Chance of null value
+            if (DBUser == null) return false;
 
             //if the password and username matches the database, return true (login success)
             if (_currUser.UserName == DBUser.UserName

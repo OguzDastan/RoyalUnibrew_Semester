@@ -2,13 +2,45 @@
     x:Class="ConsumerUWP.Admin_Overview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ConsumerUWP"
+    xmlns:local="using:ConsumerUWP.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <local:AdminVM></local:AdminVM>
+    </Page.DataContext>
 
     <Grid>
-
+        <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Date}"></TextBlock>
+                        <TextBlock Text="{Binding Nummer}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView ItemsSource="{Binding Doing}" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Date}"></TextBlock>
+                        <TextBlock Text="{Binding Nummer}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+            <ListView ItemsSource="{Binding Scheduled}" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Date}"></TextBlock>
+                            <TextBlock Text="{Binding Nummer}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
     </Grid>
 </Page>
