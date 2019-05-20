@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class ProcessOrdre
+    public class ProcessOrdre
     {
         public int ProcessOrderNR { get; set; }
         public int ColumnNR { get; set; }
