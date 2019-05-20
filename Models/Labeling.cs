@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class Lableing
+    public class Labeling
     {
         public int ProcessOrderNR { get; set; }
         public DateTime CheckTime { get; set; }
@@ -14,7 +14,7 @@ namespace Models
         public DateTime ExpireDate { get; set; }
         public string SignForTest { get; set; }
 
-        public Lableing()
+        public Labeling()
         {
 
         }
