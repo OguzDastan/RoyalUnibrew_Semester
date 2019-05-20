@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Activity
+    public class Worker
     {
-        public int ActivityID { get; set; }
-        public string ActivityName { get; set; }
+        public string WorkerSign { get; set; }
+        public int WorkerID { get; set; }
 
-        public Activity()
+        public Worker()
         {
 
         }

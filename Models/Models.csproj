@@ -41,14 +41,19 @@
     <Compile Include="Activity.cs" />
     <Compile Include="BottleCheck.cs" />
     <Compile Include="Etikketering.cs" />
+    <Compile Include="Lableing.cs" />
+    <Compile Include="LableingComment.cs" />
     <Compile Include="OverviewList.cs" />
     <Compile Include="PalleCheck.cs" />
+    <Compile Include="PalletCheck.cs" />
+    <Compile Include="ProcessActivity.cs" />
     <Compile Include="ProcessOrdre.cs" />
     <Compile Include="TapCheck.cs" />
     <Compile Include="TapKontrolvejledning.cs" />
     <Compile Include="TappeOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
