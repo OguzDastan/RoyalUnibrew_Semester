@@ -18,39 +18,41 @@ namespace RestService.Controllers
         // GET: api/Users - currently returns empty list
         public IEnumerable<Labeling> Get()
         {
-            List<Labeling> Labels = new List<Labeling>();
-            return Labels.AsEnumerable<Labeling>();
+            return um.Get();
         }
 
-        // GET: api/Users/kasper
-        [Route("api/Users/{processOrdreNr}/{timeOfTest}")]
-        public Labeling Get(int processOrdreNr, string timeOfTest)
+        [Route("api/Labeling/{ProcessOrderNR}")]
+        public IEnumerable<Labeling> Get(int ProcessOrderNR)
         {
-            string sec = timeOfTest.Substring(4);
-            timeOfTest = timeOfTest.Remove(4);
-            string min = timeOfTest.Substring(2);
-            string hour = timeOfTest.Remove(2);
-
-            //DateTime obj = new DateTime();
-            string date = "2019-08-23'3'22 - 40 - 30";
-
-            DateTime createDate = DateTime.ParseExact(date, "yyyy-MM-dd'T'hh-mm-ss", CultureInfo.InvariantCulture);
-            return um.Get(processOrdreNr, DateTime.Parse(timeOfTest));
+            return um.Get(ProcessOrderNR);
         }
-
-        // POST: api/Users
-        public void Post([FromBody]string value)
+        
+        [Route("api/Labeling/{processOrdreNr}/{hour}/{min}")]
+        public Labeling Get(int processOrdreNr, int hour, int min)
         {
+            TimeSpan ts = new TimeSpan(hour, min, 0);
+            return um.Get(processOrdreNr, ts);
         }
-
-        // PUT: api/Users/5
-        public void Put(int id, [FromBody]string value)
+        
+        public bool Post([FromBody]Labeling value)
         {
+            return um.Post(value);
         }
-
-        // DELETE: api/Users/5
-        public void Delete(int id)
+        
+        public bool Put(int id, [FromBody]Labeling value)
         {
+            return um.Put(id, value);
+        }
+        [Route("api/Labeling/{processOrdreNr}/{hour}/{min}")]
+        public bool Delete(int id)
+        {
+            return um.Delete(id);
+        }
+        public bool Delete(int id, int hour, int min)
+        {
+            TimeSpan ts = new TimeSpan(hour, min, 0);
+
+            return um.Delete(id, ts);
         }
     }
 }

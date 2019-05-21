@@ -89,6 +89,7 @@ namespace RestService.Managers
                         ProcessDate = reader.GetDateTime(4)
                     };
                 }
+                reader.Close();
             }
             return po;
         }
