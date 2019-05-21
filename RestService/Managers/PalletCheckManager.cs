@@ -15,10 +15,10 @@ namespace RestService.Managers
         private const string GET_ALL = "SELECT * FROM PalleCheck";
         private const string INSERT = "INSERT INTO PalleCheck values (@ProcessOrderNR, @TimeOfTest, @Pallet, @WorkerID)";
         private const string UPDATE = "UPDATE PalleCheck " +
-                                      "SET Pallet = @Pallet " +
-                                      "TimeOfTest = @TimeOfTest " +
+                                      "SET Pallet = @Pallet, " +
                                       "WorkerID = @WorkerID " +
-                                      "WHERE ProcessOrderNR = @ProcessOrderNR ";
+                                      "WHERE ProcessOrderNR = @ProcessOrderNR " +
+                                      "AND TimeOfTest = @TimeOfTest";
         private const string DELETE_BY_PROCESSNR = "DELETE FROM PalleCheck WHERE ProcessOrderNR = @ID ";
         private const string DELETE_ONE = "SELECT FROM PalleCheck WHERE ProcessOrderNR = @ID AND TimeOfTest = @TimeOfTest";
 
