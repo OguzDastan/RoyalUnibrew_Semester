@@ -11,7 +11,7 @@ namespace RestService.Managers
     {
         //queries
         private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrdreNr = @ProcessOrdreNr";
-        private const string INSERT = "INSERT INTO LabelingComment values (WorkerID, @Comment)";
+        private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment)";
         private const string UPDATE = "UPDATE LabelingComment" +
                                       "SET WorkerID = @WorkerID" +
                                       "AND Comment = @Comment" +
@@ -51,20 +51,22 @@ namespace RestService.Managers
             return a;
         }
 
-        public bool Post(Activity activity)
+        public bool Post(LabelingComment labelingComment)
         {
             SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ActivityName", activity.ActivityName);
+            cmd.Parameters.AddWithValue("@WorkerID", labelingComment.WorkerID);
+            cmd.Parameters.AddWithValue("@Comment", labelingComment.Comment);
             int rowsAffected = cmd.ExecuteNonQuery();
 
             return rowsAffected == 1;
         }
 
-        public bool Put(int id, Activity activity)
+        public bool Put(int id, LabelingComment labelingComment)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ActivityName", activity.ActivityName);
-            cmd.Parameters.AddWithValue("@ActivityID", id);
+            cmd.Parameters.AddWithValue("@ProcessOrdreNr", labelingComment.ProcessOrderNR);
+            cmd.Parameters.AddWithValue("@WorkerID", labelingComment.WorkerID);
+            cmd.Parameters.AddWithValue("@Comment", labelingComment.Comment);
 
             int noOfRows = cmd.ExecuteNonQuery();
             return noOfRows == 1;
@@ -73,7 +75,7 @@ namespace RestService.Managers
         public bool Delete(int id)
         {
             SqlCommand cmd = new SqlCommand(DELETE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ID", id);
+            cmd.Parameters.AddWithValue("@ProcessOrdreNr", id);
 
             int noOfRows = cmd.ExecuteNonQuery();
 
