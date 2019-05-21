@@ -34,13 +34,17 @@ namespace RestService.Controllers
         }
 
         // PUT: api/PalletCheck/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/Activity/{id}")]
+        public bool Put(int id, [FromBody]PalletCheck value)
         {
+            return palletCheckManager.Put(id, value);
         }
 
         // DELETE: api/PalletCheck/5
-        public void Delete(int id)
+        [Route("api/Activity/{id}")]
+        public bool Delete(int id)
         {
+            return palletCheckManager.Delete(id);
         }
     }
 }
