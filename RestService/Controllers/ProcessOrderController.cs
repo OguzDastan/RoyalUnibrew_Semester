@@ -19,24 +19,27 @@ namespace RestService.Controllers
         }
 
         // GET: api/ProcessOrder/5
-        public string Get(int id)
+        public ProcessOrdre Get(int id)
         {
-            return "value";
+            return poMan.Get(id);
         }
 
         // POST: api/ProcessOrder
-        public void Post([FromBody]string value)
+        public bool Post([FromBody]ProcessOrdre value)
         {
+            return poMan.Post(value);
         }
 
         // PUT: api/ProcessOrder/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put(int id, [FromBody]ProcessOrdre value)
         {
+            return poMan.Put(value);
         }
 
         // DELETE: api/ProcessOrder/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            return poMan.Delete(id);
         }
     }
 }

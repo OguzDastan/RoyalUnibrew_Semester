@@ -14,6 +14,59 @@ namespace RestService.Managers
         private const string GET_ONE = "SELECT * FROM ProcessOrder WHERE ProcessOrderNR = @id";
         private const string GET_BY_DATE = "SELECT * FROM ProcessOrder WHERE ProcessDate = @date";
         private const string GET_BY_DATE_SPAN = "SELECT * FROM ProcessOrder WHERE ProcessDate < @dateHigher AND ProcessDate > @DateLower";
+        private const string INSERT = "INSERT INTO ProcessOrder values (@ProcessOrderNR, @ColumnNR, @EndProductNR, @EndProductName, @ProcessDate)";
+        private const string UPDATE = "UPDATE ProcessOrder"
+            + "ColumnNR = @ColumNR "
+            + "EndProductNR = @EndProductNr "
+            + "EndProductName = @EndProductName "
+            + "ProcessDate = @ProcessDate "
+            + "WHERE ProcessOrderNR = @ProcessOrderNr ";
+        private const string DELETE = "DELETE FROM ProcessOrder WHERE ProcessOrderNR = @ProcessOrderNR";
+
+        public bool Put(ProcessOrdre po)
+        {
+            using (SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection))
+            {
+                cmd.Parameters.AddWithValue("@ProcessOrderNR", po.ProcessOrderNR);
+                cmd.Parameters.AddWithValue("@ColumnNR", po.ColumnNR);
+                cmd.Parameters.AddWithValue("@EndProductNR", po.EndproductNR);
+                cmd.Parameters.AddWithValue("@EndProductName", po.EndProductName);
+                cmd.Parameters.AddWithValue("@ProcessDate", po.ProcessDate);
+
+                int numRowsAffected = cmd.ExecuteNonQuery();
+
+                return numRowsAffected == 1;
+            }
+        }
+
+        public bool Delete(int ProcessOrderNR)
+        {
+            using (SqlCommand cmd = new SqlCommand(DELETE, SQLConnectionSingleton.Instance.DbConnection))
+            {
+                cmd.Parameters.AddWithValue("@ProcessOrderNR", ProcessOrderNR);
+
+                int RowsAffected = cmd.ExecuteNonQuery();
+
+                return RowsAffected == 1;
+            }
+        }
+
+        public bool Post(ProcessOrdre po)
+        {
+
+            using (SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection))
+            {
+                cmd.Parameters.AddWithValue("@ProcessOrderNR", po.ProcessOrderNR);
+                cmd.Parameters.AddWithValue("@ColumnNR", po.ColumnNR);
+                cmd.Parameters.AddWithValue("@EndProductNR", po.EndproductNR);
+                cmd.Parameters.AddWithValue("@EndProductName", po.EndProductName);
+                cmd.Parameters.AddWithValue("@ProcessDate", po.ProcessDate);
+
+                int RowsAffected = cmd.ExecuteNonQuery();
+
+                return RowsAffected == 1;
+            }
+        }
 
         public ProcessOrdre Get(int id)
         {
