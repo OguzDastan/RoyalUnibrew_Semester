@@ -16,9 +16,9 @@ namespace RestService.Controllers
         
 
         // GET: api/Activity
-        public IEnumerable<string> Get()
+        public IEnumerable<Activity> Get()
         {
-            return new string[] { "value1", "value2" };
+            return activitiesManager.Get();
         }
 
         // GET: api/Activity/5

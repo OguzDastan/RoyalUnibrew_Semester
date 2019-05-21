@@ -11,12 +11,32 @@ namespace RestService.Managers
     public class ActivitiesManager
     {
         //queries
+        private const string GET_ALL = "SELECT * FROM Activities";
         private const string GET_ONE = "SELECT * FROM Activities WHERE ActivityID = @ActivityID";
         private const string INSERT = "INSERT INTO Activities values (@ActivityName)";
         private const string UPDATE = "UPDATE Activities " + 
                                       "SET ActivityName = @ActivityName " +
                                       "WHERE ActivityID = @ActivityID ";
         private const string DELETE = "DELETE FROM Activities WHERE ActivityID = @ID ";
+
+        public List<Activity> Get()
+        {
+            List<Activity> activities = new List<Activity>();
+
+            using (SqlCommand cmd = new SqlCommand(GET_ALL, SQLConnectionSingleton.Instance.DbConnection))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    activities.Add(new Activity() {
+                        ActivityID = reader.GetInt32(0),
+                        ActivityName = reader.GetString(1).ToString()
+                    });
+                }
+            }
+            return activities;
+        }
 
         //Look up activity by ActivityID
         public Activity Get(int ActivityID)
