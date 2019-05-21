@@ -17,7 +17,7 @@ namespace RestService.Managers
         private const string UPDATE = "UPDATE PalleCheck " +
                                       "SET Pallet = @Pallet " +
                                       "TimeOfTest = @TimeOfTest " +
-                                      "WokerID = @WorkerID " +
+                                      "WorkerID = @WorkerID " +
                                       "WHERE ProcessOrderNR = @ProcessOrderNR ";
         private const string DELETE_BY_PROCESSNR = "DELETE FROM PalleCheck WHERE ProcessOrderNR = @ID ";
         private const string DELETE_ONE = "SELECT FROM PalleCheck WHERE ProcessOrderNR = @ID AND TimeOfTest = @TimeOfTest";
