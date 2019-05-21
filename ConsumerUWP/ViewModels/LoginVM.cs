@@ -35,7 +35,8 @@ namespace ConsumerUWP.ViewModels
                 OnPropertyChanged();
             }
         }
-        public string Pword {
+        public string Pword
+        {
             get { return _pword; }
             set
             {
@@ -49,7 +50,7 @@ namespace ConsumerUWP.ViewModels
             get { return _message; }
             set
             {
-                _message = value; 
+                _message = value;
                 OnPropertyChanged();
             }
 
@@ -67,9 +68,9 @@ namespace ConsumerUWP.ViewModels
             bool logged = Session.Current.Login(Uname, Pword);
             // if statement checking for incorrect username or password
             if (Session.Current.LookupUser(Uname) == null)
-            
+            {
                 Message = "Fejl i brugernavn";
-            
+            }
             else
             {
                 Message = "Fejl i password";
