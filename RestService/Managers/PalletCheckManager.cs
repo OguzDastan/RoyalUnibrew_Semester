@@ -20,7 +20,7 @@ namespace RestService.Managers
                                       "WHERE ProcessOrderNR = @ProcessOrderNR " +
                                       "AND TimeOfTest = @TimeOfTest";
         private const string DELETE_BY_PROCESSNR = "DELETE FROM PalleCheck WHERE ProcessOrderNR = @ID ";
-        private const string DELETE_ONE = "SELECT FROM PalleCheck WHERE ProcessOrderNR = @ID AND TimeOfTest = @TimeOfTest";
+        private const string DELETE_ONE = "DELETE FROM PalleCheck WHERE ProcessOrderNR = @ID AND TimeOfTest = @TimeOfTest";
 
         public PalletCheck Get(int ProcessOrderNR, TimeSpan TimeOfTest)
         {
