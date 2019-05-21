@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class LableingComment
+    public class LabelingComment
     {
         public int ProcessOrderNR { get; set; }
         public string Comment { get; set; }
         public int WorkerID { get; set; }
 
-        public LableingComment()
+        public LabelingComment()
         {
 
         }

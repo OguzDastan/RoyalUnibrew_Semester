@@ -42,7 +42,7 @@
     <Compile Include="BottleCheck.cs" />
     <Compile Include="Etikketering.cs" />
     <Compile Include="Labeling.cs" />
-    <Compile Include="LableingComment.cs" />
+    <Compile Include="LabelingComment.cs" />
     <Compile Include="OverviewList.cs" />
     <Compile Include="PalleCheck.cs" />
     <Compile Include="PalletCheck.cs" />
