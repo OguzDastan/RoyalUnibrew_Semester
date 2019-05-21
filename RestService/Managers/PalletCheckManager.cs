@@ -10,21 +10,22 @@ namespace RestService.Managers
     public class PalletCheckManager
     {
         //queries
-        private const string GET_ONE = "SELECT * FROM PalleCheck WHERE ProcessOrderNR = @ProcessOrderNR ";
+        private const string GET_ONE = "SELECT * FROM PalleCheck WHERE ProcessOrderNR = @ProcessOrderNR AND TimeOfTest = @TimeOfTest";
         private const string INSERT = "INSERT INTO PalleCheck values (@ProcessOrderNR)";
         private const string UPDATE = "UPDATE Activities " +
                                       "SET ActivityName = @ActivityName " +
                                       "WHERE ActivityID = @ActivityID ";
         private const string DELETE = "DELETE FROM Activities WHERE ActivityID = @ID ";
 
-        public PalletCheck Get(int ProcessOrderNR)
+        public PalletCheck Get(int ProcessOrderNR, TimeSpan TimeOfTest)
         {
             // creating an empty palletcheck object
             PalletCheck pallet = null;
 
             using (SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
             {
-                cmd.Parameters.AddWithValue("@ProcessOrderNR ", ProcessOrderNR);
+                cmd.Parameters.AddWithValue("@ProcessOrderNR", ProcessOrderNR);
+                cmd.Parameters.AddWithValue("@TimeOfTest", TimeOfTest);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
