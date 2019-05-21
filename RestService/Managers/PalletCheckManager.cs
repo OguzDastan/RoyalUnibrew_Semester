@@ -35,7 +35,7 @@ namespace RestService.Managers
                     pallet = new PalletCheck()
                     {
                         ProcessOrderNR = reader.GetInt32(0),
-                        TimeOfTest = reader.GetDateTime(1),
+                        TimeOfTest = reader.GetTimeSpan(1),
                         Pallet = reader.GetString(2),
                         WorkerID = reader.GetInt32(3)
                     };

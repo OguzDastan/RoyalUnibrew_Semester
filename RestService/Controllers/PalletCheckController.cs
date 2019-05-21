@@ -20,11 +20,10 @@ namespace RestService.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/PalletCheck/5
-        [Route("api/Activity/{id}")]
-        public PalletCheck Get(int id)
+        [Route("api/PalletCheck/{id}/{hour}/{min}")]
+        public PalletCheck Get(int id, int hour, int min)
         {
-            return palletCheckManager.Get(id);
+            return palletCheckManager.Get(id, new TimeSpan(hour, min, 0));
         }
 
         // POST: api/PalletCheck

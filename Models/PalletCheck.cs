@@ -9,7 +9,7 @@ namespace Models
     public class PalletCheck
     {
         public int ProcessOrderNR { get; set; }
-        public DateTime TimeOfTest { get; set; }
+        public TimeSpan TimeOfTest { get; set; }
         public string Pallet { get; set; }
         public int WorkerID { get; set; }
 
