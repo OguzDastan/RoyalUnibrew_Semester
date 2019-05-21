@@ -39,19 +39,19 @@ namespace RestService.Controllers
         }
 
         // PUT: api/PalletCheck/5
-        [Route("api/Activity/{id}")]
+        [Route("api/PalleCheck/{id}")]
         public bool Put(int id, [FromBody]PalletCheck value)
         {
             return palletCheckManager.Put(id, value);
         }
 
         // DELETE: api/PalletCheck/5
-        [Route("api/Activity/{id}")]
+        [Route("api/PalleCheck/{id}")]
         public bool Delete(int id)
         {
             return palletCheckManager.Delete(id);
         }
-        [Route("api/Activity/{id}/{hour}/{min}")]
+        [Route("api/PalleCheck/{id}/{hour}/{min}")]
         public bool Delete(int id, int hour, int min)
         {
             TimeSpan ts = new TimeSpan(hour, min, 0);
