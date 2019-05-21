@@ -29,7 +29,8 @@ namespace RestService.Controllers
         [Route("api/PalletCheck/{id}/{hour}/{min}")]
         public PalletCheck Get(int id, int hour, int min)
         {
-            return palletCheckManager.Get(id, new TimeSpan(hour, min, 0));
+            TimeSpan ts = new TimeSpan(hour, min, 0);
+            return palletCheckManager.Get(id, ts);
         }
 
         // POST: api/PalletCheck
@@ -39,19 +40,19 @@ namespace RestService.Controllers
         }
 
         // PUT: api/PalletCheck/5
-        [Route("api/PalleCheck/{id}")]
+        [Route("api/PalletCheck/{id}")]
         public bool Put(int id, [FromBody]PalletCheck value)
         {
             return palletCheckManager.Put(id, value);
         }
 
         // DELETE: api/PalletCheck/5
-        [Route("api/PalleCheck/{id}")]
+        [Route("api/PalletCheck/{id}")]
         public bool Delete(int id)
         {
             return palletCheckManager.Delete(id);
         }
-        [Route("api/PalleCheck/{id}/{hour}/{min}")]
+        [Route("api/PalletCheck/{id}/{hour}/{min}")]
         public bool Delete(int id, int hour, int min)
         {
             TimeSpan ts = new TimeSpan(hour, min, 0);
