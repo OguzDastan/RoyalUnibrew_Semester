@@ -34,7 +34,7 @@ namespace RestService.Controllers
             return activitiesManager.Post(value);
         }
 
-        // PUT: api/Activity/5 //Problemer med PUT
+        // PUT: api/Activity/5 
         [Route("api/Activity/{id}")]
         public bool Put(int id, [FromBody]Activity value)
         {

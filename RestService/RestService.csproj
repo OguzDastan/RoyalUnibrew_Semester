@@ -173,12 +173,14 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabelingController.cs" />
+    <Compile Include="Controllers\PalletCheckController.cs" />
     <Compile Include="Controllers\ProcessOrderController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\PalletCheckManager.cs" />
     <Compile Include="Managers\ProcessOrderManager.cs" />
     <Compile Include="Managers\LabelingManager.cs" />
     <Compile Include="Managers\ActivitiesManager.cs" />
