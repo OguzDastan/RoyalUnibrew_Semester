@@ -97,10 +97,10 @@ namespace RestService.Managers
         public bool Post(PalletCheck palletCheck)
         {
             SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ProcessOrderNR", palletCheck.ProcessOrderNR);
-            cmd.Parameters.AddWithValue("@TimeOfTest", palletCheck.TimeOfTest);
-            cmd.Parameters.AddWithValue("@Pallet", palletCheck.Pallet);
-            cmd.Parameters.AddWithValue("@WorkerID", palletCheck.WorkerID);
+            cmd.Parameters.AddWithValue("@ProcessOrderNR ", palletCheck.ProcessOrderNR);
+            cmd.Parameters.AddWithValue("@TimeOfTest ", palletCheck.TimeOfTest);
+            cmd.Parameters.AddWithValue("@Pallet ", palletCheck.Pallet);
+            cmd.Parameters.AddWithValue("@WorkerID ", palletCheck.WorkerID);
             int rowsAffected = cmd.ExecuteNonQuery();
 
             return rowsAffected == 1;
@@ -108,7 +108,7 @@ namespace RestService.Managers
         public bool Put(int id, PalletCheck palletCheck)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@Pallet", palletCheck.Pallet);
+            cmd.Parameters.AddWithValue("@Pallet ", palletCheck.Pallet);
             cmd.Parameters.AddWithValue("@TimeOfTest", palletCheck.TimeOfTest);
             cmd.Parameters.AddWithValue("@WorkerID", palletCheck.WorkerID);
             cmd.Parameters.AddWithValue("@ProcessOrderNR", id);
@@ -120,7 +120,7 @@ namespace RestService.Managers
         public bool Delete(int id)
         {
             SqlCommand cmd = new SqlCommand(DELETE_BY_PROCESSNR, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ID ", id);
+            cmd.Parameters.AddWithValue("@ID", id);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
