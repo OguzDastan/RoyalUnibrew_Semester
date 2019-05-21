@@ -108,10 +108,10 @@ namespace RestService.Managers
         public bool Put(int id, PalletCheck palletCheck)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@Pallet ", palletCheck.Pallet);
+            cmd.Parameters.AddWithValue("@Pallet", palletCheck.Pallet);
             cmd.Parameters.AddWithValue("@TimeOfTest", palletCheck.TimeOfTest);
             cmd.Parameters.AddWithValue("@WorkerID", palletCheck.WorkerID);
-            cmd.Parameters.AddWithValue("@ProcessOrderNR ", id);
+            cmd.Parameters.AddWithValue("@ProcessOrderNR", id);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
