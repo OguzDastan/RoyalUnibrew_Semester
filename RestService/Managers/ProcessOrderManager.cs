@@ -15,12 +15,13 @@ namespace RestService.Managers
         private const string GET_BY_DATE = "SELECT * FROM ProcessOrder WHERE ProcessDate = @date";
         private const string GET_BY_DATE_SPAN = "SELECT * FROM ProcessOrder WHERE ProcessDate < @dateHigher AND ProcessDate > @DateLower";
         private const string INSERT = "INSERT INTO ProcessOrder values (@ProcessOrderNR, @ColumnNR, @EndProductNR, @EndProductName, @ProcessDate)";
-        private const string UPDATE = "UPDATE ProcessOrder"
+        private const string UPDATE = "UPDATE ProcessOrder SET "
             + "ColumnNR = @ColumNR "
             + "EndProductNR = @EndProductNr "
             + "EndProductName = @EndProductName "
             + "ProcessDate = @ProcessDate "
             + "WHERE ProcessOrderNR = @ProcessOrderNr ";
+
         private const string DELETE = "DELETE FROM ProcessOrder WHERE ProcessOrderNR = @ProcessOrderNR";
 
         public bool Put(ProcessOrdre po)
