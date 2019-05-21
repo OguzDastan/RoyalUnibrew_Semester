@@ -13,10 +13,10 @@ namespace RestService.Managers
         //queries
         private const string GET_ONE = "SELECT * FROM Activities WHERE ActivityID = @ActivityID";
         private const string INSERT = "INSERT INTO Activities values (@ActivityName)";
-        private const string UPDATE = "UPDATE Activities" + 
-                                      "SET ActivityName = @ActivityName" +
-                                      "WHERE ActivityID = @ActivityID";
-        private const string DELETE = "DELETE FROM Activities WHERE ActivityID = @ID";
+        private const string UPDATE = "UPDATE Activities " + 
+                                      "SET ActivityName = @ActivityName " +
+                                      "WHERE ActivityID = @ActivityID ";
+        private const string DELETE = "DELETE FROM Activities WHERE ActivityID = @ID ";
 
         //Look up activity by ActivityID
         public Activity Get(int ActivityID)
@@ -52,7 +52,7 @@ namespace RestService.Managers
         public bool Post(Activity activity)
         {
             SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ActivityName", activity.ActivityName);
+            cmd.Parameters.AddWithValue(" @ActivityName", activity.ActivityName);
             int rowsAffected = cmd.ExecuteNonQuery();
 
             return rowsAffected == 1;
@@ -61,10 +61,11 @@ namespace RestService.Managers
         public bool Put(int id, Activity activity)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ActivityName", activity.ActivityName);
-            cmd.Parameters.AddWithValue("@ActivityID", id);
+            cmd.Parameters.AddWithValue("@ActivityName ", activity.ActivityName);
+            cmd.Parameters.AddWithValue("@ActivityID ", id);
 
             int noOfRows = cmd.ExecuteNonQuery();
+
             return noOfRows == 1;
         }
 
