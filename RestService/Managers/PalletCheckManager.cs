@@ -117,7 +117,6 @@ namespace RestService.Managers
 
             return rowsAffected == 1;
         }
-
         public bool Delete(int id)
         {
             SqlCommand cmd = new SqlCommand(DELETE_BY_PROCESSNR, SQLConnectionSingleton.Instance.DbConnection);
@@ -129,12 +128,13 @@ namespace RestService.Managers
         }
         public bool Delete(int id, TimeSpan TimeOfTest)
         {
-            SqlCommand cmd = new SqlCommand(DELETE_BY_PROCESSNR, SQLConnectionSingleton.Instance.DbConnection);
+            SqlCommand cmd = new SqlCommand(DELETE_ONE, SQLConnectionSingleton.Instance.DbConnection);
             cmd.Parameters.AddWithValue("@ID ", id);
+            cmd.Parameters.AddWithValue("@TimeOfTest", TimeOfTest);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
-            return rowsAffected > 0;
+            return rowsAffected == 1;
         }
     }
 }

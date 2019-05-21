@@ -15,9 +15,15 @@ namespace RestService.Controllers
         PalletCheckManager palletCheckManager = new PalletCheckManager();
 
         // GET: api/PalletCheck
-        public IEnumerable<string> Get()
+        public IEnumerable<PalletCheck> Get()
         {
-            return new string[] { "value1", "value2" };
+            return palletCheckManager.Get();
+        }
+
+        [Route("api/PalletCheck/{id}/")]
+        public IEnumerable<PalletCheck> Get(int id)
+        {
+            return palletCheckManager.Get(id);
         }
 
         [Route("api/PalletCheck/{id}/{hour}/{min}")]
@@ -44,6 +50,12 @@ namespace RestService.Controllers
         public bool Delete(int id)
         {
             return palletCheckManager.Delete(id);
+        }
+        [Route("api/Activity/{id}/{hour}/{min}")]
+        public bool Delete(int id, int hour, int min)
+        {
+            TimeSpan ts = new TimeSpan(hour, min, 0);
+            return palletCheckManager.Delete(id, ts);
         }
     }
 }
