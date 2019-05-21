@@ -12,10 +12,11 @@ namespace RestService.Managers
         //queries
         private const string GET_ONE = "SELECT * FROM PalleCheck WHERE ProcessOrderNR = @ProcessOrderNR AND TimeOfTest = @TimeOfTest";
         private const string INSERT = "INSERT INTO PalleCheck values (@ProcessOrderNR)";
-        private const string UPDATE = "UPDATE Activities " +
-                                      "SET ActivityName = @ActivityName " +
-                                      "WHERE ActivityID = @ActivityID ";
-        private const string DELETE = "DELETE FROM Activities WHERE ActivityID = @ID ";
+
+        private const string UPDATE = "UPDATE PalleCheck " +
+                                      "SET Pallet = @Pallet " +
+                                      "WHERE ProcessOrderNR = @ProcessOrderNR ";
+        private const string DELETE = "DELETE FROM PalleCheck WHERE ProcessOrderNR = @ID ";
 
         public PalletCheck Get(int ProcessOrderNR, TimeSpan TimeOfTest)
         {
@@ -48,6 +49,27 @@ namespace RestService.Managers
         {
             SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection);
             cmd.Parameters.AddWithValue("@ProcessOrderNR", palletCheck.ProcessOrderNR);
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            return rowsAffected == 1;
+        }
+
+        public bool Put(int id, PalletCheck palletCheck)
+        {
+            SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
+            cmd.Parameters.AddWithValue("@Pallet ", palletCheck.Pallet);
+            cmd.Parameters.AddWithValue("@ProcessOrderNR ", id);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            return rowsAffected == 1;
+        }
+
+        public bool Delete(int id)
+        {
+            SqlCommand cmd = new SqlCommand(DELETE, SQLConnectionSingleton.Instance.DbConnection);
+            cmd.Parameters.AddWithValue("@ID ", id);
+
             int rowsAffected = cmd.ExecuteNonQuery();
 
             return rowsAffected == 1;
