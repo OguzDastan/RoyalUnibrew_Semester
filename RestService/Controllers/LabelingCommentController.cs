@@ -11,40 +11,40 @@ namespace RestService.Controllers
 {
     public class LabelingCommentController : ApiController
     {
-        LabelingCommentManager LabelingCommentManager = new LabelingCommentManager();
+        LabelingCommentManager labelingCommentManager = new LabelingCommentManager();
 
 
         // GET: api/LabelingComment
-        public IEnumerable<string> Get()
+        public IEnumerable<LabelingComment> Get()
         {
-            return new string[] { "value1", "value2", "value3" };
+            return labelingCommentManager.Get();
         }
 
         // GET: api/LabelingComment/5
         [Route("api/LabelingComment/{id}")]
         public LabelingComment Get(int id)
         {
-            return LabelingCommentManager.Get(id);
+            return labelingCommentManager.Get(id);
         }
 
         // POST: api/LabelingComment
         public bool Post([FromBody]LabelingComment value)
         {
-            return LabelingCommentManager.Post(value);
+            return labelingCommentManager.Post(value);
         }
 
         // PUT: api/LabelingComment/5 
         [Route("api/LabelingComment/{id}")]
         public bool Put(int id, [FromBody]LabelingComment value)
         {
-            return LabelingCommentManager.Put(id, value);
+            return labelingCommentManager.Put(id, value);
         }
 
         // DELETE: api/LabelingComment/5 
         [Route("api/LabelingComment/{id}")]
         public bool Delete(int id)
         {
-            return LabelingCommentManager.Delete(id);
+            return labelingCommentManager.Delete(id);
         }
     }
 }

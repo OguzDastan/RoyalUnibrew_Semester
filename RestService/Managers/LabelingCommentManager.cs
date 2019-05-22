@@ -24,7 +24,7 @@ namespace RestService.Managers
         {
             List<LabelingComment> comments = new List<LabelingComment>();
 
-            using (SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
+            using (SqlCommand cmd = new SqlCommand(GET_ALL, SQLConnectionSingleton.Instance.DbConnection))
             {
 
                 //Reader to handle the result
