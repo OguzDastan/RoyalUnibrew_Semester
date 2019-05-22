@@ -34,10 +34,9 @@ namespace RestService.Controllers
         }
 
         // PUT: api/LabelingComment/5 
-        [Route("api/LabelingComment/{id}")]
-        public bool Put(int id, [FromBody]LabelingComment value)
+        public bool Put([FromBody]LabelingComment value)
         {
-            return labelingCommentManager.Put(id, value);
+            return labelingCommentManager.Put(value);
         }
 
         // DELETE: api/LabelingComment/5 

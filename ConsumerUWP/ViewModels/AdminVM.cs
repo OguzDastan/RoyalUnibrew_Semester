@@ -22,8 +22,8 @@ namespace ConsumerUWP.ViewModels
             Saved = new ObservableCollection<ProcessOrdre>();
             Scheduled = new ObservableCollection<ProcessOrdre>();
             List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
-
-
+            
+            
             var doing =
                     from ark in alleProcesser
                     where ark.Process == 'd'
@@ -39,7 +39,8 @@ namespace ConsumerUWP.ViewModels
                     where ark.Process == 'p'
                     select ark;
 
-            foreach (ProcessOrdre item in alleProcesser)
+    
+            foreach (ProcessOrdre item in doing)
             {
                 Doing.Add(item);
             }
@@ -53,7 +54,7 @@ namespace ConsumerUWP.ViewModels
             {
                 Scheduled.Add(item);
             }
-
+            
         }
 
         public ObservableCollection<ProcessOrdre> Doing

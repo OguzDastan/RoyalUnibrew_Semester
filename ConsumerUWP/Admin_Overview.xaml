@@ -36,9 +36,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        -->
-                
-        <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
+        
+        
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -47,8 +46,8 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-        <ListView ItemsSource="{Binding Doing}" VerticalAlignment="Top" HorizontalAlignment="Center">
+        
+        
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -57,9 +56,8 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-            <ListView ItemsSource="{Binding Scheduled}" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <ListView.ItemTemplate>
+        
+         <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Date}"></TextBlock>
@@ -67,7 +65,18 @@
                     </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+        
+        -->
+                
+        <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
+        
+        </ListView>
+        <ListView ItemsSource="{Binding Doing}" VerticalAlignment="Top" HorizontalAlignment="Center">
+        
+        </ListView>
+        <ListView ItemsSource="{Binding Scheduled}" VerticalAlignment="Top" HorizontalAlignment="Right">
+            
+        </ListView>
         <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Button.Content>
                 <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />

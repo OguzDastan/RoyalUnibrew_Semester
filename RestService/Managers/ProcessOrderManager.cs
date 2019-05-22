@@ -11,10 +11,7 @@ namespace RestService.Managers
     {
         //queries
         private const string GET_ALL = "SELECT * FROM ProcessOrder";
-        private const string GET_ONE = "SELECT * FROM ProcessOrder WHERE ProcessOrderNR = @id";
-        private const string GET_BY_DATE = "SELECT * FROM ProcessOrder WHERE ProcessDate = @date";
-        private const string GET_BY_DATE_SPAN = "SELECT * FROM ProcessOrder WHERE ProcessDate < @dateHigher AND ProcessDate > @DateLower";
-        private const string INSERT = "INSERT INTO ProcessOrder values (@ProcessOrderNR, @ColumnNR, @EndProductNR, @EndProductName, @ProcessDate, @Process)";
+        private const string GET_ONE = "SELECT * FROM ProcessOrder WHERE ProcessOrderNR = @id";private const string INSERT = "INSERT INTO ProcessOrder values (@ProcessOrderNR, @ColumnNR, @EndProductNR, @EndProductName, @ProcessDate, @Process)";
         private const string UPDATE = "UPDATE ProcessOrder SET "
             + "ColumnNR = @ColumNR "
             + "EndProductNR = @EndProductNr "
@@ -90,7 +87,8 @@ namespace RestService.Managers
                         ColumnNR = reader.GetInt32(1),
                         EndproductNR = reader.GetInt32(2),
                         EndProductName = reader.GetString(3).ToString(),
-                        ProcessDate = reader.GetDateTime(4)
+                        ProcessDate = reader.GetDateTime(4),
+                        Process = reader.GetString(5)[0]
                     };
                 }
                 reader.Close();
@@ -114,7 +112,8 @@ namespace RestService.Managers
                         ColumnNR = reader.GetInt32(1),
                         EndproductNR = reader.GetInt32(2),
                         EndProductName = reader.GetString(3).ToString(),
-                        ProcessDate = reader.GetDateTime(4)
+                        ProcessDate = reader.GetDateTime(4),
+                        Process = reader.GetString(5)[0]
                     };
                     Orders.Add(Order);
                 }

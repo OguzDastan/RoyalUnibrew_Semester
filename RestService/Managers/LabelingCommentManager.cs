@@ -12,11 +12,11 @@ namespace RestService.Managers
         //queries
         private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrderNr = @ProcessOrderNr";
         private const string GET_ALL = "SELECT * FROM LabelingComment";
-        private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment) WHERE @ProcessOrderNr = ProcessOrderNr";
-        private const string UPDATE = "UPDATE LabelingComment" +
-                                      "SET WorkerID = @WorkerID" +
-                                      "AND Comment = @Comment" +
-                                      "WHERE ProcessOrderNr = @ProcessOrderNr";
+        private const string INSERT = "INSERT INTO LabelingComment values (@ProcessOrderNr, @WorkerID, @Comment)";
+        private const string UPDATE = "UPDATE LabelingComment " +
+                                      "SET WorkerID = @WorkerID, " +
+                                      "Comment = @Comment " +
+                                      "WHERE ProcessOrderNr = @ProcessOrderNr ";
         private const string DELETE = "DELETE FROM LabelingComment WHERE ProcessOrderNr = @ProcessOrderNr";
 
         //Look up labelingComment by ProcessOrdreNr
@@ -90,7 +90,7 @@ namespace RestService.Managers
             return rowsAffected == 1;
         }
 
-        public bool Put(int id, LabelingComment labelingComment)
+        public bool Put(LabelingComment labelingComment)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
             cmd.Parameters.AddWithValue("@ProcessOrderNr", labelingComment.ProcessOrderNR);
