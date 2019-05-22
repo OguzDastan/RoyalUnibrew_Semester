@@ -52,10 +52,9 @@ namespace ConsumerUWP.ViewModels
             foreach (ProcessOrdre item in scheduled)
             {
                 Scheduled.Add(item);
-            } 
+            }
+
         }
-
-
 
         public ObservableCollection<ProcessOrdre> Doing
         {
