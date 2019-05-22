@@ -11,6 +11,7 @@ namespace RestService.Managers
     {
         //queries
         private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrdreNr = @ProcessOrdreNr";
+        private const string GET_ALL = "SELECT * FROM LabelingComment";
         private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment)";
         private const string UPDATE = "UPDATE LabelingComment" +
                                       "SET WorkerID = @WorkerID" +
@@ -19,6 +20,33 @@ namespace RestService.Managers
         private const string DELETE = "DELETE FROM LabelingComment WHERE ProcessOrdreNr = @ProcessOrdreNr";
 
         //Look up labelingComment by ProcessOrdreNr
+        public List<LabelingComment> Get()
+        {
+            List<LabelingComment> comments = new List<LabelingComment>();
+
+            using (SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
+            {
+
+                //Reader to handle the result
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //while there's a result
+                while (reader.Read())
+                {
+                    comments.Add(new LabelingComment()
+                    {
+                        ProcessOrderNR = reader.GetInt32(0),
+                        WorkerID = reader.GetInt32(1),
+                        Comment = reader.GetString(2).ToString()
+                    });
+                }
+                //the IO stream of data, coming from database is closed
+                reader.Close();
+            }
+
+            return comments;
+        }
+
         public LabelingComment Get(int ProcessOrdreNr)
         {
             //create empty labelingComment object
