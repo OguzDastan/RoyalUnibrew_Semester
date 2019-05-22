@@ -175,6 +175,7 @@
     <Compile Include="Controllers\LabelingCommentController.cs" />
     <Compile Include="Controllers\LabelingController.cs" />
     <Compile Include="Controllers\PalletCheckController.cs" />
+    <Compile Include="Controllers\ProcessActivityController.cs" />
     <Compile Include="Controllers\ProcessOrderController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -184,6 +185,7 @@
     </Compile>
     <Compile Include="Managers\PalletCheckManager.cs" />
     <Compile Include="Managers\LabelingCommentManager.cs" />
+    <Compile Include="Managers\ProcessActivityManager.cs" />
     <Compile Include="Managers\ProcessOrderManager.cs" />
     <Compile Include="Managers\LabelingManager.cs" />
     <Compile Include="Managers\ActivitiesManager.cs" />
