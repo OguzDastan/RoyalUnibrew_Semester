@@ -12,10 +12,6 @@
     </Page.DataContext>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <!--
         <ListView ItemsSource="{Binding LabelChecks}" HorizontalAlignment="Left" Width="500" Grid.Column="0">
             <ListView.ItemTemplate>
@@ -46,7 +42,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Date}"></TextBlock>
+                        <TextBlock Text="{Binding }"></TextBlock>
                         <TextBlock Text="{Binding Nummer}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
@@ -67,8 +63,8 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Date}"></TextBlock>
-                            <TextBlock Text="{Binding Nummer}"></TextBlock>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Nummer}"></TextBlock>
+                    </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

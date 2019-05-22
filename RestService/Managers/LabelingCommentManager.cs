@@ -12,7 +12,7 @@ namespace RestService.Managers
         //queries
         private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrderNr = @ProcessOrderNr";
         private const string GET_ALL = "SELECT * FROM LabelingComment";
-        private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment)";
+        private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment) WHERE @ProcessOrderNr = ProcessOrderNr";
         private const string UPDATE = "UPDATE LabelingComment" +
                                       "SET WorkerID = @WorkerID" +
                                       "AND Comment = @Comment" +
