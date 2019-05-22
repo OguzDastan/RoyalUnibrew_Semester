@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class ProcessActivity
+   public class ProcessActivity
     {
         public int ProcessOrderNR { get; set; }
         public int ActivityID { get; set; }
