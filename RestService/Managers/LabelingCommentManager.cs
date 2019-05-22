@@ -10,14 +10,14 @@ namespace RestService.Managers
     public class LabelingCommentManager
     {
         //queries
-        private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrdreNr = @ProcessOrdreNr";
+        private const string GET_ONE = "SELECT * FROM LabelingComment WHERE ProcessOrderNr = @ProcessOrderNr";
         private const string GET_ALL = "SELECT * FROM LabelingComment";
         private const string INSERT = "INSERT INTO LabelingComment values (@WorkerID, @Comment)";
         private const string UPDATE = "UPDATE LabelingComment" +
                                       "SET WorkerID = @WorkerID" +
                                       "AND Comment = @Comment" +
-                                      "WHERE ProcessOrdreNr = @ProcessOrdreNr";
-        private const string DELETE = "DELETE FROM LabelingComment WHERE ProcessOrdreNr = @ProcessOrdreNr";
+                                      "WHERE ProcessOrderNr = @ProcessOrderNr";
+        private const string DELETE = "DELETE FROM LabelingComment WHERE ProcessOrderNr = @ProcessOrderNr";
 
         //Look up labelingComment by ProcessOrdreNr
         public List<LabelingComment> Get()
@@ -47,7 +47,7 @@ namespace RestService.Managers
             return comments;
         }
 
-        public LabelingComment Get(int ProcessOrdreNr)
+        public LabelingComment Get(int ProcessOrderNr)
         {
             //create empty labelingComment object
             LabelingComment a = null;
@@ -56,7 +56,7 @@ namespace RestService.Managers
             using (SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
             {
                 //binding of relevent DB parameters
-                cmd.Parameters.AddWithValue("@ProcessOrdreNr", ProcessOrdreNr);
+                cmd.Parameters.AddWithValue("@ProcessOrderNr", ProcessOrderNr);
 
                 //Reader to handle the result
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -82,6 +82,7 @@ namespace RestService.Managers
         public bool Post(LabelingComment labelingComment)
         {
             SqlCommand cmd = new SqlCommand(INSERT, SQLConnectionSingleton.Instance.DbConnection);
+            cmd.Parameters.AddWithValue("@ProcessOrderNr", labelingComment.ProcessOrderNR);
             cmd.Parameters.AddWithValue("@WorkerID", labelingComment.WorkerID);
             cmd.Parameters.AddWithValue("@Comment", labelingComment.Comment);
             int rowsAffected = cmd.ExecuteNonQuery();
@@ -92,7 +93,7 @@ namespace RestService.Managers
         public bool Put(int id, LabelingComment labelingComment)
         {
             SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ProcessOrdreNr", labelingComment.ProcessOrderNR);
+            cmd.Parameters.AddWithValue("@ProcessOrderNr", labelingComment.ProcessOrderNR);
             cmd.Parameters.AddWithValue("@WorkerID", labelingComment.WorkerID);
             cmd.Parameters.AddWithValue("@Comment", labelingComment.Comment);
 
@@ -103,7 +104,7 @@ namespace RestService.Managers
         public bool Delete(int id)
         {
             SqlCommand cmd = new SqlCommand(DELETE, SQLConnectionSingleton.Instance.DbConnection);
-            cmd.Parameters.AddWithValue("@ProcessOrdreNr", id);
+            cmd.Parameters.AddWithValue("@ProcessOrderNr", id);
 
             int noOfRows = cmd.ExecuteNonQuery();
 
