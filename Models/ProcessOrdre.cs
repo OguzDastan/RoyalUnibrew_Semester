@@ -13,6 +13,7 @@ namespace Models
         public int EndproductNR { get; set; }
         public DateTime ProcessDate { get; set; }
         public string EndProductName { get; set; }
+        public char Process { get; set; }
 
         public ProcessOrdre()
         {

@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
 
 namespace ConsumerUWP.ViewModels
 {
-    class EtiketteArk : ProcessOrdre
+    class EtiketteArk
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }

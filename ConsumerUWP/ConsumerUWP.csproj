@@ -167,6 +167,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\OverviewVM.cs" />
+    <Compile Include="ViewModels\ProcessOrderArk.cs" />
     <Compile Include="ViewModels\Session.cs" />
   </ItemGroup>
   <ItemGroup>
