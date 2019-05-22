@@ -8,10 +8,39 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
-        <local:AdminVM></local:AdminVM>
+        <local:EtiketteArk></local:EtiketteArk>
     </Page.DataContext>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding LabelChecks}" HorizontalAlignment="Left" Width="500" Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TimeOfTest}"></TextBlock>
+                        <TextBox Text="{Binding LabelNumber, Mode=TwoWay}"></TextBox>
+                        <TextBox Text="{Binding ExpireDate, Mode=TwoWay}"></TextBox>
+                        <TextBlock Text="{Binding WorkerSignature}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView ItemsSource="{Binding PalleChecks}" HorizontalAlignment="left" Width="500" Grid.Column="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding TimeOfTest}"></TextBlock>
+                        <TextBox Text="{Binding Pallet, Mode=TwoWay}"></TextBox>
+                        <TextBlock Text="{Binding WorkerSign}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--
+        
         <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -47,5 +76,7 @@
                 <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
             </Button.Content>
         </Button>
+        
+        -->
     </Grid>
 </Page>
