@@ -83,7 +83,7 @@ namespace ConsumerUWP.ViewModels
                 if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
                 {
                     Frame curr = (Frame)Window.Current.Content;
-                    curr.Navigate(typeof(Admin_Overview));
+                    curr.Navigate(typeof(AdminLoginRedirect));
                 }
                 else if (Session.CurrentUser.AccessLevel == User.AccessLevels.USER)
                 {

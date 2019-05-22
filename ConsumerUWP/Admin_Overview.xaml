@@ -42,5 +42,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button.Content>
+                <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
+            </Button.Content>
+        </Button>
     </Grid>
 </Page>

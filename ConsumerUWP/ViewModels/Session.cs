@@ -14,7 +14,8 @@ namespace ConsumerUWP.ViewModels
     class Session
     {
         private static Session _activeSession;
-        public static Session Current {
+        public static Session Current
+        {
             get
             {
                 if (_activeSession == null)
@@ -24,17 +25,19 @@ namespace ConsumerUWP.ViewModels
                 }
 
                 return _activeSession;
-            } }
+            }
+        }
         public static User CurrentUser
         {
             get { return _currUser; }
+            set { _currUser = value; }
         }
         public Session()
         {
         }
 
         private static User _currUser;
-         
+
         public User LookupUser(string UserName)
         {
             User u = null;
@@ -43,20 +46,20 @@ namespace ConsumerUWP.ViewModels
             using (HttpClient client = new HttpClient())
             {
                 //httpGet the api (Ask the rest service)
-                Task<string> result = client.GetStringAsync(new Uri("http://localhost:54926/api/Users/"+UserName));
+                Task<string> result = client.GetStringAsync(new Uri("http://localhost:54926/api/Users/" + UserName));
                 string jsonString = result.Result;
                 //Convert the resulting JsonString, into a "User" described in the Model.dll lib.
                 u = JsonConvert.DeserializeObject<User>(jsonString);
             }
             return u;
         }
-       
+
 
 
         public bool Login(string UserName, string Password)
         {
             //get the user login credentials from ui, and look for a match in database
-            _currUser = new User(){UserName = UserName, Password = Password};
+            _currUser = new User() { UserName = UserName, Password = Password };
 
             User DBUser = LookupUser(UserName); //Chance of null value
             if (DBUser == null) return false;

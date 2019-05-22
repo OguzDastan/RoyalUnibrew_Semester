@@ -90,7 +90,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock FontSize="20" Text="{Binding ArkType}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Foreground="Black"/>
                                 <TextBlock FontSize="15" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="Gray"/>
-                                <TextBlock FontSize="15" Text="Kontrol: (evt. bool checker flueben/kryds)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Foreground="Gray"/>
+                                <TextBlock FontSize="15" Text="Kontrol: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Foreground="Gray"/>
                                 <TextBlock FontSize="15" Text="{Binding Controller, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3" Foreground="ForestGreen"/>
                             </Grid>
                         </DataTemplate>
@@ -99,7 +99,6 @@
 
 
 
-                <!-- LORTET GIDER IKKE????? aq -->
                 <Grid Grid.Row="2" Grid.Column="1" Background="LightGray" Padding="20" x:Name="ControlPopUp">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*" />

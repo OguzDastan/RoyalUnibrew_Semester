@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ConsumerUWP.ViewModels;
+using User = Models.User;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,9 +31,18 @@ namespace ConsumerUWP
         {
             this.InitializeComponent();
             this.Loaded += MainPage_Loaded;
+            
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
+            {
+                logintype.Text = "Admin";
+            }
+            else
+            {
+                logintype.Text = "Operatør";
+            }
             menu.Clear();
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K2), MenuText = typeof(K_views.K2).Name, MenuIcon = "K2" });
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K3), MenuText = typeof(K_views.K3).Name, MenuIcon = "K3" });
@@ -43,6 +53,8 @@ namespace ConsumerUWP
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K8), MenuText = typeof(K_views.K8).Name, MenuIcon = "K8" });
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K11), MenuText = typeof(K_views.K11).Name, MenuIcon = "K11" });
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K12), MenuText = typeof(K_views.K12).Name, MenuIcon = "K12" });
+
+
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -59,7 +71,10 @@ namespace ConsumerUWP
         {
             // TODO: Kill session then navigate back to mainpage
             //
+            Session.CurrentUser = null;
             this.Frame.Navigate(typeof(MainPage), null);
+
+
 
             /* // old code //
             if (splitviewContent.CanGoBack)
