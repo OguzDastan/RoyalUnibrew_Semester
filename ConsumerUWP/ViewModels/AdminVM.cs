@@ -1,74 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models;
 
 namespace ConsumerUWP.ViewModels
 {
     public class AdminVM
     {
-        private List<ProcessOrd> doing;
-        private List<ProcessOrd> saved;
-        private List<ProcessOrd> scheduled;
-        
+        private List<ProcessOrdre> _doing;
+        private List<ProcessOrdre> _saved;
+        private List<ProcessOrdre> _scheduled;
+
 
         public AdminVM()
         {
-            Doing = new List<ProcessOrd>();
-            Doing.Add(new ProcessOrd(DateTime.Now, 1));
-            Doing.Add(new ProcessOrd(DateTime.Now, 2));
-            Doing.Add(new ProcessOrd(DateTime.Now, 3));
-            Doing.Add(new ProcessOrd(DateTime.Now, 4));
-            Doing.Add(new ProcessOrd(DateTime.Now, 5));
-            Doing.Add(new ProcessOrd(DateTime.Now, 6));
-            Doing.Add(new ProcessOrd(DateTime.Now, 7));
+            Doing = new List<ProcessOrdre>();
+            Saved = new List<ProcessOrdre>();
+            Scheduled = new List<ProcessOrdre>();
+            List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
 
-            Saved = Doing;
-            Scheduled = Doing;
+            var doing =
+                    from ark in alleProcesser
+                    where ark.Process == 'd'
+                    select ark;
+
+            var saved =
+                    from ark in alleProcesser
+                    where ark.Process == 'a'
+                    select ark;
+
+            var scheduled =
+                    from ark in alleProcesser
+                    where ark.Process == 'p'
+                    select ark;
+
+            foreach (ProcessOrdre item in doing)
+            {
+                Debug.WriteLine(item.ProcessOrderNR);
+                Doing.Add(item);
+            }
+
+            foreach (ProcessOrdre item in saved)
+            {
+                Debug.WriteLine(item.ProcessOrderNR);
+                Saved.Add(item);
+            }
+
+            foreach (ProcessOrdre item in scheduled)
+            {
+                Debug.WriteLine(item.ProcessOrderNR);
+                Scheduled.Add(item);
+            }
+
 
         }
 
-        
 
-        public List<ProcessOrd> Doing
+
+        public List<ProcessOrdre> Doing
         {
-            get { return doing; }
-            set { doing = value; }
+            get { return _doing; }
+            set { _doing = value; }
         }
 
-        public List<ProcessOrd> Saved
+        public List<ProcessOrdre> Saved
         {
-            get { return saved; }
-            set { saved = value; }
+            get { return _saved; }
+            set { _saved = value; }
         }
 
-        public List<ProcessOrd> Scheduled
+        public List<ProcessOrdre> Scheduled
         {
-            get { return scheduled; }
-            set { scheduled = value; }
-        }
-    }
-    public class ProcessOrd
-    {
-        private DateTime date;
-        private int _nummer;
-        public ProcessOrd(DateTime d, int n)
-        {
-            Date = d;
-            Nummer = n;
-        }
-
-        public DateTime Date
-        {
-            get { return date; }
-            set { date = value; }
-        }
-
-        public int Nummer
-        {
-            get { return _nummer; }
-            set { _nummer = value; }
+            get { return _scheduled; }
+            set { _scheduled = value; }
         }
     }
 }

@@ -32,11 +32,38 @@ namespace ConsumerUWP.ViewModels
                 response = client.GetStringAsync("http://localhost:54926/api/ProcessActivity/" + ProcessOrderNummer);
                 List<ProcessActivity> loadedProcessActivities = JsonConvert.DeserializeObject<List<ProcessActivity>>(response.Result);
 
-                foreach(ProcessActivity Activity in loadedProcessActivities)
+                foreach (ProcessActivity Activity in loadedProcessActivities)
                 {
                     activities.Add(Activity);
                 }
             }
         }
+
+        public static List<ProcessOrdre> LoadAllArks()
+        {
+            List<ProcessOrdre> arks = new List<ProcessOrdre>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                Task<string> response = client.GetStringAsync("http://localhost:54926/api/ProcessOrder");
+                List<ProcessOrdre> loaded = JsonConvert.DeserializeObject<List<ProcessOrdre>>(response.Result);
+
+                foreach (ProcessOrdre po in loaded)
+                {
+
+                    arks.Add(new ProcessOrdre()
+                    {
+                        ColumnNR = po.ColumnNR,
+                        EndProductName = po.EndProductName,
+                        EndproductNR = po.EndproductNR,
+                        ProcessDate = po.ProcessDate.Date,
+                        Process = po.Process
+                    });
+                }
+            }
+            return arks;
+
+        }
+        
     }
 }

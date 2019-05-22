@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
-        <local:EtiketteArk></local:EtiketteArk>
+        <local:AdminVM></local:AdminVM>
     </Page.DataContext>
 
     <Grid>
@@ -16,6 +16,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--
         <ListView ItemsSource="{Binding LabelChecks}" HorizontalAlignment="Left" Width="500" Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -39,8 +40,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--
-        
+        -->
+                
         <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -77,6 +78,5 @@
             </Button.Content>
         </Button>
         
-        -->
     </Grid>
 </Page>
