@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ConsumerUWP.Annotations;
 using Models;
 
 namespace ConsumerUWP.ViewModels
 {
-    public class AdminVM
+    public class AdminVM : INotifyPropertyChanged
     {
         private ObservableCollection<ProcessOrdre> _doing;
         private ObservableCollection<ProcessOrdre> _saved;
         private ObservableCollection<ProcessOrdre> _scheduled;
+        private ProcessOrdre _selectedOrdre;
+
+        public ProcessOrdre SelectedOrdre {
+            get {
+                return _selectedOrdre;
+            }
+            set {
+                _selectedOrdre = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         public AdminVM()
@@ -22,8 +37,7 @@ namespace ConsumerUWP.ViewModels
             Saved = new ObservableCollection<ProcessOrdre>();
             Scheduled = new ObservableCollection<ProcessOrdre>();
             List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
-            
-            
+
             var doing =
                     from ark in alleProcesser
                     where ark.Process == 'd'
@@ -73,6 +87,14 @@ namespace ConsumerUWP.ViewModels
         {
             get { return _scheduled; }
             set { _scheduled = value; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

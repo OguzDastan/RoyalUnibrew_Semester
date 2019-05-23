@@ -124,6 +124,12 @@
     </Compile>
     <Compile Include="App.xaml.cs">
     </Compile>
+    <Compile Include="Custom Controls\AdministerProcess.xaml.cs">
+      <DependentUpon>AdministerProcess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\ProcessListingControl.xaml.cs">
+      <DependentUpon>ProcessListingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EtiketteArk.xaml.cs">
       <DependentUpon>EtiketteArk.xaml</DependentUpon>
     </Compile>
@@ -199,6 +205,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Custom Controls\AdministerProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\ProcessListingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EtiketteArk.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +260,10 @@
     <Page Include="Operator_Overview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

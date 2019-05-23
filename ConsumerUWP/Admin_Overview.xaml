@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Models"
+    xmlns:customControls="using:ConsumerUWP.Custom_Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
@@ -13,86 +14,31 @@
     </Page.DataContext>
 
     <Grid>
-        <!--
-        <ListView ItemsSource="{Binding LabelChecks}" HorizontalAlignment="Left" Width="500" Grid.Column="0">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding TimeOfTest}"></TextBlock>
-                        <TextBox Text="{Binding LabelNumber, Mode=TwoWay}"></TextBox>
-                        <TextBox Text="{Binding ExpireDate, Mode=TwoWay}"></TextBox>
-                        <TextBlock Text="{Binding WorkerSignature}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView ItemsSource="{Binding PalleChecks}" HorizontalAlignment="left" Width="500" Grid.Column="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding TimeOfTest}"></TextBlock>
-                        <TextBox Text="{Binding Pallet, Mode=TwoWay}"></TextBox>
-                        <TextBlock Text="{Binding WorkerSign}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100"></ColumnDefinition>
+            <ColumnDefinition MinWidth="400"></ColumnDefinition>
+            <ColumnDefinition MinWidth="400"></ColumnDefinition>
+            <ColumnDefinition MinWidth="400"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <customControls:ProcessListingControl Saved="{Binding Saved}" Planned="{Binding Scheduled}"
+                                              Doing="{Binding Doing}" SelectedOrdre="{Binding SelectedOrdre, Mode=TwoWay}" 
+                                              Grid.Column="1" Grid.ColumnSpan="3"
+                                              Grid.Row="1" Grid.RowSpan="2">
+        </customControls:ProcessListingControl>
         
-        
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding }"></TextBlock>
-                        <TextBlock Text="{Binding Nummer}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        
-        
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Date}"></TextBlock>
-                        <TextBlock Text="{Binding Nummer}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        
-         <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Date}"></TextBlock>
-                        <TextBlock Text="{Binding Nummer}"></TextBlock>
-                    </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-        
-        -->
-                
-        <ListView ItemsSource="{Binding Saved}" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ProcessOrdre">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Process Ordre Nummer: "></TextBlock>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding EndProductName}"></TextBlock>
-                            <TextBlock Text="{Binding ProcessOrderNR}"></TextBlock>    
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView ItemsSource="{Binding Doing}" VerticalAlignment="Top" HorizontalAlignment="Center">
-        
-        </ListView>
-        <ListView ItemsSource="{Binding Scheduled}" VerticalAlignment="Top" HorizontalAlignment="Right">
-            
-        </ListView>
-        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" Grid.Column="4" Grid.Row="3"  HorizontalAlignment="Left">
             <Button.Content>
                 <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
             </Button.Content>
         </Button>
-        
+
     </Grid>
 </Page>

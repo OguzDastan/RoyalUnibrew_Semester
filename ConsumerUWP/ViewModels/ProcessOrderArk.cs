@@ -53,6 +53,7 @@ namespace ConsumerUWP.ViewModels
 
                     arks.Add(new ProcessOrdre()
                     {
+                        ProcessOrderNR = po.ProcessOrderNR,
                         ColumnNR = po.ColumnNR,
                         EndProductName = po.EndProductName,
                         EndproductNR = po.EndproductNR,
