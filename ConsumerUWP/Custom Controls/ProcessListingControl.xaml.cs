@@ -67,9 +67,11 @@ namespace ConsumerUWP.Custom_Controls
         }
         #endregion
 
-        ListView PlannedList;
-        ListView AktiveList;
-        ListView ArkiveredeList;
+        private ListView PlannedList;
+        private ListView AktiveList;
+        private ListView ArkiveredeList;
+
+        private GridView EditGrid;
 
         public ProcessListingControl()
         {
@@ -78,16 +80,23 @@ namespace ConsumerUWP.Custom_Controls
             PlannedList = FindName("PlanlagteOrdre") as ListView;
             AktiveList = FindName("AktiveOrdre") as ListView;
             ArkiveredeList = FindName("ArkiveredeOrdre") as ListView;
+            EditGrid = FindName("EditGridView") as GridView;
+
+            //EditPanel = FindName("EditPanel") as StackPanel;
         }
 
         private void AktiveOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //EditGrid.Visibility = Visibility.Collapsed;
+
             PlannedList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
         }
 
         private void ArkiveredeOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //EditGrid.Visibility = Visibility.Collapsed;
+
             PlannedList.SelectedIndex = -1;
             AktiveList.SelectedIndex = -1;
         }

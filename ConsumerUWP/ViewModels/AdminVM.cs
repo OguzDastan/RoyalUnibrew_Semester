@@ -24,15 +24,17 @@ namespace ConsumerUWP.ViewModels
                 return _selectedOrdre;
             }
             set {
-                _selectedOrdre = value;
-                OnPropertyChanged();
-            }
+                    _selectedOrdre = value;
+                    OnPropertyChanged();
+                }
         }
 
 
 
         public AdminVM()
         {
+            
+
             Doing = new ObservableCollection<ProcessOrdre>();
             Saved = new ObservableCollection<ProcessOrdre>();
             Scheduled = new ObservableCollection<ProcessOrdre>();
@@ -68,7 +70,9 @@ namespace ConsumerUWP.ViewModels
             {
                 Scheduled.Add(item);
             }
-            
+
+
+            SelectedOrdre = doing.First<ProcessOrdre>();
         }
 
         public ObservableCollection<ProcessOrdre> Doing
