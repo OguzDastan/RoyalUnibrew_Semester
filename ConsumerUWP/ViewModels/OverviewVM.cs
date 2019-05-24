@@ -20,27 +20,34 @@ namespace ConsumerUWP.ViewModels
 
         private string _controller;
 
-        private OverviewList _selectedark;
+        private ProcessOrdre _selectedark;
 
-        private ObservableCollection<OverviewList> _overviewlist = new ObservableCollection<OverviewList>();
+        private ObservableCollection<ProcessOrdre> _overviewlist = new ObservableCollection<ProcessOrdre>();
 
         public OverviewVM()
         {
-            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 07.30"));
-            _overviewlist.Add(new OverviewList("Tappe Operatør", "15-05-2019 / 11.30"));
-            _overviewlist.Add(new OverviewList("Trykkontrol", "15-05-2019 / 14.30"));
-            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 15.45"));
-            _overviewlist.Add(new OverviewList("Færdigvare Kontrol", "15-05-2019 / 18.30"));
-            _overviewlist.Add(new OverviewList("Tappe Operatør", "16-05-2019 / 07.30"));
-            _overviewlist.Add(new OverviewList("Trykkontrol", "16-05-2019 / 08.00"));
+            OverviewLists = new ObservableCollection<ProcessOrdre>();
+            List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
 
+            var doing =
+                from ark in alleProcesser
+                where ark.Process == 'd'
+                orderby ark.ProcessDate
+                select ark;
+
+            foreach (ProcessOrdre item in doing)
+            {
+                OverviewLists.Add(item);
+            }
+
+            /*
             ControlArkCommand = new RelayCommand(
                 AddControllerToArk);
-
+            */
 
         }
 
-        public OverviewList SelectedArk
+        public ProcessOrdre SelectedArk
         {
             get { return _selectedark; }
             set
@@ -50,8 +57,9 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
+
         // XAML binding til ListView
-        public ObservableCollection<OverviewList> OverviewLists
+        public ObservableCollection<ProcessOrdre> OverviewLists
         {
             get { return _overviewlist; }
             set { _overviewlist = value; }
@@ -72,12 +80,12 @@ namespace ConsumerUWP.ViewModels
             get;
             private set;
         }
-
+        /*
         private void AddControllerToArk()
         {
             SelectedArk.Controller = Controller;
         }
-
+        */
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

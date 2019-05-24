@@ -69,7 +69,7 @@ namespace ConsumerUWP.ViewModels
                 && _currUser.Password == DBUser.Password)
             {
                 //Set the logged in user, to have the acceslevel denoted in the database
-                _currUser.AccessLevel = DBUser.AccessLevel;
+                _currUser = DBUser;
                 return true;
             }
             //else return false (Login not possible)
