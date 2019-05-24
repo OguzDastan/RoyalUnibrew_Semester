@@ -66,6 +66,40 @@ namespace ConsumerUWP.Custom_Controls
             get { return (ProcessOrderArk)GetValue(SelectedOrdreProperty); }
             set { SetValue(SelectedOrdreProperty, value); }
         }
+
+        public static readonly DependencyProperty DateProperty = DependencyProperty.Register(
+            "Date", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+
+        public string Date
+        {
+            get { return (string) GetValue(DateProperty); }
+            set
+            {
+                SetValue(DateProperty, value);
+                if (SelectedOrdre != null)
+                {
+                    SelectedOrdre.ProcessDate = new DateTime(SelectedOrdre.ProcessDate.Year, SelectedOrdre.ProcessDate.Month, Int32.Parse(value));
+                }
+            }
+        }
+
+        public static readonly DependencyProperty MonthProperty = DependencyProperty.Register(
+            "Month", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+
+        public string Month
+        {
+            get { return (string) GetValue(MonthProperty); }
+            set { SetValue(MonthProperty, value); }
+        }
+
+        public static readonly DependencyProperty yearProperty = DependencyProperty.Register(
+            "year", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+
+        public string year
+        {
+            get { return (string) GetValue(yearProperty); }
+            set { SetValue(yearProperty, value); }
+        }
         #endregion
 
         private ListView PlannedList;
@@ -82,8 +116,6 @@ namespace ConsumerUWP.Custom_Controls
             AktiveList = FindName("AktiveOrdre") as ListView;
             ArkiveredeList = FindName("ArkiveredeOrdre") as ListView;
             EditGrid = FindName("EditGridView") as StackPanel;
-
-            //EditPanel = FindName("EditPanel") as StackPanel;
         }
 
         private void AktiveOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -112,7 +144,8 @@ namespace ConsumerUWP.Custom_Controls
 
         private void Update_OnClick(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("trying to change name into: "+SelectedOrdre.EndProductName);
+            SelectedOrdre.ProcessDate = new DateTime(Int32.Parse(year),Int32.Parse(Month),Int32.Parse(Date));
+            Debug.WriteLine("Day is now:"+SelectedOrdre.ProcessDate.Day+" "+(SelectedOrdre.ProcessDate.Day == Int32.Parse(Date)));
             Debug.WriteLine(ProcessOrderArk.SaveArk(SelectedOrdre));
         }
     }
