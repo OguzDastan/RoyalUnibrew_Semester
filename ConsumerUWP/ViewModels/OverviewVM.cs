@@ -26,7 +26,7 @@ namespace ConsumerUWP.ViewModels
 
         public OverviewVM()
         {
-            OverviewLists = new ObservableCollection<ProcessOrdre>();
+            OverviewLists = new ObservableCollection<ProcessOrderArk>();
             ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
 
             var doing =
