@@ -26,15 +26,22 @@ namespace ConsumerUWP
     public sealed partial class Operator_Overview : Page
     {
         private ObservableCollection<NavigationItem> menu = new ObservableCollection<NavigationItem>();
+        private string _username;
+
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value; }
+        }
 
         public Operator_Overview()
         {
             this.InitializeComponent();
             this.Loaded += MainPage_Loaded;
-            
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Username = Session.CurrentUser.UserName;
             if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
             {
                 logintype.Text = "Admin";

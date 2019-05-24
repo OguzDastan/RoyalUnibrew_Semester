@@ -104,30 +104,8 @@
         </ListView>
 
 
-        <GridView Grid.Row="2" Grid.Column="0"  Grid.ColumnSpan="3" Name="EditGridView">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="models:ProcessOrdre">
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot}"></TextBlock>
-                            <TextBlock Text="Something Happened!"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
 
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-
-        <GridView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="Blue">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-
-                    <TextBlock Text="SOMETHING TEXTIS" Foreground="Azure"></TextBlock>
-
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
 
     </Grid>
 </UserControl>
