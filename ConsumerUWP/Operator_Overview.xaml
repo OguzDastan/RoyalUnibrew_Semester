@@ -43,7 +43,7 @@
                 <Grid Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,1,0">
                     <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="30" Margin="110, 10, 0, 50" Height="100"  Foreground="White"/>
                     <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="50" Margin="0, 20,0,0"  Foreground="White"/>
-                    <TextBlock x:Name="loginname" Text="{Binding Username, Mode=TwoWay}" FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="50" Margin="0, 65,0,0"  Foreground="White"/>
+                    <TextBlock x:Name="loginname" Text="{Binding Uname, Mode=TwoWay}" FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="50" Margin="0, 65,0,0"  Foreground="White"/>
                 </Grid>
 
                 <!-- OVERSIGT TITEL FOR (K?)-->

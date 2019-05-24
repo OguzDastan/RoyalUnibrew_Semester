@@ -12,7 +12,7 @@
     <Grid>
 
 
-        <ListView Name="MyListView" ItemsSource="{x:Bind Entries}">
+        <ListView Name="MyListView" ItemsSource="{x:Bind singleArk}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

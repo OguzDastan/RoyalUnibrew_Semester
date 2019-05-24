@@ -41,6 +41,10 @@ namespace ConsumerUWP.ViewModels
             }
 
             /*
+            GaaTilArkCommand = new RelayCommand(
+                ButtonBase_OnClick);
+                */
+            /*
             ControlArkCommand = new RelayCommand(
                 AddControllerToArk);
             */
@@ -75,16 +79,31 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
-        public RelayCommand ControlArkCommand
+
+
+        public RelayCommand GaaTilArkCommand
         {
             get;
-            private set;
+            set;
+        }
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame curr = new Frame();
+            int id = SelectedArk.ProcessOrderNR;
+            curr.Navigate(typeof(ConsumerUWP.EtiketteArk), id);
         }
         /*
         private void AddControllerToArk()
         {
             SelectedArk.Controller = Controller;
         }
+
+        public RelayCommand ControlArkCommand
+        {
+            get;
+            private set;
+        }
+        
         */
         public event PropertyChangedEventHandler PropertyChanged;
 
