@@ -40,6 +40,7 @@
                         <Run Text="Aktive ark" />
                         </TextBlock>
                     </StackPanel>
+                    
                     <!--
                     <StackPanel HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
                         <Button Padding="5" Background="ForestGreen" Click="Button_Click" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
@@ -50,6 +51,7 @@
                         </Button>
                     </StackPanel>
                     -->
+                    
                     <StackPanel HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center">
                         <Button Padding="5" Background="MidnightBlue" Click="Button_Click2" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
                             <Button.Content>
@@ -69,7 +71,7 @@
 
                 </Grid>
                 <!-- LISTVIEW OVER AKTIVE ARK -->
-                <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" SelectedItem="{Binding SelectedArk, Mode=TwoWay}" Grid.Row="1" Grid.Column="1">
+                <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" SelectedItem="{Binding SelectedArk, Mode=TwoWay}" SelectionChanged="ListView_SelectionChanged" Grid.Row="1" Grid.Column="1">
                     <ListView.Header>
                         <Grid Padding="15" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,3" >
                             <Grid.ColumnDefinitions>

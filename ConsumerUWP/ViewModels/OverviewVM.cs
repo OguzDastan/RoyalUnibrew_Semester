@@ -20,9 +20,9 @@ namespace ConsumerUWP.ViewModels
 
         private string _controller;
 
-        private ProcessOrdre _selectedark;
+        private ProcessOrderArk _selectedark;
 
-        private ObservableCollection<ProcessOrdre> _overviewlist = new ObservableCollection<ProcessOrdre>();
+        private ObservableCollection<ProcessOrderArk> _overviewlist = new ObservableCollection<ProcessOrderArk>();
 
         public OverviewVM()
         {
@@ -47,7 +47,7 @@ namespace ConsumerUWP.ViewModels
 
         }
 
-        public ProcessOrdre SelectedArk
+        public ProcessOrderArk SelectedArk
         {
             get { return _selectedark; }
             set
@@ -59,7 +59,7 @@ namespace ConsumerUWP.ViewModels
 
 
         // XAML binding til ListView
-        public ObservableCollection<ProcessOrdre> OverviewLists
+        public ObservableCollection<ProcessOrderArk> OverviewLists
         {
             get { return _overviewlist; }
             set { _overviewlist = value; }
