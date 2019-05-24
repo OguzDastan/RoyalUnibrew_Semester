@@ -27,9 +27,9 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <customControls:ProcessListingControl Saved="{Binding Saved}" Planned="{Binding Scheduled}"
-                                              Doing="{Binding Doing}" SelectedOrdre="{Binding SelectedOrdre, Mode=TwoWay}" 
+                                              Doing="{Binding Doing}"  
                                               Grid.Column="1" Grid.ColumnSpan="3"
                                               Grid.Row="1" Grid.RowSpan="2">
         </customControls:ProcessListingControl>

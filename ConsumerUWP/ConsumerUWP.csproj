@@ -163,6 +163,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Activity.cs" />
     <Compile Include="ViewModels\AdminVM.cs" />
     <Compile Include="ViewModels\EtiketteArk.cs" />
     <Compile Include="ViewModels\NavigationItem.cs" />

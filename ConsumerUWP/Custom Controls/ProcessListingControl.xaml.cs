@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
+using ConsumerUWP.ViewModels;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -57,12 +58,12 @@ namespace ConsumerUWP.Custom_Controls
         }
         //
         public static readonly DependencyProperty SelectedOrdreProperty = DependencyProperty.Register(
-            "SelectedOrdre", typeof(ProcessOrdre), typeof(ProcessListingControl),
-            new PropertyMetadata(default(ProcessOrdre)));
+            "SelectedOrdre", typeof(ProcessOrderArk), typeof(ProcessListingControl),
+            new PropertyMetadata(default(ProcessOrderArk)));
 
-        public ProcessOrdre SelectedOrdre
+        public ProcessOrderArk SelectedOrdre
         {
-            get { return (ProcessOrdre)GetValue(SelectedOrdreProperty); }
+            get { return (ProcessOrderArk)GetValue(SelectedOrdreProperty); }
             set { SetValue(SelectedOrdreProperty, value); }
         }
         #endregion
@@ -71,7 +72,7 @@ namespace ConsumerUWP.Custom_Controls
         private ListView AktiveList;
         private ListView ArkiveredeList;
 
-        private GridView EditGrid;
+        private StackPanel EditGrid;
 
         public ProcessListingControl()
         {
@@ -80,14 +81,14 @@ namespace ConsumerUWP.Custom_Controls
             PlannedList = FindName("PlanlagteOrdre") as ListView;
             AktiveList = FindName("AktiveOrdre") as ListView;
             ArkiveredeList = FindName("ArkiveredeOrdre") as ListView;
-            EditGrid = FindName("EditGridView") as GridView;
+            EditGrid = FindName("EditGridView") as StackPanel;
 
             //EditPanel = FindName("EditPanel") as StackPanel;
         }
 
         private void AktiveOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //EditGrid.Visibility = Visibility.Collapsed;
+            EditGrid.Visibility = Visibility.Collapsed;
 
             PlannedList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
@@ -95,7 +96,7 @@ namespace ConsumerUWP.Custom_Controls
 
         private void ArkiveredeOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //EditGrid.Visibility = Visibility.Collapsed;
+            EditGrid.Visibility = Visibility.Collapsed;
 
             PlannedList.SelectedIndex = -1;
             AktiveList.SelectedIndex = -1;
@@ -103,8 +104,16 @@ namespace ConsumerUWP.Custom_Controls
 
         private void PlanlagteOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            EditGrid.Visibility = Visibility.Visible;
+
             AktiveList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
+        }
+
+        private void Update_OnClick(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("trying to change name into: "+SelectedOrdre.EndProductName);
+            Debug.WriteLine(ProcessOrderArk.SaveArk(SelectedOrdre));
         }
     }
 }

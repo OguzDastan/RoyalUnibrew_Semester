@@ -1,18 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ConsumerUWP.Annotations;
 using Models;
 using Newtonsoft.Json;
 
 namespace ConsumerUWP.ViewModels
 {
-    class ProcessOrderArk : ProcessOrdre
+    public class ProcessOrderArk : INotifyPropertyChanged
     {
+        private char _process;
+        private DateTime _processDate;
+        private int _endproductNR;
+        private string _endProductName;
+        private int _ColumnNR;
+        private int _processOrderNR;
+
         public ObservableCollection<ProcessActivity> activities { get; set; }
+
+        public char Process
+        {
+            get { return _process; }
+            set
+            {
+                _process = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime ProcessDate
+        {
+            get { return _processDate; }
+            set
+            {
+                _processDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int EndproductNR
+        {
+            get { return _endproductNR; }
+            set
+            {
+                _endproductNR = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string EndProductName
+        {
+            get { return _endProductName; }
+            set
+            {
+                _endProductName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ColumnNR
+        {
+            get { return _ColumnNR; }
+            set
+            {
+                _ColumnNR = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ProcessOrderNR
+        {
+            get { return _processOrderNR; }
+            set
+            {
+                _processOrderNR = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ProcessOrderArk()
+        {
+            activities = new ObservableCollection<ProcessActivity>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                Task<string> response = client.GetStringAsync("http://localhost:54926/api/ProcessActivity/" + this.ProcessOrderNR);
+                List<ProcessActivity> loadedProcessActivities = JsonConvert.DeserializeObject<List<ProcessActivity>>(response.Result);
+
+                if (loadedProcessActivities != null)
+                {
+                    foreach (ProcessActivity Activity in loadedProcessActivities)
+                    {
+                        if (Activity.ActivityID == 10) activities.Add(new EtiketteArk(this.ProcessOrderNR));
+                    }
+                }
+
+            }
+        }
 
         public ProcessOrderArk(int ProcessOrderNummer)
         {
@@ -29,19 +120,19 @@ namespace ConsumerUWP.ViewModels
 
                 activities = new ObservableCollection<ProcessActivity>();
 
-                response = client.GetStringAsync("http://localhost:54926/api/ProcessActivity/" + ProcessOrderNummer);
-                List<ProcessActivity> loadedProcessActivities = JsonConvert.DeserializeObject<List<ProcessActivity>>(response.Result);
+                Task<string> Activityresponse = client.GetStringAsync("http://localhost:54926/api/ProcessActivity/" + this.ProcessOrderNR);
+                List<ProcessActivity> loadedProcessActivities = JsonConvert.DeserializeObject<List<ProcessActivity>>(Activityresponse.Result);
 
                 foreach (ProcessActivity Activity in loadedProcessActivities)
                 {
-                    activities.Add(Activity);
+                    if (Activity.ActivityID == 10) activities.Add(new EtiketteArk(this.ProcessOrderNR));
                 }
             }
         }
 
-        public static List<ProcessOrdre> LoadAllArks()
+        public static ObservableCollection<ProcessOrderArk> LoadAllArks()
         {
-            List<ProcessOrdre> arks = new List<ProcessOrdre>();
+            ObservableCollection<ProcessOrderArk> arks = new ObservableCollection<ProcessOrderArk>();
 
             using (HttpClient client = new HttpClient())
             {
@@ -51,7 +142,7 @@ namespace ConsumerUWP.ViewModels
                 foreach (ProcessOrdre po in loaded)
                 {
 
-                    arks.Add(new ProcessOrdre()
+                    arks.Add(new ProcessOrderArk()
                     {
                         ProcessOrderNR = po.ProcessOrderNR,
                         ColumnNR = po.ColumnNR,
@@ -65,6 +156,37 @@ namespace ConsumerUWP.ViewModels
             return arks;
 
         }
-        
+
+        public static bool SaveArk(ProcessOrderArk savePo)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                ProcessOrdre PO = new ProcessOrdre()
+                {
+                    ProcessOrderNR = savePo.ProcessOrderNR,
+                    ColumnNR = savePo.ColumnNR,
+                    EndproductNR = savePo.EndproductNR,
+                    EndProductName = savePo.EndProductName,
+                    ProcessDate = savePo.ProcessDate,
+                    Process = savePo.Process
+                };
+
+                string jsonString = JsonConvert.SerializeObject(PO);
+                StringContent content = new StringContent(jsonString, Encoding.ASCII, "application/json");
+
+                Task<HttpResponseMessage> response = client.PutAsync("http://localhost:54926/api/ProcessOrder/" + PO.ProcessOrderNR, content);
+                
+                return response.Result.IsSuccessStatusCode;
+            }
+            return true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
