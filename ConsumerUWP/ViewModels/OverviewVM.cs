@@ -27,7 +27,7 @@ namespace ConsumerUWP.ViewModels
         public OverviewVM()
         {
             OverviewLists = new ObservableCollection<ProcessOrdre>();
-            List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
+            ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
 
             var doing =
                 from ark in alleProcesser
@@ -35,7 +35,7 @@ namespace ConsumerUWP.ViewModels
                 orderby ark.ProcessDate
                 select ark;
 
-            foreach (ProcessOrdre item in doing)
+            foreach (ProcessOrderArk item in doing)
             {
                 OverviewLists.Add(item);
             }

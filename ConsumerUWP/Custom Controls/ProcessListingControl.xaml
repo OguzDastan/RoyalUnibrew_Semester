@@ -108,6 +108,12 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Færdigvare Navn: "></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Færdigvare Nr: "></TextBlock>
+                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Kolonne Nr: "></TextBlock>
+                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Process Order Dato: "></TextBlock>
+                <DatePicker Date="{Binding SelectedOrdre.ProcessDate, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
                 <Button Name="Update" Click="Update_OnClick" Content="Save"></Button>
             </StackPanel>
         </StackPanel>
