@@ -30,5 +30,12 @@ namespace ConsumerUWP
             PalleCheckManager p = new PalleCheckManager();
             Entries = p.Entries;
         }
+        /*
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            string idStr = e.NavigationParameter as string;
+            int id = int.Parse(idStr);
+        }
+        */
     }
 }

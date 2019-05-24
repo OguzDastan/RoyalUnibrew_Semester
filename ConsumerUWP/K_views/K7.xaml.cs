@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ConsumerUWP.ViewModels;
+using ConsumerUWP;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,10 +58,18 @@ namespace ConsumerUWP.K_views
                 GaaTilArk.Visibility = Visibility.Collapsed;
             }
         }
+        private OverviewVM ovm;
+        /*
+        private void ListView_ItemClick(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+            
+            this.Frame.Navigate(typeof(EtiketteArk), ovm.SelectedArk.ProcessOrderNR);
+        }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        */
     }
 }
