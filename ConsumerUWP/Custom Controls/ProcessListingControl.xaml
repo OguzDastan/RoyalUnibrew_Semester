@@ -113,7 +113,15 @@
                 <TextBlock Text="Kolonne Nr: "></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Text="Process Order Dato: "></TextBlock>
-                <TextBlock Text="{Binding SelectedOrdre.ProcessDate.Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="/"></TextBlock>
+                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}"></TextBox>
+                <TextBlock Text="/"></TextBlock>
+                <TextBox Text="{Binding year, ElementName=ProcessListingRoot}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}"></TextBox>
+                
                 <Button Name="Update" Click="Update_OnClick" Content="Save"></Button>
             </StackPanel>
         </StackPanel>
