@@ -56,5 +56,10 @@ namespace ConsumerUWP.K_views
                 GaaTilArk.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

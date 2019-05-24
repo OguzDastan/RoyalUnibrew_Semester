@@ -20,14 +20,14 @@ namespace ConsumerUWP.ViewModels
 
         private string _controller;
 
-        private ProcessOrdre _selectedark;
+        private ProcessOrderArk _selectedark;
 
-        private ObservableCollection<ProcessOrdre> _overviewlist = new ObservableCollection<ProcessOrdre>();
+        private ObservableCollection<ProcessOrderArk> _overviewlist = new ObservableCollection<ProcessOrderArk>();
 
         public OverviewVM()
         {
-            OverviewLists = new ObservableCollection<ProcessOrdre>();
-            List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
+            OverviewLists = new ObservableCollection<ProcessOrderArk>();
+            ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
 
             var doing =
                 from ark in alleProcesser
@@ -35,7 +35,7 @@ namespace ConsumerUWP.ViewModels
                 orderby ark.ProcessDate
                 select ark;
 
-            foreach (ProcessOrdre item in doing)
+            foreach (ProcessOrderArk item in doing)
             {
                 OverviewLists.Add(item);
             }
@@ -47,7 +47,7 @@ namespace ConsumerUWP.ViewModels
 
         }
 
-        public ProcessOrdre SelectedArk
+        public ProcessOrderArk SelectedArk
         {
             get { return _selectedark; }
             set
@@ -59,7 +59,7 @@ namespace ConsumerUWP.ViewModels
 
 
         // XAML binding til ListView
-        public ObservableCollection<ProcessOrdre> OverviewLists
+        public ObservableCollection<ProcessOrderArk> OverviewLists
         {
             get { return _overviewlist; }
             set { _overviewlist = value; }
