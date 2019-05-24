@@ -104,7 +104,7 @@
         </ListView>
 
         <StackPanel Orientation="Vertical"
-            Grid.Row="2" Grid.Column="0" Name="EditGridView" Visibility="Collapsed">
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Færdigvare Navn: "></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
@@ -113,7 +113,7 @@
                 <TextBlock Text="Kolonne Nr: "></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Text="Process Order Dato: "></TextBlock>
-                <DatePicker Date="{Binding SelectedOrdre.ProcessDate, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                <TextBlock Text="{Binding SelectedOrdre.ProcessDate.Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 <Button Name="Update" Click="Update_OnClick" Content="Save"></Button>
             </StackPanel>
         </StackPanel>
