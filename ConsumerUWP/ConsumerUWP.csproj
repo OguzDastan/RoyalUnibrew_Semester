@@ -166,6 +166,7 @@
     <Compile Include="ViewModels\Activity.cs" />
     <Compile Include="ViewModels\AdminVM.cs" />
     <Compile Include="ViewModels\EtiketteArk.cs" />
+    <Compile Include="ViewModels\EtikketSingleView.cs" />
     <Compile Include="ViewModels\NavigationItem.cs" />
     <Compile Include="Operator_Overview.xaml.cs">
       <DependentUpon>Operator_Overview.xaml</DependentUpon>

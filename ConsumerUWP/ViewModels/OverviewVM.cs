@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,34 +20,38 @@ namespace ConsumerUWP.ViewModels
     {
 
         private string _controller;
+        private int _id;
 
         private ProcessOrderArk _selectedark;
 
-        private ObservableCollection<ProcessOrderArk> _overviewlist = new ObservableCollection<ProcessOrderArk>();
+        public ObservableCollection<ProcessOrderArk> _overviewlist = new ObservableCollection<ProcessOrderArk>();
+
+
 
         public OverviewVM()
         {
             OverviewLists = new ObservableCollection<ProcessOrderArk>();
             ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
 
-            var doing =
+            var doingStatus =
                 from ark in alleProcesser
                 where ark.Process == 'd'
                 orderby ark.ProcessDate
                 select ark;
 
-            foreach (ProcessOrderArk item in doing)
+            foreach (ProcessOrderArk item in doingStatus)
             {
                 OverviewLists.Add(item);
             }
 
+            GaaTilArkCommand = new RelayCommand(StoreOdreNrToId);
             /*
             GaaTilArkCommand = new RelayCommand(
                 ButtonBase_OnClick);
                 */
             /*
             ControlArkCommand = new RelayCommand(
-                AddControllerToArk);
+                StoreOdreNrToId);
             */
 
         }
@@ -84,16 +89,38 @@ namespace ConsumerUWP.ViewModels
         public RelayCommand GaaTilArkCommand
         {
             get;
-            set;
+            private set;
         }
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        private void StoreOdreNrToId()
+        {
+            Id = SelectedArk.ProcessOrderNR;
+            var parameters = new ProcessOrderArk {ProcessOrderNR = Id};
+            Debug.WriteLine(Id);
+            Frame f = new Frame();
+            f.Navigate(typeof(EtiketteArk), parameters);
+        }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Frame curr = new Frame();
             int id = SelectedArk.ProcessOrderNR;
             curr.Navigate(typeof(ConsumerUWP.EtiketteArk), id);
         }
+
+        public RelayCommand ControlArkCommand
+        {
+            get;
+            private set;
+        }
         /*
-        private void AddControllerToArk()
+        private void StoreOdreNrToId()
         {
             SelectedArk.Controller = Controller;
         }

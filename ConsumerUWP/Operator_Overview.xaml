@@ -23,14 +23,15 @@
             <RowDefinition Height="15*" />
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1920" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
         <!-- LIST MENU FRA MODEL -->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Grid.Column="0">
 
             <!-- HOVED GRID COLUMNS-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1920" />
-                <ColumnDefinition Width="250" />
-            </Grid.ColumnDefinitions>
 
             <!-- SIDE VISER (AKTIV SIDE NAVN) -->
             <Grid Grid.Row="0" Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,0,1">
@@ -41,9 +42,13 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,1,0">
-                    <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="30" Margin="110, 10, 0, 50" Height="100"  Foreground="White"/>
-                    <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="50" Margin="0, 20,0,0"  Foreground="White"/>
-                    <TextBlock x:Name="loginname" Text="{Binding Uname, Mode=TwoWay}" FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="50" Margin="0, 65,0,0"  Foreground="White"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="46" Margin="50, 10, 0, 0"  Foreground="White"/>
+                    <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="30, 50, 0, 0" Padding="50"   Foreground="White"/>
+                    <TextBlock x:Name="loginname" FontSize="30" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Grid>
 
                 <!-- OVERSIGT TITEL FOR (K?)-->

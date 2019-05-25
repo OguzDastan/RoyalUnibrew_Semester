@@ -26,6 +26,7 @@ namespace ConsumerUWP
     public sealed partial class Operator_Overview : Page
     {
         private ObservableCollection<NavigationItem> menu = new ObservableCollection<NavigationItem>();
+        private ObservableCollection<User> userList = new ObservableCollection<User>();
         private string _username;
 
         public string Username
@@ -42,6 +43,7 @@ namespace ConsumerUWP
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Username = Session.CurrentUser.UserName;
+            loginname.Text = Session.CurrentUser.UserName;
             if (Session.CurrentUser.AccessLevel == User.AccessLevels.ADMIN)
             {
                 logintype.Text = "Admin";
@@ -60,6 +62,8 @@ namespace ConsumerUWP
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K8), MenuText = typeof(K_views.K8).Name, MenuIcon = "K8" });
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K11), MenuText = typeof(K_views.K11).Name, MenuIcon = "K11" });
             menu.Add(new NavigationItem { PageLink = typeof(K_views.K12), MenuText = typeof(K_views.K12).Name, MenuIcon = "K12" });
+
+
 
 
         }

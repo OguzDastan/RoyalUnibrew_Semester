@@ -27,7 +27,22 @@ namespace ConsumerUWP.K_views
     /// </summary>
     public sealed partial class K7 : Page
     {
-        public int Id { get; set; }
+        public TextBlock getId
+        {
+            get { return sendId; }
+            set { sendId = value; }
+        }
+        public string Id
+        {
+            get
+            {
+                return sendId.Text;
+            }
+            set
+            {
+                sendId.Text = value;
+            }
+        }
 
         public ProcessOrderArk po { get; set; }
         private OverviewVM ovm;
@@ -72,15 +87,20 @@ namespace ConsumerUWP.K_views
 
         private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            
 
-            
+
+
         }
+
+
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-//            int id = po.ProcessOrderNR;
-            this.Frame.Navigate(typeof(EtiketteArk), OverviewListFront.SelectedValue);
+            var parameters = new ProcessOrderArk { ProcessOrderNR = Convert.ToInt32(Id) };
+            //Debug.WriteLine(Id);
+            Frame.Navigate(typeof(EtiketteArk), parameters);
+            // int id = po.ProcessOrderNR;
+            // this.Frame.Navigate(typeof(EtiketteArk), OverviewListFront.SelectedValue);
         }
     }
 }
