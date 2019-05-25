@@ -104,7 +104,7 @@ namespace ConsumerUWP.ViewModels
             var parameters = new ProcessOrderArk {ProcessOrderNR = Id};
             Debug.WriteLine(Id);
             Frame f = new Frame();
-            f.Navigate(typeof(EtiketteArk), parameters);
+            f.Navigate(typeof(EtiketteArkVM), parameters);
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

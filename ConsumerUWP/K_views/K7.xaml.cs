@@ -100,7 +100,7 @@ namespace ConsumerUWP.K_views
             //Debug.WriteLine(Id);
             Frame.Navigate(typeof(EtiketteArk), parameters);
             // int id = po.ProcessOrderNR;
-            // this.Frame.Navigate(typeof(EtiketteArk), OverviewListFront.SelectedValue);
+            // this.Frame.Navigate(typeof(EtiketteArkVM), OverviewListFront.SelectedValue);
         }
     }
 }

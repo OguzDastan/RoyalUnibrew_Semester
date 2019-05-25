@@ -99,7 +99,7 @@ namespace ConsumerUWP.ViewModels
                 {
                     foreach (ProcessActivity Activity in loadedProcessActivities)
                     {
-                        if (Activity.ActivityID == 10) activities.Add(new EtiketteArk(this.ProcessOrderNR));
+                        if (Activity.ActivityID == 10) activities.Add(new EtiketteArkVM(this.ProcessOrderNR));
                     }
                 }
 
@@ -126,7 +126,7 @@ namespace ConsumerUWP.ViewModels
 
                 foreach (ProcessActivity Activity in loadedProcessActivities)
                 {
-                    if (Activity.ActivityID == 10) activities.Add(new EtiketteArk(this.ProcessOrderNR));
+                    if (Activity.ActivityID == 10) activities.Add(new EtiketteArkVM(this.ProcessOrderNR));
                 }
             }
         }

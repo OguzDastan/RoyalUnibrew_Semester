@@ -27,7 +27,6 @@ namespace ConsumerUWP
     public sealed partial class EtiketteArk : Page
     {
         public int Id { get; set; }
-        private EtikketSingleView et;
 
         private ObservableCollection<ProcessOrderArk> singleArk = new ObservableCollection<ProcessOrderArk>();
         private ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
@@ -54,6 +53,7 @@ namespace ConsumerUWP
             /// BIND LIST TO XAML
             var parameters = e.Parameter as ProcessOrderArk;
             Id = parameters.ProcessOrderNR;
+            ViewModels.EtiketteArkVM et = new ViewModels.EtiketteArkVM(Id);
             Debug.WriteLine(Id);
 
 

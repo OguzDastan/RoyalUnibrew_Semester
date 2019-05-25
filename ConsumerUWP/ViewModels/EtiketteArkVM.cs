@@ -10,16 +10,17 @@ using Models;
 using System.ComponentModel;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
+using ConsumerUWP;
 
 namespace ConsumerUWP.ViewModels
 {
-    class EtiketteArk : ProcessActivity
+    public class EtiketteArkVM : ProcessActivity
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }
         
 
-        public EtiketteArk(int ProcessOrderNummer)
+        public EtiketteArkVM(int ProcessOrderNummer)
         {
             PalleChecks = new ObservableCollection<PalleCheck>();
             LabelChecks = new ObservableCollection<LabelCheck>();

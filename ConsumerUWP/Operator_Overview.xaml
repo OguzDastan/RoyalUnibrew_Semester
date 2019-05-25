@@ -24,12 +24,12 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1920" />
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="1500" />
+            <ColumnDefinition Width="1.5*" />
         </Grid.ColumnDefinitions>
 
         <!-- LIST MENU FRA MODEL -->
-        <Grid Grid.Row="0" Grid.Column="0">
+        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,0">
 
             <!-- HOVED GRID COLUMNS-->
 
@@ -52,8 +52,13 @@
                 </Grid>
 
                 <!-- OVERSIGT TITEL FOR (K?)-->
-                <Grid Grid.Column="1">
-                    <TextBlock FontSize="38" Grid.Column="1" Grid.Row="0" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Grid Grid.Column="1" Margin="0,0,420,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="620*"/>
+                        <ColumnDefinition Width="103*"/>
+                        <ColumnDefinition Width="112*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontSize="38" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" >
                         <Run FontWeight="Bold">Process Oversigt </Run>
                         <Run>for </Run>
                         <Run FontWeight="Black" Text="{Binding ElementName=listmenu, Path=SelectedItem.MenuText}"></Run>
@@ -65,7 +70,7 @@
         </Grid>
 
         <!-- NAVIGATE PAGE HEADER -->
-        <SplitView Grid.Row="1" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="White">
+        <SplitView Grid.Row="1" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="White" Margin="0,0,0,0">
             <SplitView.Pane>
                 <!-- NAV ITEM LIST BLOCK-->
                 <ListView x:Name="listmenu" ItemsSource="{x:Bind menu}" SelectionChanged="ListView_SelectionChanged" Background="Bisque" BorderBrush="Black" BorderThickness="0,0,1,0" Margin="0,0,50,0">
@@ -87,7 +92,7 @@
 
         </SplitView>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,0">
             <!-- LOGUD KNAP (NEDERST TIL VENSTRE) -->
             <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <Button.Content>
