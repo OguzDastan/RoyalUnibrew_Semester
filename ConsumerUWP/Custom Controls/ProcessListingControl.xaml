@@ -126,16 +126,14 @@
                 <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
                 <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
-
-                <!-- HVAD ER DET FOR NOGET ULÆKKERT NOGET? <3 -->
                 <TextBlock Text="Process Order Dato: " Grid.Row="0" Grid.Column="3"></TextBlock>
                 <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
                 <TextBlock Text="Måned" Grid.Row="0" Grid.Column="4"/>
-                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot}"
+                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="4"/>
                 <TextBlock Text="År" Grid.Row="0" Grid.Column="5"/>
-                <TextBox Text="{Binding year, ElementName=ProcessListingRoot}"
+                <TextBox Text="{Binding year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="5"/>
                 
                 <Button Name="Update" Click="Update_OnClick" Content="Save" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
