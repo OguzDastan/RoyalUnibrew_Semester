@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,28 +20,43 @@ namespace ConsumerUWP.ViewModels
     {
 
         private string _controller;
+        private int _id;
 
-        private OverviewList _selectedark;
+        private ProcessOrderArk _selectedark;
 
-        private ObservableCollection<OverviewList> _overviewlist = new ObservableCollection<OverviewList>();
+        public ObservableCollection<ProcessOrderArk> _overviewlist = new ObservableCollection<ProcessOrderArk>();
+
+
 
         public OverviewVM()
         {
-            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 07.30"));
-            _overviewlist.Add(new OverviewList("Tappe Operatør", "15-05-2019 / 11.30"));
-            _overviewlist.Add(new OverviewList("Trykkontrol", "15-05-2019 / 14.30"));
-            _overviewlist.Add(new OverviewList("Etiket Operatør", "15-05-2019 / 15.45"));
-            _overviewlist.Add(new OverviewList("Færdigvare Kontrol", "15-05-2019 / 18.30"));
-            _overviewlist.Add(new OverviewList("Tappe Operatør", "16-05-2019 / 07.30"));
-            _overviewlist.Add(new OverviewList("Trykkontrol", "16-05-2019 / 08.00"));
+            OverviewLists = new ObservableCollection<ProcessOrderArk>();
+            ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
 
+            var doingStatus =
+                from ark in alleProcesser
+                where ark.Process == 'd'
+                orderby ark.ProcessDate
+                select ark;
+
+            foreach (ProcessOrderArk item in doingStatus)
+            {
+                OverviewLists.Add(item);
+            }
+
+            GaaTilArkCommand = new RelayCommand(StoreOdreNrToId);
+            /*
+            GaaTilArkCommand = new RelayCommand(
+                ButtonBase_OnClick);
+                */
+            /*
             ControlArkCommand = new RelayCommand(
-                AddControllerToArk);
-
+                StoreOdreNrToId);
+            */
 
         }
 
-        public OverviewList SelectedArk
+        public ProcessOrderArk SelectedArk
         {
             get { return _selectedark; }
             set
@@ -50,8 +66,9 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
+
         // XAML binding til ListView
-        public ObservableCollection<OverviewList> OverviewLists
+        public ObservableCollection<ProcessOrderArk> OverviewLists
         {
             get { return _overviewlist; }
             set { _overviewlist = value; }
@@ -67,17 +84,54 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
-        public RelayCommand ControlArkCommand
+
+
+        public RelayCommand GaaTilArkCommand
         {
             get;
             private set;
         }
 
-        private void AddControllerToArk()
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        private void StoreOdreNrToId()
+        {
+            Id = SelectedArk.ProcessOrderNR;
+            var parameters = new ProcessOrderArk {ProcessOrderNR = Id};
+            Debug.WriteLine(Id);
+            Frame f = new Frame();
+            f.Navigate(typeof(EtiketteArkVM), parameters);
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame curr = new Frame();
+            int id = SelectedArk.ProcessOrderNR;
+            curr.Navigate(typeof(ConsumerUWP.EtiketteArk), id);
+        }
+
+        public RelayCommand ControlArkCommand
+        {
+            get;
+            private set;
+        }
+        /*
+        private void StoreOdreNrToId()
         {
             SelectedArk.Controller = Controller;
         }
 
+        public RelayCommand ControlArkCommand
+        {
+            get;
+            private set;
+        }
+        
+        */
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

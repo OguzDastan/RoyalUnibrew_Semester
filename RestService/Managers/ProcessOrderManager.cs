@@ -13,11 +13,11 @@ namespace RestService.Managers
         private const string GET_ALL = "SELECT * FROM ProcessOrder";
         private const string GET_ONE = "SELECT * FROM ProcessOrder WHERE ProcessOrderNR = @id";private const string INSERT = "INSERT INTO ProcessOrder values (@ProcessOrderNR, @ColumnNR, @EndProductNR, @EndProductName, @ProcessDate, @Process)";
         private const string UPDATE = "UPDATE ProcessOrder SET "
-            + "ColumnNR = @ColumNR "
-            + "EndProductNR = @EndProductNr "
-            + "EndProductName = @EndProductName "
-            + "ProcessDate = @ProcessDate "
-            + "Process = @Process"
+            + "ColumnNR = @ColumNR, "
+            + "EndProductNR = @EndProductNr, "
+            + "EndProductName = @EndProductName, "
+            + "ProcessDate = @ProcessDate, "
+            + "Process = @Process "
             + "WHERE ProcessOrderNR = @ProcessOrderNr ";
 
         private const string DELETE = "DELETE FROM ProcessOrder WHERE ProcessOrderNR = @ProcessOrderNR";
@@ -27,7 +27,7 @@ namespace RestService.Managers
             using (SqlCommand cmd = new SqlCommand(UPDATE, SQLConnectionSingleton.Instance.DbConnection))
             {
                 cmd.Parameters.AddWithValue("@ProcessOrderNR", po.ProcessOrderNR);
-                cmd.Parameters.AddWithValue("@ColumnNR", po.ColumnNR);
+                cmd.Parameters.AddWithValue("@ColumNR", po.ColumnNR);
                 cmd.Parameters.AddWithValue("@EndProductNR", po.EndproductNR);
                 cmd.Parameters.AddWithValue("@EndProductName", po.EndProductName);
                 cmd.Parameters.AddWithValue("@ProcessDate", po.ProcessDate);

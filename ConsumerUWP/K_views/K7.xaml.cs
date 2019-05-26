@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,6 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ConsumerUWP.ViewModels;
+using ConsumerUWP;
+using Template10.Utils;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,6 +27,25 @@ namespace ConsumerUWP.K_views
     /// </summary>
     public sealed partial class K7 : Page
     {
+        public TextBlock getId
+        {
+            get { return sendId; }
+            set { sendId = value; }
+        }
+        public string Id
+        {
+            get
+            {
+                return sendId.Text;
+            }
+            set
+            {
+                sendId.Text = value;
+            }
+        }
+
+        public ProcessOrderArk po { get; set; }
+        private OverviewVM ovm;
         public K7()
         {
             this.InitializeComponent();
@@ -55,6 +78,29 @@ namespace ConsumerUWP.K_views
             {
                 GaaTilArk.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ListView_ItemClick1(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EtiketteArk), ovm.SelectedArk.ProcessOrderNR);
+        }
+
+        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+
+
+
+        }
+
+
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var parameters = new ProcessOrderArk { ProcessOrderNR = Convert.ToInt32(Id) };
+            //Debug.WriteLine(Id);
+            Frame.Navigate(typeof(EtiketteArk), parameters);
+            // int id = po.ProcessOrderNR;
+            // this.Frame.Navigate(typeof(EtiketteArkVM), OverviewListFront.SelectedValue);
         }
     }
 }

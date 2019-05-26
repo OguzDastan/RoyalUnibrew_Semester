@@ -13,18 +13,23 @@ using System.Runtime.CompilerServices;
 
 namespace ConsumerUWP.ViewModels
 {
-    class EtiketteArk
+    public class EtiketteArkVM : ProcessActivity
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }
         
 
-        public EtiketteArk(int ProcessOrderNummer)
+        public EtiketteArkVM(int ProcessOrderNummer)
         {
             PalleChecks = new ObservableCollection<PalleCheck>();
             LabelChecks = new ObservableCollection<LabelCheck>();
 
             LoadArk(ProcessOrderNummer);
+        }
+
+        public EtiketteArkVM()
+        {
+            
         }
 
         private void LoadArk(int ProcessOrderNummer)
@@ -46,7 +51,7 @@ namespace ConsumerUWP.ViewModels
                         TimeOfTest = l.TimeOfTest,
                         LabelNumber = l.LableNR,
                         ExpireDate = l.ExpireyDate.Date,
-                        WorkerSignature = w.WorkerSign
+                        Worker = w
                     });
                 }
 
@@ -62,7 +67,7 @@ namespace ConsumerUWP.ViewModels
                     {
                         TimeOfTest = item.TimeOfTest,
                         Pallet = item.Pallet,
-                        WorkerSign = w.WorkerSign
+                        Worker = w
                     });
                 }
             }
@@ -83,7 +88,7 @@ namespace ConsumerUWP.ViewModels
                 }
                     }
             private string _pallet;
-            public string WorkerSign { get; set; }
+            public Worker Worker { get; set; }
             public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -98,7 +103,9 @@ namespace ConsumerUWP.ViewModels
             public TimeSpan TimeOfTest { get; set; }
             public DateTime ExpireDate { get; set; }
             public int LabelNumber { get; set; }
-            public string WorkerSignature { get; set; }
+            public Worker Worker { get; set; }
+
+
             public event PropertyChangedEventHandler PropertyChanged;
 
 

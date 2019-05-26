@@ -40,7 +40,8 @@
                         <Run Text="Aktive ark" />
                         </TextBlock>
                     </StackPanel>
-
+                    
+                    <!--
                     <StackPanel HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
                         <Button Padding="5" Background="ForestGreen" Click="Button_Click" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
                             <Button.Content>
@@ -48,10 +49,9 @@
                                            ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
                             </Button.Content>
                         </Button>
-
-
                     </StackPanel>
-
+                    -->
+                    
                     <StackPanel HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center">
                         <Button Padding="5" Background="MidnightBlue" Click="Button_Click2" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
                             <Button.Content>
@@ -59,10 +59,7 @@
                                            ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
                             </Button.Content>
                         </Button>
-
-
                     </StackPanel>
-
 
                     <StackPanel HorizontalAlignment="Right" Grid.Column="3" VerticalAlignment="Center" >
                         <Button Padding="5" Background="ForestGreen" HorizontalAlignment="Center" Margin="0,0,10,5" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
@@ -71,9 +68,40 @@
                             </Button.Content>
                         </Button>
                     </StackPanel>
+
                 </Grid>
                 <!-- LISTVIEW OVER AKTIVE ARK -->
-                <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" SelectedItem="{Binding SelectedArk, Mode=TwoWay}" Grid.Row="1" Grid.Column="1">
+                <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" 
+                          SelectedItem="{Binding SelectedArk, Mode=TwoWay}" 
+                          Grid.Row="1" Grid.Column="1"
+                          ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="False"
+                          x:Name="OverviewListFront">
+                    <ListView.Header>
+                        <Grid Padding="15" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,3" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*" />
+                                <ColumnDefinition Width="0.9*" />
+                                <ColumnDefinition Width="0.9*" />
+                                <ColumnDefinition Width="0.7*" />
+                                <ColumnDefinition Width="0.3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Padding="5" Grid.Column="0">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Produktnavn" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="1">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Processnummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="2">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Færdigkontrolnummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="3">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Process Dato" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,1,0" Padding="5" Grid.Column="4">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Status" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            </StackPanel>
+                        </Grid>
+                    </ListView.Header>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -81,23 +109,24 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate >
                         <DataTemplate>
-                            <Grid Padding="10" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,1" >
+                            <Grid Padding="15" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,1" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="0.2*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                    <ColumnDefinition Width="0.9*" />
+                                    <ColumnDefinition Width="0.9*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                    <ColumnDefinition Width="0.3*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock FontSize="20" Text="{Binding ArkType}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Foreground="Black"/>
-                                <TextBlock FontSize="15" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="Gray"/>
-                                <TextBlock FontSize="15" Text="Kontrol: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Foreground="Gray"/>
-                                <TextBlock FontSize="15" Text="{Binding Controller, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3" Foreground="ForestGreen"/>
+
+                                <TextBlock FontSize="15" Text="{Binding EndProductName}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Foreground="Black"/>
+                                <TextBlock FontSize="15" Text="{Binding ProcessOrderNR}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="Black"/>
+                                <TextBlock FontSize="15" Text="{Binding EndproductNR}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Foreground="Black"/>
+                                <TextBlock FontSize="15" Text="{Binding ProcessDate}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Foreground="Black"/>
+                                <TextBlock FontSize="15" Text="{Binding Process}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4" Foreground="Black"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-
 
                 <Grid Grid.Row="2" Grid.Column="1" Background="LightGray" Padding="20" x:Name="ControlPopUp">
                     <Grid.ColumnDefinitions>
@@ -110,10 +139,10 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Bold" Grid.Row="0  "  Text="{Binding SelectedArk.ArkType}" Margin="10"/>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedArk.Title}" Margin="10"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Bold" Grid.Row="0  "  Text="{Binding SelectedArk.EndProductName}" Margin="10"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding SelectedArk.EndProductName}" Margin="10"/>
                     <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding Controller, Mode=TwoWay}" Width="100" PlaceholderText="Kontrollør" Margin="10" ToolTipService.ToolTip="Skriv dine initialer her"/>
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Godkend" Command="{Binding ControlArkCommand}" Margin="10" Background="ForestGreen" Foreground="White"/>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Godkend" Margin="10" Background="ForestGreen" Foreground="White"/>
                 </Grid>
             </Grid>
 
@@ -128,9 +157,10 @@
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Medium" Grid.Row="0"  Text="Vælge ark" Margin="10"/>
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Gå til"  Margin="10" Background="ForestGreen" Foreground="White" Command="{Binding GoToArkCommand}"/>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.ArkType}" Margin="10"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Medium" Grid.Row="0"  Text="Vælge ark" Margin="10"/>
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Gå til"  Margin="10" Background="ForestGreen" Foreground="White" Click="ButtonBase_OnClick" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.EndProductName}" Margin="10"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.ProcessOrderNR}" Margin="10" Visibility="Collapsed" x:Name="sendId"/>
             </Grid>
 
         </StackPanel>

@@ -1,0 +1,203 @@
+﻿<UserControl
+    x:Name="ProcessListingRoot"
+    x:Class="ConsumerUWP.Custom_Controls.ProcessListingControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConsumerUWP.Custom_Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Models"
+    mc:Ignorable="d"
+    d:DesignHeight="1200"
+    d:DesignWidth="1920">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Listen over de planlagte Process Ordre -->
+        <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="0" Grid.Row="0" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                   Text="Planlagte Process Odre"></TextBlock>
+        <ListView ItemsSource="{Binding Planned, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="400" 
+                 VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" 
+                  SelectedItem="{Binding SelectedOrdre, ElementName=ProcessListingRoot, Mode=TwoWay}"
+                  Name="PlanlagteOrdre" SelectionChanged="PlanlagteOrdre_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProcessOrdre">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="{Binding ProcessOrderNR}" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="{Binding EndProductName}" FontSize="16"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Udføres til" FontSize="16" Margin="0 0 42 0"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Day}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Month}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Year}" FontSize="16" FontStyle="Italic"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Listen over de Aktive Process Ordre -->
+        <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="1" Grid.Row="0" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                   Text="Aktive Ordre"></TextBlock>
+        <ListView ItemsSource="{Binding Doing, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"
+                  Name="AktiveOrdre" SelectedItem="{Binding SelectedOrdre, ElementName=ProcessListingRoot, Mode=TwoWay}"
+                  SelectionChanged="AktiveOrdre_SelectionChanged"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProcessOrdre">
+                    <StackPanel Orientation="Vertical" Margin="5" CanDrag="True">
+                        <TextBlock Text="{Binding ProcessOrderNR}" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="{Binding EndProductName}" FontSize="16"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Udføres til" FontSize="16" Margin="0 0 42 0"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Day}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Month}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Year}" FontSize="16" FontStyle="Italic"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Listen over de arkiverede (Godkendte) Process Ordre -->
+        <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="2" Grid.Row="0" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                   Text="Arkiverede (godkendt) Ordre"></TextBlock>
+        <ListView ItemsSource="{Binding Saved, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1"
+                  Name="ArkiveredeOrdre" SelectionChanged="ArkiveredeOrdre_SelectionChanged"
+                  SelectedItem="{Binding SelectedOrdre, ElementName=ProcessListingRoot, Mode=TwoWay}"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProcessOrdre">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="{Binding ProcessOrderNR}" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="{Binding EndProductName}" FontSize="16"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Udført:" FontSize="16" Margin="0 0 42 0"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Day}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Month}" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="/" FontSize="16" FontStyle="Italic"></TextBlock>
+                            <TextBlock Text="{Binding ProcessDate.Year}" FontSize="16" FontStyle="Italic"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Edit panel -->
+        <StackPanel Orientation="Vertical"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed" BorderThickness="0,1,0,0" BorderBrush="Gray" Padding="20" Margin="100">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
+                <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
+                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+                <TextBlock Text="Dag" Grid.Row="0" Grid.Column="3"></TextBlock>
+                <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
+                <TextBlock Text="Måned" Grid.Row="0" Grid.Column="4"/>
+                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="4"/>
+                <TextBlock Text="År" Grid.Row="0" Grid.Column="5"/>
+                <TextBox Text="{Binding year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="5"/>
+
+                <Button Name="Edit" Content="Gem" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
+            </Grid>
+        </StackPanel>
+
+        <!-- Save Panel -->
+        <StackPanel Orientation="Vertical"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="SaveGridView" Visibility="Collapsed" BorderThickness="0,1,0,0" BorderBrush="Gray" Padding="20" Margin="100">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
+                <TextBox Text="{Binding SaveOrder.EndProductName, ElementName=ProcessListingRoot}" Grid.Column="0" Grid.Row="1"></TextBox>
+
+                <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding SaveOrder.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
+                <TextBox Text="{Binding SaveOrder.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+
+                <TextBlock Text="Process Order Nr: " Grid.Row="0" Grid.Column="3"></TextBlock>
+                <TextBox Text="{Binding SaveOrder.ProcessOrderNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
+
+                <TextBlock Text="Tilkoblede underark" HorizontalAlignment="center" FontSize="22" Grid.Column="4" Grid.Row="1"></TextBlock>
+                <ListView Grid.Column="4" Grid.Row="2" Height="150" Name="AktivitetsListe"
+                    ItemsSource="{Binding Activities, ElementName=ProcessListingRoot}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Name="AkttivitetsGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" FontSize="18" Text="{Binding ActivityName}"></TextBlock>
+                                <CheckBox Name="AktivitetChecked" Unchecked="AktivitetChecked_OnUnchecked" Checked="AktivitetChecked_OnChecked" Grid.Column="0"></CheckBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+                <Button Name="CreateButton" Click="Create_OnClick" Content="Opret Ny Process Order" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
+
+            </Grid>
+        </StackPanel>
+
+
+
+    </Grid>
+</UserControl>

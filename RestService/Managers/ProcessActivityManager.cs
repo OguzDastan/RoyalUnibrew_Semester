@@ -12,18 +12,18 @@ namespace RestService.Managers
     public class ProcessActivityManager
     {
         //queries
-        private const string GET_ONE = "SELECT * FROM ProcessActivity WHERE ActivityID = @ActivityID";
+        private const string GET_ONE = "SELECT * FROM ProcessActivity WHERE ProcessOrderNR = @ProcessOrderNR";
         private const string GET_ALL = "SELECT * FROM ProcessActivity";
         private const string INSERT = "INSERT INTO ProcessActivity VALUES (@ActivityID, @ProcessOrderNR)";
         private const string DELETE = "DELETE FROM ProcessActivity WHERE ProcessOrderNR = @ID AND ActivityID = @ActivityID";
 
-        public ProcessActivity Get(int ActivityID)
+        public ProcessActivity Get(int ProcessOrderNR)
         {
             ProcessActivity processActivity = null;
         
             using (SqlCommand cmd = new SqlCommand(GET_ONE, SQLConnectionSingleton.Instance.DbConnection))
             {
-                cmd.Parameters.AddWithValue("@ActivityID", ActivityID);
+                cmd.Parameters.AddWithValue("@ProcessOrderNR", ProcessOrderNR);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 

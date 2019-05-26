@@ -1,29 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ConsumerUWP.Annotations;
 using Models;
 
 namespace ConsumerUWP.ViewModels
 {
-    public class AdminVM
+    public class AdminVM : INotifyPropertyChanged
     {
-        private ObservableCollection<ProcessOrdre> _doing;
-        private ObservableCollection<ProcessOrdre> _saved;
-        private ObservableCollection<ProcessOrdre> _scheduled;
+        private ObservableCollection<ProcessOrderArk> _doing;
+        private ObservableCollection<ProcessOrderArk> _saved;
+        private ObservableCollection<ProcessOrderArk> _scheduled;
+
+        public ObservableCollection<ProcessOrderArk> Doing
+        {
+            get { return _doing; }
+            set { _doing = value; }
+        }
+
+        public ObservableCollection<ProcessOrderArk> Saved
+        {
+            get { return _saved; }
+            set { _saved = value; }
+        }
+
+        public ObservableCollection<ProcessOrderArk> Scheduled
+        {
+            get { return _scheduled; }
+            set { _scheduled = value; }
+        }
+
+        public ProcessOrderArk SelectedOrdre
+        {
+            get { return _selectedOrdre; }
+            set
+            {
+                _selectedOrdre = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        private ProcessOrderArk _selectedOrdre;
 
 
         public AdminVM()
         {
-            Doing = new ObservableCollection<ProcessOrdre>();
-            Saved = new ObservableCollection<ProcessOrdre>();
-            Scheduled = new ObservableCollection<ProcessOrdre>();
-            List<ProcessOrdre> alleProcesser = ProcessOrderArk.LoadAllArks();
-            
-            
+            Doing = new ObservableCollection<ProcessOrderArk>();
+            Saved = new ObservableCollection<ProcessOrderArk>();
+            Scheduled = new ObservableCollection<ProcessOrderArk>();
+            ObservableCollection<ProcessOrderArk> alleProcesser = ProcessOrderArk.LoadAllArks();
+
             var doing =
                     from ark in alleProcesser
                     where ark.Process == 'd'
@@ -40,39 +72,28 @@ namespace ConsumerUWP.ViewModels
                     select ark;
 
     
-            foreach (ProcessOrdre item in doing)
+            foreach (ProcessOrderArk item in doing)
             {
                 Doing.Add(item);
             }
 
-            foreach (ProcessOrdre item in saved)
+            foreach (ProcessOrderArk item in saved)
             {
                 Saved.Add(item);
             }
 
-            foreach (ProcessOrdre item in scheduled)
+            foreach (ProcessOrderArk item in scheduled)
             {
                 Scheduled.Add(item);
             }
-            
         }
 
-        public ObservableCollection<ProcessOrdre> Doing
-        {
-            get { return _doing; }
-            set { _doing = value; }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<ProcessOrdre> Saved
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            get { return _saved; }
-            set { _saved = value; }
-        }
-
-        public ObservableCollection<ProcessOrdre> Scheduled
-        {
-            get { return _scheduled; }
-            set { _scheduled = value; }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

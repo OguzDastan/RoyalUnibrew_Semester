@@ -19,7 +19,7 @@ namespace RestService.Controllers
             return processActivityManager.Get();
         }
 
-        // GET: api/ProcessActivity/5
+        // GET: api/ProcessActivity/{ProcessOrderNR}
         [Route("api/ProcessActivity/{id}")]
         public ProcessActivity Get(int id)
         {
