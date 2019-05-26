@@ -168,6 +168,7 @@ namespace ConsumerUWP.Custom_Controls
         {
             EditGrid.Visibility = Visibility.Collapsed;
             SaveGrid.Visibility = Visibility.Collapsed;
+            Archive.Visibility = Visibility.Visible;
 
             PlannedList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
@@ -284,7 +285,7 @@ namespace ConsumerUWP.Custom_Controls
 
             TextBox t = sender as TextBox;
             if (t.Text == "") t.Text = "0";
-            SelectedOrdre.EndproductNR = Int32.Parse(t.Text);
+            if(SelectedOrdre != null) SelectedOrdre.EndproductNR = Int32.Parse(t.Text);
         }
 
         private void EditColNR_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -292,7 +293,13 @@ namespace ConsumerUWP.Custom_Controls
 
             TextBox t = sender as TextBox;
             if (t.Text == "") t.Text = "0";
-            SelectedOrdre.ColumnNR = Int32.Parse(t.Text);
+            if (SelectedOrdre != null) SelectedOrdre.ColumnNR = Int32.Parse(t.Text);
+        }
+
+        private void Archive_OnClick(object sender, RoutedEventArgs e)
+        {
+            SelectedOrdre.Process = 'a';
+            ProcessOrderArk.SaveArk(SelectedOrdre);
         }
     }
 }
