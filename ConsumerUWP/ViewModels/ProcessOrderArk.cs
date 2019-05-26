@@ -195,7 +195,8 @@ namespace ConsumerUWP.ViewModels
         {
             using (HttpClient client = new HttpClient())
             {
-                StringContent st = new StringContent(JsonConvert.SerializeObject(po));
+                string JsonString = JsonConvert.SerializeObject(po);
+                StringContent st = new StringContent(JsonString, Encoding.ASCII, "application/json");
                 Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/ProcessOrder", st);
 
                 return response.Result.StatusCode == HttpStatusCode.OK;
@@ -214,7 +215,7 @@ namespace ConsumerUWP.ViewModels
                     {
                         ActivityID = activity.ActivityID,
                         ProcessOrderNR = ProcessOrderNr
-                    }));
+                    }), Encoding.ASCII, "application/json");
                     Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/processActivity", st);
 
                     isOk = (response.Result.StatusCode == HttpStatusCode.OK);

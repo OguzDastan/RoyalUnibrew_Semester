@@ -57,6 +57,7 @@ namespace RestService.Managers
                         ProcessOrderNR = reader.GetInt32(1)
                     });
                 }
+                reader.Close();
             }
             return processActivities;
         }

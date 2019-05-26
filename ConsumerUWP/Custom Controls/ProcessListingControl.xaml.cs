@@ -146,7 +146,7 @@ namespace ConsumerUWP.Custom_Controls
         private ListView ArkiveredeList;
 
         private StackPanel EditGrid;
-
+        private StackPanel SaveGrid;
 
         public ProcessListingControl()
         {
@@ -161,11 +161,13 @@ namespace ConsumerUWP.Custom_Controls
 
             AktivitetsListe = FindName("AktivitetsListe") as ListView;
             EditGrid = FindName("EditGridView") as StackPanel;
+            SaveGrid = FindName("SaveGridView") as StackPanel;
         }
 
         private void AktiveOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EditGrid.Visibility = Visibility.Collapsed;
+            SaveGrid.Visibility = Visibility.Collapsed;
 
             PlannedList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
@@ -174,6 +176,7 @@ namespace ConsumerUWP.Custom_Controls
         private void ArkiveredeOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EditGrid.Visibility = Visibility.Collapsed;
+            SaveGrid.Visibility = Visibility.Collapsed;
 
             PlannedList.SelectedIndex = -1;
             AktiveList.SelectedIndex = -1;
@@ -182,6 +185,7 @@ namespace ConsumerUWP.Custom_Controls
         private void PlanlagteOrdre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EditGrid.Visibility = Visibility.Visible;
+            SaveGrid.Visibility = Visibility.Collapsed;
 
             AktiveList.SelectedIndex = -1;
             ArkiveredeList.SelectedIndex = -1;
@@ -222,6 +226,7 @@ namespace ConsumerUWP.Custom_Controls
         {
             ProcessOrderArk.SaveProcessOrder(SaveOrder);
             ProcessOrderArk.SaveActivities(selectedActivities, SaveOrder.ProcessOrderNR);
+            SaveGrid.Visibility = Visibility.Visible;
         }
 
         private void AktivitetChecked_OnChecked(object sender, RoutedEventArgs e)
@@ -243,6 +248,51 @@ namespace ConsumerUWP.Custom_Controls
             Models.Activity data = t.DataContext as Models.Activity;
 
             Debug.WriteLine(selectedActivities.Remove(data));
+        }
+
+        private void SaveFVNR_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t.Text == "") t.Text = "0";
+            SaveOrder.EndproductNR = Int32.Parse(t.Text);
+        }
+
+        private void SaveColNr_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t.Text == "") t.Text = "0";
+            SaveOrder.ColumnNR = Int32.Parse(t.Text);
+        }
+
+        private void SavePONR_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t.Text == "") t.Text = "0";
+            SaveOrder.ProcessOrderNR = Int32.Parse(t.Text);
+        }
+
+        private void CreateNew_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveGrid.Visibility = Visibility.Visible;
+            EditGrid.Visibility = Visibility.Collapsed;
+            Button b = (Button) sender;
+            b.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditFVNR_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            TextBox t = sender as TextBox;
+            if (t.Text == "") t.Text = "0";
+            SelectedOrdre.EndproductNR = Int32.Parse(t.Text);
+        }
+
+        private void EditColNR_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            TextBox t = sender as TextBox;
+            if (t.Text == "") t.Text = "0";
+            SelectedOrdre.ColumnNR = Int32.Parse(t.Text);
         }
     }
 }

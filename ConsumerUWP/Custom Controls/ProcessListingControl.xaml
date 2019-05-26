@@ -125,9 +125,9 @@
                 <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0"/>
                 <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Name="editFVNR" TextChanged="EditFVNR_OnTextChanged" Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
-                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+                <TextBox Name="editColNR" TextChanged="EditColNR_OnTextChanged" Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
                 <TextBlock Text="Dag" Grid.Row="0" Grid.Column="3"></TextBlock>
                 <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
@@ -163,16 +163,16 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
-                <TextBox Text="{Binding SaveOrder.EndProductName, ElementName=ProcessListingRoot}" Grid.Column="0" Grid.Row="1"></TextBox>
+                <TextBox Text="{Binding SaveOrder.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="1"></TextBox>
 
                 <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
-                <TextBox Text="{Binding SaveOrder.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Name="SaveFVNR" TextChanged="SaveFVNR_OnTextChanged" Text="{Binding SaveOrder.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
 
                 <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
-                <TextBox Text="{Binding SaveOrder.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+                <TextBox Name="SaveColNr" TextChanged="SaveColNr_OnTextChanged" Text="{Binding SaveOrder.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
 
                 <TextBlock Text="Process Order Nr: " Grid.Row="0" Grid.Column="3"></TextBlock>
-                <TextBox Text="{Binding SaveOrder.ProcessOrderNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
+                <TextBox Name="SavePONR" TextChanged="SavePONR_OnTextChanged" Text="{Binding SaveOrder.ProcessOrderNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
 
                 <TextBlock Text="Tilkoblede underark" HorizontalAlignment="center" FontSize="22" Grid.Column="4" Grid.Row="1"></TextBlock>
                 <ListView Grid.Column="4" Grid.Row="2" Height="150" Name="AktivitetsListe"
@@ -196,6 +196,8 @@
 
             </Grid>
         </StackPanel>
+        <Button Grid.Column="0" Grid.Row="2" Content="Opret Ny Process Order" Name="CreateNew" Click="CreateNew_OnClick"></Button>
+        
 
 
 
