@@ -10,7 +10,6 @@ using Models;
 using System.ComponentModel;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
-using ConsumerUWP;
 
 namespace ConsumerUWP.ViewModels
 {
@@ -26,6 +25,11 @@ namespace ConsumerUWP.ViewModels
             LabelChecks = new ObservableCollection<LabelCheck>();
 
             LoadArk(ProcessOrderNummer);
+        }
+
+        public EtiketteArkVM()
+        {
+            
         }
 
         private void LoadArk(int ProcessOrderNummer)

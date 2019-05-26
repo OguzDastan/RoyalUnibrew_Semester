@@ -46,7 +46,7 @@
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="&#xE13D;" Grid.Column="0" Grid.Row="0" FontFamily="Segoe MDL2 Assets" FontSize="46" Margin="50, 10, 0, 0"  Foreground="White"/>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="&#xE13D;" FontFamily="Segoe MDL2 Assets" FontSize="46" Margin="50, 10, 0, 0"  Foreground="White"/>
                     <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="30, 50, 0, 0" Padding="50"   Foreground="White"/>
                     <TextBlock x:Name="loginname" FontSize="30" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Grid>
@@ -66,7 +66,6 @@
 
                 </Grid>
             </Grid>
-
         </Grid>
 
         <!-- NAVIGATE PAGE HEADER -->
@@ -89,7 +88,6 @@
             <SplitView.Content>
                 <Frame x:Name="splitviewContent" Navigated="splitviewContent_Navigated" />
             </SplitView.Content>
-
         </SplitView>
 
         <Grid Grid.Row="1" Margin="0,0,0,0">
