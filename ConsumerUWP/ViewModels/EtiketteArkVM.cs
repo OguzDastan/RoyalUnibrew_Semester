@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Models;
 using System.ComponentModel;
+using System.Net;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
+using Windows.Devices.Usb;
 
 namespace ConsumerUWP.ViewModels
 {
@@ -71,6 +73,28 @@ namespace ConsumerUWP.ViewModels
                     });
                 }
             }
+        }
+
+        public static bool SavePalleCheck()
+        {
+            return true;
+        }
+
+        public static bool SaveLabelCheck(Labeling labeling)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(labeling);
+                StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/Labeling", content);
+
+                return response.Result.StatusCode == HttpStatusCode.OK;
+            }
+        }
+
+        public static bool SaveComment()
+        {
+            return true;
         }
 
         public class PalleCheck : INotifyPropertyChanged

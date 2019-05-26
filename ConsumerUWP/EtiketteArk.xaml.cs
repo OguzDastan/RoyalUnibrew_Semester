@@ -97,9 +97,24 @@ namespace ConsumerUWP
             if (txtbox_Label.Text != ""
                 || txtbox_ExpireDate.Text != "")
             {
-                //// TODO
-                //// GEM DATA
-                //// ELLER GØR DET FRA VM
+                Labeling l = new Labeling()
+                {
+                    ExpireyDate = DateTime.Now,
+                    LableNR = Int32.Parse(txtbox_Label.Text),
+                    ProcessOrderNR = this.Id,
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    WorkerToSign = 3
+                };
+                EtiketteArkVM.SaveLabelCheck(l);
+                ET.LabelChecks.Add(new EtiketteArkVM.LabelCheck()
+                {
+                    ExpireDate = DateTime.Now,
+                    LabelNumber = Int32.Parse(txtbox_Label.Text),
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB"}
+                });
+
+
             }
             else
             {
