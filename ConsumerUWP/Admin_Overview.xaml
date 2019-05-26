@@ -12,6 +12,7 @@
         <local:AdminVM></local:AdminVM>
     </Page.DataContext>
 
+
     <Grid>
         <!--
         <ListView ItemsSource="{Binding LabelChecks}" HorizontalAlignment="Left" Width="500" Grid.Column="0">
