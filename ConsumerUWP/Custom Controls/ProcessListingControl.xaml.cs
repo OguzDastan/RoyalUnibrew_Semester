@@ -20,6 +20,8 @@ using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
 using Windows.UI.Notifications;
 using ConsumerUWP.ViewModels;
+using Template10.Utils;
+using Activity = ConsumerUWP.ViewModels.Activity;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -118,7 +120,26 @@ namespace ConsumerUWP.Custom_Controls
                 SetValue(yearProperty, value);
             }
         }
+
+        public ObservableCollection<Models.Activity> Activities
+        {
+            get { return _activities; }
+        }
+
+        public static readonly DependencyProperty SaveOrderProperty = DependencyProperty.Register(
+            "SaveOrder", typeof(ProcessOrdre), typeof(ProcessListingControl), new PropertyMetadata(default(ProcessOrdre)));
+
+        public ProcessOrdre SaveOrder
+        {
+            get { return (ProcessOrdre) GetValue(SaveOrderProperty); }
+            set { SetValue(SaveOrderProperty, value); }
+        }
+
         #endregion
+
+        private ObservableCollection<Models.Activity> _activities = Activity.LoadActivities();
+        private List<Models.Activity> selectedActivities;
+
 
         private ListView PlannedList;
         private ListView AktiveList;
@@ -126,13 +147,19 @@ namespace ConsumerUWP.Custom_Controls
 
         private StackPanel EditGrid;
 
+
         public ProcessListingControl()
         {
+            selectedActivities = new List<Models.Activity>();
+            SaveOrder = new ProcessOrdre(){Process = 'p', ProcessDate = DateTime.Now};
+
             this.InitializeComponent();
 
             PlannedList = FindName("PlanlagteOrdre") as ListView;
             AktiveList = FindName("AktiveOrdre") as ListView;
             ArkiveredeList = FindName("ArkiveredeOrdre") as ListView;
+
+            AktivitetsListe = FindName("AktivitetsListe") as ListView;
             EditGrid = FindName("EditGridView") as StackPanel;
         }
 
@@ -172,7 +199,7 @@ namespace ConsumerUWP.Custom_Controls
 
             if (year != null)
             {
-                if (Month == "") Month = "1";
+                if (year == "") year = "1";
                 Curr = new DateTime(Int32.Parse(year), Curr.Month, Curr.Day);
             }
             if (Month != null)
@@ -189,6 +216,33 @@ namespace ConsumerUWP.Custom_Controls
             SelectedOrdre.ProcessDate = Curr;
 
             return Curr;
+        }
+
+        private void Create_OnClick(object sender, RoutedEventArgs e)
+        {
+            ProcessOrderArk.SaveProcessOrder(SaveOrder);
+            ProcessOrderArk.SaveActivities(selectedActivities, SaveOrder.ProcessOrderNR);
+        }
+
+        private void AktivitetChecked_OnChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox c = sender as CheckBox;
+            Grid g = c.Parent as Grid;
+            TextBlock t = g.AllChildren().First() as TextBlock;
+            Models.Activity data = t.DataContext as Models.Activity;
+
+            selectedActivities.Add(data);
+        }
+
+        private void AktivitetChecked_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+
+            CheckBox c = sender as CheckBox;
+            Grid g = c.Parent as Grid;
+            TextBlock t = g.AllChildren().First() as TextBlock;
+            Models.Activity data = t.DataContext as Models.Activity;
+
+            Debug.WriteLine(selectedActivities.Remove(data));
         }
     }
 }

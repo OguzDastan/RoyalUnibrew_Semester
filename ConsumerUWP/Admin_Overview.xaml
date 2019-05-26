@@ -15,23 +15,20 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
         <customControls:ProcessListingControl Saved="{Binding Saved}" Planned="{Binding Scheduled}"
-                                              Doing="{Binding Doing}"  
-                                              Grid.Column="1" 
-                                              Grid.Row="1" >
+                                              Doing="{Binding Doing}" 
+                                              Grid.Row="0" Grid.Column="1">
         </customControls:ProcessListingControl>
         
-        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left">
+        <Button Width="50" Height="50" BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left">
             <Button.Content>
                 <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
             </Button.Content>

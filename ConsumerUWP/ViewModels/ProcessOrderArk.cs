@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -176,7 +177,7 @@ namespace ConsumerUWP.ViewModels
                 StringContent content = new StringContent(jsonString, Encoding.ASCII, "application/json");
 
                 Task<HttpResponseMessage> response = client.PutAsync("http://localhost:54926/api/ProcessOrder/" + PO.ProcessOrderNR, content);
-                
+
                 return response.Result.IsSuccessStatusCode;
             }
             return true;
@@ -188,6 +189,39 @@ namespace ConsumerUWP.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static bool SaveProcessOrder(ProcessOrdre po)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent st = new StringContent(JsonConvert.SerializeObject(po));
+                Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/ProcessOrder", st);
+
+                return response.Result.StatusCode == HttpStatusCode.OK;
+            }
+        }
+
+        public static bool SaveActivities(List<Models.Activity> selectedActivities, int ProcessOrderNr)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                bool isOk = false;
+
+                foreach (Models.Activity activity in selectedActivities)
+                {
+                    StringContent st = new StringContent(JsonConvert.SerializeObject(new ProcessActivity()
+                    {
+                        ActivityID = activity.ActivityID,
+                        ProcessOrderNR = ProcessOrderNr
+                    }));
+                    Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/processActivity", st);
+
+                    isOk = (response.Result.StatusCode == HttpStatusCode.OK);
+                }
+
+                return isOk;
+            }
         }
     }
 }
