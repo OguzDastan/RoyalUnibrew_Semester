@@ -15,26 +15,23 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100"></ColumnDefinition>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <customControls:ProcessListingControl Saved="{Binding Saved}" Planned="{Binding Scheduled}"
                                               Doing="{Binding Doing}"  
-                                              Grid.Column="1" Grid.ColumnSpan="3"
-                                              Grid.Row="1" Grid.RowSpan="2">
+                                              Grid.Column="1" 
+                                              Grid.Row="1" >
         </customControls:ProcessListingControl>
         
-        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" Grid.Column="4" Grid.Row="3"  HorizontalAlignment="Left">
+        <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left">
             <Button.Content>
                 <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
             </Button.Content>

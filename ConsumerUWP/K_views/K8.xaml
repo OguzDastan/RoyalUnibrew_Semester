@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock FontSize="34" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding ElementName=listmenu, Path=SelectedItem.MenuText}" />
-        <TextBlock FontSize="56">K8</TextBlock>
+
         <TextBlock FontSize="96">UNDER CONSTRUCTION</TextBlock>
     </Grid>
 </Page>

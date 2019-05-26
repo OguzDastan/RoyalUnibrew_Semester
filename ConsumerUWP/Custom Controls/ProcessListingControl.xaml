@@ -13,21 +13,21 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
-            <ColumnDefinition MinWidth="400"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Listen over de planlagte Process Ordre -->
         <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="0" Grid.Row="0" 
-                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
                    Text="Planlagte Process Odre"></TextBlock>
-        <ListView ItemsSource="{Binding Planned, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="400"
+        <ListView ItemsSource="{Binding Planned, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="400" 
                  VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" 
                   SelectedItem="{Binding SelectedOrdre, ElementName=ProcessListingRoot, Mode=TwoWay}"
                   Name="PlanlagteOrdre" SelectionChanged="PlanlagteOrdre_SelectionChanged">
@@ -51,7 +51,7 @@
 
         <!-- Listen over de Aktive Process Ordre -->
         <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="1" Grid.Row="0" 
-                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
                    Text="Aktive Ordre"></TextBlock>
         <ListView ItemsSource="{Binding Doing, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible"
                   Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"
@@ -78,7 +78,7 @@
 
         <!-- Listen over de arkiverede (Godkendte) Process Ordre-->
         <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="2" Grid.Row="0" 
-                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Left" 
                    Text="Arkiverede (godkendt) Ordre"></TextBlock>
         <ListView ItemsSource="{Binding Saved, ElementName=ProcessListingRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible"
                   Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1"
@@ -104,32 +104,42 @@
         </ListView>
 
         <StackPanel Orientation="Vertical"
-            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Færdigvare Navn: " FontSize="22" FontWeight="Bold"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Færdigvare Nr: " FontSize="22" FontWeight="Bold"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Kolonne Nr: " FontSize="22" FontWeight="Bold"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Process Order Dato: " FontSize="22" FontWeight="Bold"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="/"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="/"></TextBlock>
-                <TextBox Width="50" Margin="8 0 8 0"
-                    Text="{Binding year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed" BorderThickness="0,1,0,0" BorderBrush="Gray" Padding="20" Margin="100">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
+                <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
+                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+
+                <!-- HVAD ER DET FOR NOGET ULÆKKERT NOGET? <3 -->
+                <TextBlock Text="Process Order Dato: " Grid.Row="0" Grid.Column="3"></TextBlock>
+                <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
+                <TextBlock Text="Måned" Grid.Row="0" Grid.Column="4"/>
+                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="4"/>
+                <TextBlock Text="År" Grid.Row="0" Grid.Column="5"/>
+                <TextBox Text="{Binding year, ElementName=ProcessListingRoot}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="5"/>
                 
-                <Button Name="Update" Click="Update_OnClick" Content="Save"></Button>
-            </StackPanel>
+                <Button Name="Update" Click="Update_OnClick" Content="Save" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
+            </Grid>
         </StackPanel>
 
 
