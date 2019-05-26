@@ -7,8 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Data="using:Models"
+    xmlns:converters="using:Template10.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -88,7 +92,10 @@
                             <TextBox  HorizontalAlignment="Center" Text="{Binding LabelNumber, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding ExpireDate, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox  HorizontalAlignment="Center" Text="{Binding ExpireDate, Mode=TwoWay, 
+                         Converter={StaticResource StringFormatConverter}, 
+                         ConverterParameter=' {0:dd-MM-yyyy}'}"
+                                      TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2" >
                             <Button  HorizontalAlignment="Center" Content="Gem"></Button>
