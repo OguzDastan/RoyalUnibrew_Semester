@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
+using Windows.UI.Notifications;
 using ConsumerUWP.ViewModels;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -68,7 +69,12 @@ namespace ConsumerUWP.Custom_Controls
         }
 
         public static readonly DependencyProperty DateProperty = DependencyProperty.Register(
-            "Date", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+            "Date", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string),
+                (o, args) =>
+                {
+                    ProcessListingControl mine = o as ProcessListingControl;
+                    mine.updateDateTime();
+                }));
 
         public string Date
         {
@@ -76,29 +82,41 @@ namespace ConsumerUWP.Custom_Controls
             set
             {
                 SetValue(DateProperty, value);
-                if (SelectedOrdre != null)
-                {
-                    SelectedOrdre.ProcessDate = new DateTime(SelectedOrdre.ProcessDate.Year, SelectedOrdre.ProcessDate.Month, Int32.Parse(value));
-                }
             }
         }
 
         public static readonly DependencyProperty MonthProperty = DependencyProperty.Register(
-            "Month", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+            "Month", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string),
+                ((o, args) =>
+                {
+                    ProcessListingControl mine = o as ProcessListingControl;
+                    mine.updateDateTime();
+                } )));
 
         public string Month
         {
             get { return (string) GetValue(MonthProperty); }
-            set { SetValue(MonthProperty, value); }
+            set
+            {
+                SetValue(MonthProperty, value);
+            }
         }
 
         public static readonly DependencyProperty yearProperty = DependencyProperty.Register(
-            "year", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string)));
+            "year", typeof(string), typeof(ProcessListingControl), new PropertyMetadata(default(string),
+                ((o, args) =>
+                {
+                    ProcessListingControl mine = o as ProcessListingControl;
+                    mine.updateDateTime();
+                } )));
 
         public string year
         {
             get { return (string) GetValue(yearProperty); }
-            set { SetValue(yearProperty, value); }
+            set
+            {
+                SetValue(yearProperty, value);
+            }
         }
         #endregion
 
@@ -144,9 +162,33 @@ namespace ConsumerUWP.Custom_Controls
 
         private void Update_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectedOrdre.ProcessDate = new DateTime(Int32.Parse(year),Int32.Parse(Month),Int32.Parse(Date));
-            Debug.WriteLine("Day is now:"+SelectedOrdre.ProcessDate.Day+" "+(SelectedOrdre.ProcessDate.Day == Int32.Parse(Date)));
+            //SelectedOrdre.ProcessDate = updateDateTime();
             Debug.WriteLine(ProcessOrderArk.SaveArk(SelectedOrdre));
+        }
+
+        private DateTime updateDateTime()
+        {
+            DateTime Curr = new DateTime(SelectedOrdre.ProcessDate.Year, SelectedOrdre.ProcessDate.Month, SelectedOrdre.ProcessDate.Day);
+
+            if (year != null)
+            {
+                if (Month == "") Month = "1";
+                Curr = new DateTime(Int32.Parse(year), Curr.Month, Curr.Day);
+            }
+            if (Month != null)
+            {
+                if (Month == "") Month = "1";
+                Curr = new DateTime(Curr.Year, Int32.Parse(Month), Curr.Day);
+            }
+            if (Date != null)
+            {
+                if (Date == "") Date = "1";
+                Curr = new DateTime(Curr.Year, Curr.Month, Int32.Parse(Date));
+            }
+
+            SelectedOrdre.ProcessDate = Curr;
+
+            return Curr;
         }
     }
 }

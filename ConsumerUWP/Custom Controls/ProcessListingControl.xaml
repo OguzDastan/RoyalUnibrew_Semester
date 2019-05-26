@@ -106,21 +106,27 @@
         <StackPanel Orientation="Vertical"
             Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Færdigvare Navn: "></TextBlock>
-                <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Færdigvare Nr: "></TextBlock>
-                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Kolonne Nr: "></TextBlock>
-                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBlock Text="Process Order Dato: "></TextBlock>
-                <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <TextBlock Text="Færdigvare Navn: " FontSize="22" FontWeight="Bold"></TextBlock>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Færdigvare Nr: " FontSize="22" FontWeight="Bold"></TextBlock>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Kolonne Nr: " FontSize="22" FontWeight="Bold"></TextBlock>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Text="Process Order Dato: " FontSize="22" FontWeight="Bold"></TextBlock>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Text="/"></TextBlock>
-                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot}"
-                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}"></TextBox>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBlock Text="/"></TextBlock>
-                <TextBox Text="{Binding year, ElementName=ProcessListingRoot}"
-                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}"></TextBox>
+                <TextBox Width="50" Margin="8 0 8 0"
+                    Text="{Binding year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 
                 <Button Name="Update" Click="Update_OnClick" Content="Save"></Button>
             </StackPanel>
