@@ -28,8 +28,9 @@ namespace ConsumerUWP
     {
         public int Id { get; set; }
 
-        
+
         public List<PalleCheck> Entries { get; set; }
+
         public EtiketteArk()
         {
             this.InitializeComponent();
@@ -37,7 +38,7 @@ namespace ConsumerUWP
 
         public void GetSingeItem()
         {
-            
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,12 +51,13 @@ namespace ConsumerUWP
         }
 
         #region dependency
+
         public static readonly DependencyProperty ETProperty = DependencyProperty.Register(
             "ET", typeof(EtiketteArkVM), typeof(EtiketteArk), new PropertyMetadata(default(EtiketteArkVM)));
 
         public EtiketteArkVM ET
         {
-            get { return (EtiketteArkVM) GetValue(ETProperty); }
+            get { return (EtiketteArkVM)GetValue(ETProperty); }
             set { SetValue(ETProperty, value); }
         }
 
@@ -64,7 +66,7 @@ namespace ConsumerUWP
         private async void OpenPopup(object sender, RoutedEventArgs e)
         {
             ContentDialogResult result = await termsOfUseContentDialog.ShowAsync();
-            if (txtbox_Label.Text == "" 
+            if (txtbox_Label.Text == ""
                 || txtbox_ExpireDate.Text == "")
             {
                 termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
@@ -76,7 +78,7 @@ namespace ConsumerUWP
             }
         }
 
-        
+
 
         private void Txtbox_Label_OnTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -92,7 +94,8 @@ namespace ConsumerUWP
             }
         }
 
-        private void TermsOfUseContentDialog_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private void TermsOfUseContentDialog_OnPrimaryButtonClick(ContentDialog sender,
+            ContentDialogButtonClickEventArgs args)
         {
             if (txtbox_Label.Text != ""
                 || txtbox_ExpireDate.Text != "")
@@ -111,7 +114,7 @@ namespace ConsumerUWP
                     ExpireDate = DateTime.Now,
                     LabelNumber = Int32.Parse(txtbox_Label.Text),
                     TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
-                    Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB"}
+                    Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB" }
                 });
 
 
@@ -125,7 +128,9 @@ namespace ConsumerUWP
 
         private void SaveComment_OnClick(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
         private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             if (txtbox_Palle.Text != "")
