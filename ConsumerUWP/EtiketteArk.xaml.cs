@@ -75,13 +75,25 @@ namespace ConsumerUWP
                 termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
             }
         }
+        private async void OpenPopup2(object sender, RoutedEventArgs e)
+        {
+            ContentDialogResult result = await PallePopup.ShowAsync();
+            if (txtbox_Palle.Text == "")
+            {
+                PallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                // GEM TIL DATABASE HER
+                PallePopup.IsPrimaryButtonEnabled = true;
+            }
+        }
 
-        
 
         private void Txtbox_Label_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtbox_Label.Text.Length != 5
-                || txtbox_ExpireDate.Text.Length != 5)
+            if (txtbox_Label.Text.Length <= 5
+                || txtbox_ExpireDate.Text.Length <= 5)
             {
                 Debug.WriteLine("Error in " + txtbox_Label.Header + " or " + txtbox_ExpireDate.Header);
                 termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
@@ -89,6 +101,18 @@ namespace ConsumerUWP
             else
             {
                 termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
+            }
+        }
+        private void Txtbox_Palle_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtbox_Palle.Text.Length <= 8)
+            {
+                Debug.WriteLine("Error in " + txtbox_Palle.Header);
+                PallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                PallePopup.IsPrimaryButtonEnabled = true;
             }
         }
 
@@ -113,8 +137,6 @@ namespace ConsumerUWP
                     TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
                     Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB"}
                 });
-
-
             }
             else
             {
@@ -125,7 +147,8 @@ namespace ConsumerUWP
 
         private void SaveComment_OnClick(object sender, RoutedEventArgs e)
         {
-            
+        }
+
         private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             if (txtbox_Palle.Text != "")
@@ -151,5 +174,7 @@ namespace ConsumerUWP
                 //// ERROR MSG
             }
         }
+
+
     }
 }

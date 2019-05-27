@@ -46,6 +46,29 @@
             </Grid>
         </ContentDialog>
 
+        <!-- POPUP TIL OPRET NY ENTRY -->
+        <ContentDialog x:Name="PallePopup"
+                       PrimaryButtonText="Godkend" IsPrimaryButtonEnabled="False" 
+                       PrimaryButtonClick="PallePopup_OnPrimaryButtonClick"
+                       CloseButtonText="Fortryd">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock FontSize="24" Text="Opret ny Etikketering" HorizontalAlignment="Center" Padding="15" FontWeight="Bold"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" >
+                    <TextBox x:Name="txtbox_Palle" TextChanged="Txtbox_Palle_OnTextChanged"  HorizontalAlignment="Center" Header="Labelnummer"></TextBox>
+                </StackPanel>
+            </Grid>
+        </ContentDialog>
+
         <ListView Name="MyListView1" ItemsSource="{Binding ET.LabelChecks, ElementName=MyEtikketteArk}" Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="Black">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -84,20 +107,24 @@
                 <DataTemplate >
                     <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding LabelNumber, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox  HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
+                            <TextBox  HorizontalAlignment="Center" Text="{Binding LabelNumber, Mode=TwoWay}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" >
                             <TextBox  HorizontalAlignment="Center" Text="{Binding ExpireDate, Mode=TwoWay, 
                          Converter={StaticResource StringFormatConverter}, 
                          ConverterParameter=' {0:dd-MM-yyyy}'}"
                                       TextWrapping="Wrap"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="2" >
+                        <StackPanel Grid.Column="3" >
                             <Button  HorizontalAlignment="Center" Content="Gem"></Button>
                         </StackPanel>
                     </Grid>
@@ -128,7 +155,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
-                        <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0"></Button>
+                        <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0"></Button>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="0" >
                         <TextBlock  HorizontalAlignment="Center" Text="Pallenummer"></TextBlock>
