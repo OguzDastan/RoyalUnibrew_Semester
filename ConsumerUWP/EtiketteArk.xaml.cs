@@ -152,6 +152,8 @@ namespace ConsumerUWP
 
         private void SaveComment_OnClick(object sender, RoutedEventArgs e)
         {
+            string s = KommentarTextBox.Text;
+            Debug.WriteLine(EtiketteArkVM.SaveComment(s, Id));
         }
 
         private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
