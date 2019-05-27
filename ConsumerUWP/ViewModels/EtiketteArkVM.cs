@@ -19,12 +19,14 @@ namespace ConsumerUWP.ViewModels
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }
+        public string comment { get; set; }
 
 
         public EtiketteArkVM(int ProcessOrderNummer)
         {
             PalleChecks = new ObservableCollection<PalleCheck>();
             LabelChecks = new ObservableCollection<LabelCheck>();
+            comment = LoadComment(ProcessOrderNummer).Comment;
 
             LoadArk(ProcessOrderNummer);
         }
