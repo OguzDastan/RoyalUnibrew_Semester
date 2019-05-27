@@ -149,7 +149,7 @@ namespace ConsumerUWP
             {
                 PalletCheck p = new PalletCheck()
                 {
-                    Pallet = txtbox_Label.Text,
+                    Pallet = txtbox_Palle.Text,
                     ProcessOrderNR = this.Id,
                     TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
                     WorkerID = 3
@@ -157,7 +157,7 @@ namespace ConsumerUWP
                 EtiketteArkVM.SavePalleCheck(p);
                 ET.PalleChecks.Add(new EtiketteArkVM.PalleCheck()
                 {
-                    Pallet = txtbox_Label.Text,
+                    Pallet = txtbox_Palle.Text,
                     TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
                     Worker = new Worker() { WorkerID = 3 }
                 });
