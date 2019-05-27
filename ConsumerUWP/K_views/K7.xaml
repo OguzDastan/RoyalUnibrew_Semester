@@ -40,41 +40,13 @@
                         <Run Text="Aktive ark" />
                         </TextBlock>
                     </StackPanel>
-                    
-                    <!--
-                    <StackPanel HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
-                        <Button Padding="5" Background="ForestGreen" Click="Button_Click" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
-                            <Button.Content>
-                                <TextBlock Text="Kontrollere ark" FontSize="18"
-                                           ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
-                            </Button.Content>
-                        </Button>
-                    </StackPanel>
-                    -->
-                    
-                    <StackPanel HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center">
-                        <Button Padding="5" Background="MidnightBlue" Click="Button_Click2" HorizontalAlignment="Center" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
-                            <Button.Content>
-                                <TextBlock Text="Gå til ark" FontSize="18"
-                                           ToolTipService.ToolTip="For at kontrollere et ark, tryk på knappen 'Kontrollere Ark', derefter vælger du et ark ud fra listen, dernæst skriver du dine initialer ind og godkender."/>
-                            </Button.Content>
-                        </Button>
-                    </StackPanel>
-
-                    <StackPanel HorizontalAlignment="Right" Grid.Column="3" VerticalAlignment="Center" >
-                        <Button Padding="5" Background="ForestGreen" HorizontalAlignment="Center" Margin="0,0,10,5" BorderBrush="DarkSlateGray" BorderThickness="2" Foreground="White" FontWeight="Medium">
-                            <Button.Content>
-                                <TextBlock Text="Opret Ny" FontSize="18" />
-                            </Button.Content>
-                        </Button>
-                    </StackPanel>
 
                 </Grid>
                 <!-- LISTVIEW OVER AKTIVE ARK -->
                 <ListView ItemsSource="{Binding OverviewLists, Mode=TwoWay}" 
                           SelectedItem="{Binding SelectedArk, Mode=TwoWay}" 
                           Grid.Row="1" Grid.Column="1"
-                          ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="False"
+                          ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True"
                           x:Name="OverviewListFront">
                     <ListView.Header>
                         <Grid Padding="15" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="0,0,0,3" >
@@ -174,18 +146,5 @@
             </Grid>
 
         </StackPanel>
-
-        <!--
-       <StackPanel Margin="100">
-           <Button FontSize="50" Content="Forside" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Tappeoperatør" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Vægtkontrol_PET" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Tap_Kontrolvejledning" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Etiketoperatør" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Færdigvarekontrol" Command="{Binding}"></Button>
-           <Button FontSize="50" Content="Produktionsfølgeseddel" Command="{Binding}"></Button>
-        </StackPanel>
-        <TextBlock FontSize="56">K7</TextBlock>
-        -->
     </Grid>
 </Page>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -34,11 +35,6 @@ namespace ConsumerUWP
         public EtiketteArk()
         {
             this.InitializeComponent();
-        }
-
-        public void GetSingeItem()
-        {
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -164,8 +160,20 @@ namespace ConsumerUWP
 
         private void SaveComment_OnClick(object sender, RoutedEventArgs e)
         {
-            string s = KommentarTextBox.Text;
-            Debug.WriteLine(EtiketteArkVM.SaveComment(s, Id));
+            try
+            {
+                string s = KommentarTextBox.Text;
+                Debug.WriteLine(EtiketteArkVM.SaveComment(s, Id));
+                Message.Text = "Gemt!";
+                Message.Foreground = new SolidColorBrush(Colors.Green);
+                Message.Visibility = Visibility.Visible;
+            }
+            catch (Exception exception)
+            {
+                Message.Text = exception.Message + " Fejl!";
+                Message.Foreground = new SolidColorBrush(Colors.Red);
+                Message.Visibility = Visibility.Visible;
+            }
         }
 
         private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

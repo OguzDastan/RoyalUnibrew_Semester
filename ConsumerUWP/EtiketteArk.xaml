@@ -54,7 +54,7 @@
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock FontSize="24" Text="Opret ny Etikketering" HorizontalAlignment="Center" Padding="15" FontWeight="Bold"/>
+                        <TextBlock FontSize="24" Text="Ny Pallecheck" HorizontalAlignment="Center" Padding="15" FontWeight="Bold"/>
                     </StackPanel>
                 </DataTemplate>
             </ContentDialog.TitleTemplate>
@@ -64,7 +64,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" >
-                    <TextBox x:Name="txtbox_Palle" TextChanged="Txtbox_Palle_OnTextChanged"  HorizontalAlignment="Center" Header="Labelnummer"></TextBox>
+                    <TextBox x:Name="txtbox_Palle" TextChanged="Txtbox_Palle_OnTextChanged"  HorizontalAlignment="Center" Header="Pallenr"></TextBox>
                 </StackPanel>
             </Grid>
         </ContentDialog>
@@ -78,35 +78,36 @@
             <ListView.Header>
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.2*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Grid.Column="1" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
-                        <TextBlock HorizontalAlignment="Left" FontSize="36" Text="Label"></TextBlock>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
+                        <TextBlock HorizontalAlignment="Center" FontSize="36" Text="Label"></TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                     </StackPanel>
-                    <StackPanel Grid.Column="3" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
+                    <StackPanel Grid.Column="4" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                         <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0"></Button>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="0" Grid.Column="2" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" >
-                        <TextBlock  HorizontalAlignment="Center" Text="Tid"></TextBlock>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" >
-                        <TextBlock  HorizontalAlignment="Center" Text="Label nr"></TextBlock>
+                        <TextBlock  HorizontalAlignment="Center" Text="Tid" FontWeight="Bold"></TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="2" >
-                        <TextBlock  HorizontalAlignment="Center" Text="Udløbsdato"></TextBlock>
+                        <TextBlock  HorizontalAlignment="Center" Text="Label nr" FontWeight="Bold"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="3" >
+                        <TextBlock  HorizontalAlignment="Center" Text="Udløbsdato" FontWeight="Bold"></TextBlock>
                     </StackPanel>
                 </Grid>
             </ListView.Header>
@@ -115,14 +116,14 @@
                 <DataTemplate >
                     <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" >
-                            <Button  HorizontalAlignment="Center" Content="X" FontSize="10" VerticalAlignment="Center"/>
+                        <StackPanel Grid.Column="0" >
+                            <Button  HorizontalAlignment="Center" Content="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="7" Margin="0, 7, 0,0"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
                             <TextBox  HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
@@ -153,27 +154,28 @@
             <ListView.Header>
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.1*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.7*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.2*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Grid.Column="1" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
-                        <TextBlock HorizontalAlignment="Left" FontSize="36" Text="Palle"></TextBlock>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
+                        <TextBlock HorizontalAlignment="Center" FontSize="36" Text="Pallecheck"></TextBlock>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                     </StackPanel>
-                    <StackPanel Grid.Column="2" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
+                    <StackPanel Grid.Column="3" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                         <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0"></Button>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" >
-                        <TextBlock  HorizontalAlignment="Center" Text="Pallenummer"></TextBlock>
+                    <StackPanel Grid.Row="1" Grid.Column="1" >
+                        <TextBlock  HorizontalAlignment="Center" Text="Tid" FontWeight="Bold"></TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="2" >
-                        <TextBlock  HorizontalAlignment="Center" Text="Kontrollere"></TextBlock>
+                        <TextBlock  HorizontalAlignment="Center" Text="Pallenr" FontWeight="Bold"></TextBlock>
                     </StackPanel>
                 </Grid>
             </ListView.Header>
@@ -183,17 +185,25 @@
                 <DataTemplate >
                     <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding Pallet, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <Button  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="7" Margin="0, 7, 0,0"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
+                            <TextBox  HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="2" >
-                            <Button  HorizontalAlignment="Center" Content="Godkend"/>
+                        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" >
+                            <TextBox  HorizontalAlignment="Stretch" Text="{Binding Pallet, Mode=TwoWay}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" >
+                        </StackPanel>
+                        <StackPanel Grid.Column="4" >
+                            <Button  HorizontalAlignment="Right" Content="Godkend"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -202,9 +212,9 @@
 
         <Grid Grid.Column="2" BorderThickness="0,0,2,0" BorderBrush="Black">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.58*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="0.0158*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.09*"></RowDefinition>
             </Grid.RowDefinitions>
 
 
@@ -221,8 +231,11 @@
                     Name="KommentarTextBox"
                     />
             </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Vertical" >
-                <Button Name="SaveComment" Click="SaveComment_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Top" Content="Gem" Margin="20,0" ></Button>
+            <StackPanel Grid.Row="1" Orientation="Vertical" >
+                <Button Name="SaveComment" Click="SaveComment_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Content="Gem" Margin="20,130,20,0" ></Button>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical" >
+                <TextBlock Name="Message" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,180,20,0" Visibility="Collapsed"></TextBlock>
             </StackPanel>
         </Grid>
 
