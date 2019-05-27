@@ -75,16 +75,9 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
-        public static bool SavePalleCheck(PalletCheck palletCheck)
+        public static bool SavePalleCheck()
         {
-            using (HttpClient client = new HttpClient())
-            {
-                string json = JsonConvert.SerializeObject(palletCheck);
-                StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
-                Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/PalletCheck", content);
-
-                return response.Result.StatusCode == HttpStatusCode.OK;
-            }
+            return true;
         }
 
         public static bool SaveLabelCheck(Labeling labeling)

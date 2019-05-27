@@ -54,15 +54,16 @@
                 <!-- OVERSIGT TITEL FOR (K?)-->
                 <Grid Grid.Column="1" Margin="0,0,420,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="620*"/>
+                        <ColumnDefinition Width="103*"/>
+                        <ColumnDefinition Width="112*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" FontSize="38" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" ToolTipService.ToolTip="Her kan du se oversigten af de aktive ark. For at ryde op på oversigten, skal admin logge på og arkivere arkene.">
-                        <Run FontWeight="Bold"
-                             >
-                             Aktive ark for </Run>
+                    <TextBlock FontSize="38" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" >
+                        <Run FontWeight="Bold">Process Oversigt </Run>
                         <Run>for </Run>
                         <Run FontWeight="Black" Text="{Binding ElementName=listmenu, Path=SelectedItem.MenuText}"></Run>
                     </TextBlock>
+
                 </Grid>
             </Grid>
         </Grid>
