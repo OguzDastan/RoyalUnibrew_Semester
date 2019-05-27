@@ -63,32 +63,54 @@ namespace ConsumerUWP
 
         private async void OpenPopup(object sender, RoutedEventArgs e)
         {
-            ContentDialogResult result = await termsOfUseContentDialog.ShowAsync();
+            ContentDialogResult result = await labelPopup.ShowAsync();
             if (txtbox_Label.Text == "" 
                 || txtbox_ExpireDate.Text == "")
             {
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
+                labelPopup.IsPrimaryButtonEnabled = false;
             }
             else
             {
-                // GEM TIL DATABASE HER
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
+                labelPopup.IsPrimaryButtonEnabled = true;
+            }
+        }
+        private async void OpenPopup2(object sender, RoutedEventArgs e)
+        {
+            ContentDialogResult result = await pallePopup.ShowAsync();
+            if (txtbox_Palle.Text == "")
+            {
+                pallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                pallePopup.IsPrimaryButtonEnabled = true;
+            }
+        }
+        private void Txt_Palle_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtbox_Palle.Text.Length <= 8)
+            {
+                Debug.WriteLine("Error in " + txtbox_Palle.Header);
+                pallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                pallePopup.IsPrimaryButtonEnabled = true;
             }
         }
 
-        
 
         private void Txtbox_Label_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtbox_Label.Text.Length != 5
-                || txtbox_ExpireDate.Text.Length != 5)
+            if (txtbox_Label.Text.Length <= 5
+                || txtbox_ExpireDate.Text.Length <= 9)
             {
                 Debug.WriteLine("Error in " + txtbox_Label.Header + " or " + txtbox_ExpireDate.Header);
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
+                labelPopup.IsPrimaryButtonEnabled = false;
             }
             else
             {
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
+                labelPopup.IsPrimaryButtonEnabled = true;
             }
         }
 
@@ -113,8 +135,6 @@ namespace ConsumerUWP
                     TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
                     Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB"}
                 });
-
-
             }
             else
             {
@@ -123,5 +143,30 @@ namespace ConsumerUWP
             }
         }
 
+        private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (txtbox_Palle.Text != "")
+            {
+                PalletCheck p = new PalletCheck()
+                {
+                    Pallet = txtbox_Label.Text,
+                    ProcessOrderNR = this.Id,
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    WorkerID = 3
+                };
+                EtiketteArkVM.SavePalleCheck(p);
+                ET.PalleChecks.Add(new EtiketteArkVM.PalleCheck()
+                {
+                    Pallet = txtbox_Label.Text,
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    Worker = new Worker() { WorkerID = 3 }
+                });
+            }
+            else
+            {
+                //// TODO
+                //// ERROR MSG
+            }
+        }
     }
 }
