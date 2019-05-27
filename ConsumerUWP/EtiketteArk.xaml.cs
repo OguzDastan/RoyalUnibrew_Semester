@@ -123,5 +123,9 @@ namespace ConsumerUWP
             }
         }
 
+        private void SaveComment_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

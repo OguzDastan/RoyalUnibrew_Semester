@@ -178,10 +178,11 @@
                     Height="120"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     CharacterSpacing="5"
+                    Name="KommentarTextBox"
                     />
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical" >
-                <Button  HorizontalAlignment="Stretch" VerticalAlignment="Top" Content="Gem" Margin="20,0" ></Button>
+                <Button Name="SaveComment" Click="SaveComment_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Top" Content="Gem" Margin="20,0" ></Button>
             </StackPanel>
         </Grid>
 
