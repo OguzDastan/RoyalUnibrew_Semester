@@ -61,6 +61,8 @@ namespace ConsumerUWP
             set { SetValue(ETProperty, value); }
         }
 
+        
+
         #endregion
 
         private async void OpenPopup(object sender, RoutedEventArgs e)
