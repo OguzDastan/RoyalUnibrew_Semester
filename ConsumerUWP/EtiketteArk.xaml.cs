@@ -46,11 +46,21 @@ namespace ConsumerUWP
             var parameters = e.Parameter as ProcessOrderArk;
             Id = parameters.ProcessOrderNR;
             this.ET = new EtiketteArkVM(Id);
+            CommentString = EtiketteArkVM.LoadComment(Id).Comment;
             // showing parsed ID
             Debug.WriteLine(Id);
         }
 
         #region dependency
+
+        public static readonly DependencyProperty CommentStringProperty = DependencyProperty.Register(
+            "CommentString", typeof(string), typeof(EtiketteArk), new PropertyMetadata(default(string)));
+
+        public string CommentString
+        {
+            get { return (string) GetValue(CommentStringProperty); }
+            set { SetValue(CommentStringProperty, value); }
+        }
 
         public static readonly DependencyProperty ETProperty = DependencyProperty.Register(
             "ET", typeof(EtiketteArkVM), typeof(EtiketteArk), new PropertyMetadata(default(EtiketteArkVM)));
