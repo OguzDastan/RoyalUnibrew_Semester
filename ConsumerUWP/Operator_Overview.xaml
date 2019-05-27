@@ -37,8 +37,8 @@
             <Grid Grid.Row="0" Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <!-- NY GRID COLUMNS-->
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250" />
-                    <ColumnDefinition Width="1670" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,1,0">
