@@ -126,6 +126,30 @@ namespace ConsumerUWP
         private void SaveComment_OnClick(object sender, RoutedEventArgs e)
         {
             
+        private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (txtbox_Palle.Text != "")
+            {
+                PalletCheck p = new PalletCheck()
+                {
+                    Pallet = txtbox_Palle.Text,
+                    ProcessOrderNR = this.Id,
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    WorkerID = 3
+                };
+                EtiketteArkVM.SavePalleCheck(p);
+                ET.PalleChecks.Add(new EtiketteArkVM.PalleCheck()
+                {
+                    Pallet = txtbox_Palle.Text,
+                    TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    Worker = new Worker() { WorkerID = 3 }
+                });
+            }
+            else
+            {
+                //// TODO
+                //// ERROR MSG
+            }
         }
     }
 }
