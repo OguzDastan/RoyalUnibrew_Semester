@@ -8,23 +8,32 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Models;
 using System.ComponentModel;
+using System.Net;
 using ConsumerUWP.Annotations;
 using System.Runtime.CompilerServices;
+using Windows.Devices.Usb;
 
 namespace ConsumerUWP.ViewModels
 {
-    class EtiketteArk : ProcessActivity
+    public class EtiketteArkVM : ProcessActivity
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }
-        
+        public string comment { get; set; }
 
-        public EtiketteArk(int ProcessOrderNummer)
+
+        public EtiketteArkVM(int ProcessOrderNummer)
         {
             PalleChecks = new ObservableCollection<PalleCheck>();
             LabelChecks = new ObservableCollection<LabelCheck>();
+            comment = LoadComment(ProcessOrderNummer).Comment;
 
             LoadArk(ProcessOrderNummer);
+        }
+
+        public EtiketteArkVM()
+        {
+
         }
 
         private void LoadArk(int ProcessOrderNummer)
@@ -68,10 +77,79 @@ namespace ConsumerUWP.ViewModels
             }
         }
 
+        public static bool SavePalleCheck(PalletCheck palletCheck)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(palletCheck);
+                StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/PalletCheck", content);
+
+                return response.Result.StatusCode == HttpStatusCode.OK;
+            }
+        }
+
+        public static bool SaveLabelCheck(Labeling labeling)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(labeling);
+                StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/Labeling", content);
+
+                return response.Result.StatusCode == HttpStatusCode.OK;
+            }
+        }
+
+        public static LabelingComment LoadComment(int ProcessOrderNummer)
+        {
+            LabelingComment comment = new LabelingComment();
+
+            using (HttpClient client = new HttpClient())
+            {
+                Task<string> response =
+                    client.GetStringAsync("http://localhost:54926/api/LabelingComment/" + ProcessOrderNummer);
+                comment = JsonConvert.DeserializeObject<LabelingComment>(response.Result);
+            }
+            return comment;
+        }
+
+        public static bool SaveComment(string comment, int ProcessOrderNummer)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                if (LoadComment(ProcessOrderNummer) is null)
+                {
+                    string json = JsonConvert.SerializeObject(new LabelingComment()
+                    {
+                        Comment = comment,
+                        ProcessOrderNR = ProcessOrderNummer,
+                        WorkerID = 3
+                    });
+                    StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                    Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/LabelingComment", content);
+                    return response.Result.StatusCode == HttpStatusCode.OK;
+                }
+                else
+                {
+                    string json = JsonConvert.SerializeObject(new LabelingComment()
+                    {
+                        Comment = comment,
+                        ProcessOrderNR = ProcessOrderNummer,
+                        WorkerID = 3
+                    });
+                    StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                    Task<HttpResponseMessage> response = client.PutAsync("http://localhost:54926/api/LabelingComment", content);
+                    return response.Result.StatusCode == HttpStatusCode.OK;
+                }
+            }
+        }
+
         public class PalleCheck : INotifyPropertyChanged
         {
             public TimeSpan TimeOfTest { get; set; }
-            public string Pallet {
+            public string Pallet
+            {
                 get
                 {
                     return _pallet;
@@ -81,7 +159,7 @@ namespace ConsumerUWP.ViewModels
                     _pallet = value;
                     OnPropertyChanged();
                 }
-                    }
+            }
             private string _pallet;
             public Worker Worker { get; set; }
             public event PropertyChangedEventHandler PropertyChanged;

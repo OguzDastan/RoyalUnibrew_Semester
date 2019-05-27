@@ -68,16 +68,6 @@ namespace ConsumerUWP.K_views
         }
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            /// TODO: session check for admin clearence
-            if (GaaTilArk.Visibility == Visibility.Collapsed)
-            {
-                GaaTilArk.Visibility = Visibility.Visible;
-                ControlPopUp.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                GaaTilArk.Visibility = Visibility.Collapsed;
-            }
         }
 
         private void ListView_ItemClick1(object sender, DoubleTappedRoutedEventArgs e)
@@ -88,6 +78,11 @@ namespace ConsumerUWP.K_views
         private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
         {
 
+            /// TODO: session check for admin clearence
+            if (GaaTilArk.Visibility == Visibility.Collapsed)
+            {
+                GaaTilArk.Visibility = Visibility.Visible;
+            }
 
 
         }
@@ -100,7 +95,7 @@ namespace ConsumerUWP.K_views
             //Debug.WriteLine(Id);
             Frame.Navigate(typeof(EtiketteArk), parameters);
             // int id = po.ProcessOrderNR;
-            // this.Frame.Navigate(typeof(EtiketteArk), OverviewListFront.SelectedValue);
+            // this.Frame.Navigate(typeof(EtiketteArkVM), OverviewListFront.SelectedValue);
         }
     }
 }

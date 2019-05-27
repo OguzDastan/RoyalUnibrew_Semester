@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Models"
     mc:Ignorable="d"
-    d:DesignHeight="500"
-    d:DesignWidth="1800">
+    d:DesignHeight="1200"
+    d:DesignWidth="1920">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Listen over de arkiverede (Godkendte) Process Ordre-->
+        <!-- Listen over de arkiverede (Godkendte) Process Ordre -->
         <TextBlock FontSize="24" FontWeight="Bold" Grid.Column="2" Grid.Row="0" 
                    VerticalAlignment="Stretch" HorizontalAlignment="Left" 
                    Text="Arkiverede (godkendt) Ordre"></TextBlock>
@@ -103,10 +103,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <!-- Edit panel -->
         <StackPanel Orientation="Vertical"
             Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="EditGridView" Visibility="Collapsed" BorderThickness="0,1,0,0" BorderBrush="Gray" Padding="20" Margin="100">
             <Grid >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -123,27 +125,81 @@
                 <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
                 <TextBox Text="{Binding SelectedOrdre.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0"/>
                 <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Name="editFVNR" TextChanged="EditFVNR_OnTextChanged" Text="{Binding SelectedOrdre.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
-                <TextBox Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
-
-                <!-- HVAD ER DET FOR NOGET ULÆKKERT NOGET? <3 -->
-                <TextBlock Text="Process Order Dato: " Grid.Row="0" Grid.Column="3"></TextBlock>
+                <TextBox Name="editColNR" TextChanged="EditColNR_OnTextChanged" Text="{Binding SelectedOrdre.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+                <TextBlock Text="Dag" Grid.Row="0" Grid.Column="3"></TextBlock>
                 <TextBox Text="{Binding Date, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Day, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
                 <TextBlock Text="Måned" Grid.Row="0" Grid.Column="4"/>
-                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot}"
+                <TextBox Text="{Binding Month, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Month, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="4"/>
                 <TextBlock Text="År" Grid.Row="0" Grid.Column="5"/>
-                <TextBox Text="{Binding year, ElementName=ProcessListingRoot}"
+                <TextBox Text="{Binding year, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          PlaceholderText="{Binding SelectedOrdre.ProcessDate.Year, ElementName=ProcessListingRoot}" Grid.Row="1" Grid.Column="5"/>
-                
-                <Button Name="Update" Click="Update_OnClick" Content="Save" Grid.Row="2" Padding="10" Margin="0,10" Grid.Column="0"></Button>
+
+                <Button Name="Edit" Content="Gem" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
             </Grid>
         </StackPanel>
 
+        <!-- Save Panel -->
+        <StackPanel Orientation="Vertical"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Name="SaveGridView" Visibility="Collapsed" BorderThickness="0,1,0,0" BorderBrush="Gray" Padding="20" Margin="100">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
 
+                <TextBlock Text="Færdigvare Navn: " Grid.Row="0" Grid.Column="0"></TextBlock>
+                <TextBox Text="{Binding SaveOrder.EndProductName, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.Row="1"></TextBox>
 
+                <TextBlock Text="Færdigvare Nr: " Grid.Row="0" Grid.Column="1"/>
+                <TextBox Name="SaveFVNR" TextChanged="SaveFVNR_OnTextChanged" Text="{Binding SaveOrder.EndproductNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+
+                <TextBlock Text="Kolonne Nr: " Grid.Row="0" Grid.Column="2"/>
+                <TextBox Name="SaveColNr" TextChanged="SaveColNr_OnTextChanged" Text="{Binding SaveOrder.ColumnNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+
+                <TextBlock Text="Process Order Nr: " Grid.Row="0" Grid.Column="3"></TextBlock>
+                <TextBox Name="SavePONR" TextChanged="SavePONR_OnTextChanged" Text="{Binding SaveOrder.ProcessOrderNR, ElementName=ProcessListingRoot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="3"/>
+
+                <TextBlock Text="Tilkoblede underark" HorizontalAlignment="center" FontSize="22" Grid.Column="4" Grid.Row="1"></TextBlock>
+                <ListView Grid.Column="4" Grid.Row="2" Height="150" Name="AktivitetsListe"
+                    ItemsSource="{Binding Activities, ElementName=ProcessListingRoot}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Name="AkttivitetsGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" FontSize="18" Text="{Binding ActivityName}"></TextBlock>
+                                <CheckBox Name="AktivitetChecked" Unchecked="AktivitetChecked_OnUnchecked" Checked="AktivitetChecked_OnChecked" Grid.Column="0"></CheckBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+                <Button Name="CreateButton" Click="Create_OnClick" Content="Opret Ny Process Order" Grid.Row="2" Padding="10" Margin="0,30" Grid.Column="0"></Button>
+
+            </Grid>
+        </StackPanel>
+        
+        <Button Grid.Column="2" Grid.Row="2" Content="Opret Ny Process Order" Name="CreateNew" Click="CreateNew_OnClick"></Button>
+        
+    <Button Grid.Column="2" Grid.Row="2" Content="Godkend" Name="Archive" Click="Archive_OnClick" Visibility="Collapsed"></Button>
 
 
     </Grid>

@@ -19,7 +19,7 @@ namespace RestService.Managers
         }
 
         private SqlConnection _dbConnection;
-        private const String ConnString = @"Data Source=oldbserver.database.windows.net;Initial Catalog=UnibrewDB;User ID=oldbadmin;Password=SECRET123pass;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";          
+        private const String ConnString = @"Data Source=oldbserver.database.windows.net;Initial Catalog=UnibrewDB;User ID=oldbadmin;Password=SECRET123pass;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=True;";          
         public SqlConnection DbConnection => _dbConnection;
     }
 }

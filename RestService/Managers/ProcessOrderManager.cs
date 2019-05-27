@@ -62,7 +62,7 @@ namespace RestService.Managers
                 cmd.Parameters.AddWithValue("@EndProductNR", po.EndproductNR);
                 cmd.Parameters.AddWithValue("@EndProductName", po.EndProductName);
                 cmd.Parameters.AddWithValue("@ProcessDate", po.ProcessDate);
-
+                
                 int RowsAffected = cmd.ExecuteNonQuery();
 
                 return RowsAffected == 1;
