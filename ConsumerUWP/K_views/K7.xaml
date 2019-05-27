@@ -86,19 +86,24 @@
                                 <ColumnDefinition Width="0.3*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Padding="5" Grid.Column="0">
-                                <TextBlock FontSize="25" FontWeight="Bold" Text="Produktnavn" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Produktnavn" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"
+                                           ToolTipService.ToolTip="Produktnavnet er det tilgivet navn af administratoren. For spørgsmål vedrørende dette, kontakt den vedrørende administrator."/>
                             </StackPanel>
                             <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="1">
-                                <TextBlock FontSize="25" FontWeight="Bold" Text="Processnummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Processodrenummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"
+                                           ToolTipService.ToolTip="Processordrenummeret er tilknyttet til den listede process."/>
                             </StackPanel>
                             <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="2">
-                                <TextBlock FontSize="25" FontWeight="Bold" Text="Færdigkontrolnummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Færdigkontrolnummer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"
+                                           ToolTipService.ToolTip="Hvis der er tilknyttet Færdigvarekontrolnummer betyder det at processen er færdigt."/>
                             </StackPanel>
                             <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="3">
-                                <TextBlock FontSize="25" FontWeight="Bold" Text="Process Dato" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Process Dato" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"
+                                           ToolTipService.ToolTip="Oprettede dato på processen"/>
                             </StackPanel>
-                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,1,0" Padding="5" Grid.Column="4">
-                                <TextBlock FontSize="25" FontWeight="Bold" Text="Status" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            <StackPanel BorderBrush="LightGray" BorderThickness="1,0,0,0" Padding="5" Grid.Column="4">
+                                <TextBlock FontSize="25" FontWeight="Bold" Text="Status" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"
+                                           ToolTipService.ToolTip="Hvis processen kan ses i denne oversigt, betyder det at den er aktiv."/>
                             </StackPanel>
                         </Grid>
                     </ListView.Header>
@@ -146,21 +151,26 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="1" Background="LightGray" Padding="20" x:Name="GaaTilArk">
+            <Grid Background="LightGray" Padding="20" x:Name="GaaTilArk">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="24" FontWeight="Medium" Grid.Row="0"  Text="Vælge ark" Margin="10"/>
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Gå til"  Margin="10" Background="ForestGreen" Foreground="White" Click="ButtonBase_OnClick" />
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.EndProductName}" Margin="10"/>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontSize="18" FontWeight="Bold" Grid.Row="2"  Text="{Binding SelectedArk.ProcessOrderNR}" Margin="10" Visibility="Collapsed" x:Name="sendId"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="7" FontSize="24" FontWeight="Medium" Grid.Row="0" Margin="10">
+                    <Run Text="Du har valgt"/>
+                    <Run Text="{Binding SelectedArk.EndProductName}" FontWeight="Bold"/>
+                </TextBlock>
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Etiketoperatør"  Margin="10" Background="ForestGreen" Foreground="White" Click="ButtonBase_OnClick" />
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Tappeoperatør"  Margin="10" Background="ForestGreen" Foreground="White" IsEnabled="False" />
+                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Content="Vægtkontrol PET"  Margin="10" Background="ForestGreen" Foreground="White" IsEnabled="False" />
+                <TextBlock x:Name="sendId" Text="{Binding SelectedArk.ProcessOrderNR, Mode=TwoWay}" Visibility="Collapsed"></TextBlock>
             </Grid>
 
         </StackPanel>
