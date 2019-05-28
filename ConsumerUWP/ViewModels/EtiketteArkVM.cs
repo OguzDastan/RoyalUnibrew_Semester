@@ -15,11 +15,34 @@ using Windows.Devices.Usb;
 
 namespace ConsumerUWP.ViewModels
 {
-    public class EtiketteArkVM : ProcessActivity
+    public class EtiketteArkVM : ProcessActivity, INotifyPropertyChanged
     {
         public ObservableCollection<PalleCheck> PalleChecks { get; set; }
         public ObservableCollection<LabelCheck> LabelChecks { get; set; }
+
+
+        private LabelCheck _selectedLabel;
+        private PalleCheck _selectedPalle;
+        public LabelCheck SelectedLabel
+        {
+            get { return _selectedLabel; }
+            set
+            {
+                _selectedLabel = value;
+                OnPropertyChanged();
+            }
+        }
+        public PalleCheck SelectedPalle
+        {
+            get { return _selectedPalle; }
+            set
+            {
+                _selectedPalle = value;
+                OnPropertyChanged();
+            }
+        }
         public string comment { get; set; }
+
 
 
         public EtiketteArkVM(int ProcessOrderNummer)
@@ -144,6 +167,36 @@ namespace ConsumerUWP.ViewModels
                 }
             }
         }
+        public static bool DeletePalle(string comment, int ProcessOrderNummer)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                if (LoadComment(ProcessOrderNummer) is null)
+                {
+                    string json = JsonConvert.SerializeObject(new LabelingComment()
+                    {
+                        Comment = comment,
+                        ProcessOrderNR = ProcessOrderNummer,
+                        WorkerID = 3
+                    });
+                    StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                    Task<HttpResponseMessage> response = client.PostAsync("http://localhost:54926/api/LabelingComment", content);
+                    return response.Result.StatusCode == HttpStatusCode.OK;
+                }
+                else
+                {
+                    string json = JsonConvert.SerializeObject(new LabelingComment()
+                    {
+                        Comment = comment,
+                        ProcessOrderNR = ProcessOrderNummer,
+                        WorkerID = 3
+                    });
+                    StringContent content = new StringContent(json, Encoding.ASCII, "Application/json");
+                    Task<HttpResponseMessage> response = client.PutAsync("http://localhost:54926/api/LabelingComment", content);
+                    return response.Result.StatusCode == HttpStatusCode.OK;
+                }
+            }
+        }
 
         public class PalleCheck : INotifyPropertyChanged
         {
@@ -187,6 +240,14 @@ namespace ConsumerUWP.ViewModels
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

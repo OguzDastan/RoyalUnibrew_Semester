@@ -43,21 +43,16 @@
 
                 <Grid Grid.Column="0" Background="SlateGray" BorderBrush="Black" BorderThickness="0,0,1,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0" Text="&#xE13D;" FontFamily="Segoe MDL2 Assets" FontSize="46" Margin="50, 10, 0, 0"  Foreground="White"/>
-                    <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="30, 50, 0, 0" Padding="50"   Foreground="White"/>
+                    <TextBlock x:Name="logintype" FontSize="16" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="30, 50, 0, 0" Foreground="White"/>
                     <TextBlock x:Name="loginname" FontSize="30" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </Grid>
 
                 <!-- OVERSIGT TITEL FOR (K?)-->
-                <Grid Grid.Column="1" Margin="0,0,420,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="620*"/>
-                        <ColumnDefinition Width="103*"/>
-                        <ColumnDefinition Width="112*"/>
-                    </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <TextBlock FontSize="38" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" >
                         <Run FontWeight="Bold">Process Oversigt </Run>
                         <Run>for </Run>
@@ -69,7 +64,7 @@
         </Grid>
 
         <!-- NAVIGATE PAGE HEADER -->
-        <SplitView Grid.Row="1" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="White" Margin="0,0,0,0">
+        <SplitView Grid.Row="1" Grid.Column="0" x:Name="RootSpiltView" OpenPaneLength="300" CompactPaneLength="250" DisplayMode="CompactOverlay" Background="White" Margin="0,0,0,0">
             <SplitView.Pane>
                 <!-- NAV ITEM LIST BLOCK-->
                 <ListView x:Name="listmenu" ItemsSource="{x:Bind menu}" SelectionChanged="ListView_SelectionChanged" Background="Bisque" BorderBrush="Black" BorderThickness="0,0,1,0" Margin="0,0,50,0">
@@ -90,9 +85,9 @@
             </SplitView.Content>
         </SplitView>
 
-        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,0,0">
+        <Grid Grid.Row="1" Grid.Column="0" >
             <!-- LOGUD KNAP (NEDERST TIL VENSTRE) -->
-            <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button BorderThickness="0" Background="Transparent" Click="Button_Click_Back" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <Button.Content>
                     <TextBlock Text="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="24" Padding="10" />
                 </Button.Content>

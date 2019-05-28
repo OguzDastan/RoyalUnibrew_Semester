@@ -61,7 +61,6 @@
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" >
                     <TextBox x:Name="txtbox_Palle" TextChanged="Txtbox_Palle_OnTextChanged"  HorizontalAlignment="Center" Header="Pallenr"></TextBox>
@@ -69,7 +68,10 @@
             </Grid>
         </ContentDialog>
 
-        <ListView Name="MyListView1" ItemsSource="{Binding ET.LabelChecks, ElementName=MyEtikketteArk}" Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="Black">
+        <ListView Name="MyListView1" 
+                  ItemsSource="{Binding ET.LabelChecks, ElementName=MyEtikketteArk}" 
+                  SelectedItem="{Binding ET.SelectedLabel, Mode=TwoWay, ElementName=MyEtikketteArk}" 
+                  Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="Black">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -78,11 +80,11 @@
             <ListView.Header>
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.2*"></RowDefinition>
@@ -95,7 +97,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
                     </StackPanel>
                     <StackPanel Grid.Column="4" Grid.Row="0" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
-                        <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0"></Button>
+                        <Button Content="&#xE109;" FontFamily="Segoe MDL2 Assets" FontSize="20" FontWeight="Bold" Click="OpenPopup" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,15,0" IsEnabled="True"></Button>
                     </StackPanel>
 
                     <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BorderThickness="0,0,0,2" BorderBrush="Black" Padding="5" Margin="0,0,0,15">
@@ -126,24 +128,30 @@
                             <Button  HorizontalAlignment="Center" Content="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="7" Margin="0, 7, 0,0"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="TimeOfTestTxtLabel" HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding LabelNumber, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="LabelNrTxt" HorizontalAlignment="Center" Text="{Binding LabelNumber, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="3" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding ExpireDate, Mode=TwoWay, 
+                            <TextBox x:Name="ExpireDateTxt" HorizontalAlignment="Center" Text="{Binding ExpireDate, Mode=TwoWay, 
                          Converter={StaticResource StringFormatConverter}, 
                          ConverterParameter=' {0:dd-MM-yyyy}'}"
                                       TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="4" >
-                            <Button  HorizontalAlignment="Center" Content="Gem"></Button>
+                            <Button  HorizontalAlignment="Center" Content="Gem" Click="GemLabel" IsEnabled="False"></Button>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackPanel x:Name="propStateView" Grid.Column="0" Padding="20,0">
+            <TextBlock Text="{Binding ET.SelectedLabel.LabelNumber, Mode=TwoWay, ElementName=MyEtikketteArk}"/>
+            <TextBlock Text="{Binding ET.SelectedLabel.TimeOfTest, Mode=TwoWay, ElementName=MyEtikketteArk}"/>
+            <TextBlock Text="{Binding ET.SelectedLabel.ExpireDate, Mode=TwoWay, ElementName=MyEtikketteArk}"/>
+        </StackPanel>
 
         <ListView Name="MyListView2" ItemsSource="{Binding ET.PalleChecks, ElementName=MyEtikketteArk}" Grid.Column="1" BorderThickness="0,0,2,0" BorderBrush="Black">
             <ListView.ItemContainerStyle>
@@ -195,15 +203,15 @@
                             <Button  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE106;" FontFamily="Segoe MDL2 Assets" FontSize="7" Margin="0, 7, 0,0"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" >
-                            <TextBox  HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="TimeOfTestTxt" HorizontalAlignment="Center" Text="{Binding TimeOfTest, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="2" Grid.ColumnSpan="2" >
-                            <TextBox  HorizontalAlignment="Stretch" Text="{Binding Pallet, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox x:Name="PalleNrTxt" HorizontalAlignment="Stretch" Text="{Binding Pallet, Mode=TwoWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Grid.Column="3" >
                         </StackPanel>
                         <StackPanel Grid.Column="4" >
-                            <Button  HorizontalAlignment="Right" Content="Godkend"/>
+                            <Button  HorizontalAlignment="Right" Content="Godkend" IsEnabled="False"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

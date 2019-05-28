@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ConsumerUWP.ViewModels;
-
+using Models;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace ConsumerUWP
@@ -30,11 +30,11 @@ namespace ConsumerUWP
         public int Id { get; set; }
 
 
-        public List<PalleCheck> Entries { get; set; }
 
         public EtiketteArk()
         {
             this.InitializeComponent();
+            propStateView.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -48,6 +48,15 @@ namespace ConsumerUWP
         }
 
         #region dependency
+
+        public static readonly DependencyProperty LabelNummerProperty = DependencyProperty.Register(
+            "LabelNummer", typeof(int), typeof(EtiketteArk), new PropertyMetadata(default(int)));
+
+        public int LabelNummer
+        {
+            get { return (int) GetValue(LabelNummerProperty); }
+            set { SetValue(LabelNummerProperty, value); }
+        }
 
         public static readonly DependencyProperty CommentStringProperty = DependencyProperty.Register(
             "CommentString", typeof(string), typeof(EtiketteArk), new PropertyMetadata(default(string)));
@@ -67,10 +76,24 @@ namespace ConsumerUWP
             set { SetValue(ETProperty, value); }
         }
 
-        
 
         #endregion
 
+        #region Popups
+
+        private async void OpenPopup2(object sender, RoutedEventArgs e)
+        {
+            ContentDialogResult result = await PallePopup.ShowAsync();
+            if (txtbox_Palle.Text == "")
+            {
+                PallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                // GEM TIL DATABASE HER
+                PallePopup.IsPrimaryButtonEnabled = true;
+            }
+        }
         private async void OpenPopup(object sender, RoutedEventArgs e)
         {
             ContentDialogResult result = await termsOfUseContentDialog.ShowAsync();
@@ -85,49 +108,6 @@ namespace ConsumerUWP
                 termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
             }
         }
-        private async void OpenPopup2(object sender, RoutedEventArgs e)
-        {
-            ContentDialogResult result = await PallePopup.ShowAsync();
-            if (txtbox_Palle.Text == "")
-            {
-                PallePopup.IsPrimaryButtonEnabled = false;
-            }
-            else
-            {
-                // GEM TIL DATABASE HER
-                PallePopup.IsPrimaryButtonEnabled = true;
-            }
-        }
-
-
-
-
-        private void Txtbox_Label_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtbox_Label.Text.Length <= 5
-                || txtbox_ExpireDate.Text.Length <= 5)
-            {
-                Debug.WriteLine("Error in " + txtbox_Label.Header + " or " + txtbox_ExpireDate.Header);
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
-            }
-            else
-            {
-                termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
-            }
-        }
-        private void Txtbox_Palle_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtbox_Palle.Text.Length <= 8)
-            {
-                Debug.WriteLine("Error in " + txtbox_Palle.Header);
-                PallePopup.IsPrimaryButtonEnabled = false;
-            }
-            else
-            {
-                PallePopup.IsPrimaryButtonEnabled = true;
-            }
-        }
-
         private void TermsOfUseContentDialog_OnPrimaryButtonClick(ContentDialog sender,
             ContentDialogButtonClickEventArgs args)
         {
@@ -157,25 +137,6 @@ namespace ConsumerUWP
                 //// ERROR MSG
             }
         }
-
-        private void SaveComment_OnClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string s = KommentarTextBox.Text;
-                Debug.WriteLine(EtiketteArkVM.SaveComment(s, Id));
-                Message.Text = "Gemt!";
-                Message.Foreground = new SolidColorBrush(Colors.Green);
-                Message.Visibility = Visibility.Visible;
-            }
-            catch (Exception exception)
-            {
-                Message.Text = exception.Message + " Fejl!";
-                Message.Foreground = new SolidColorBrush(Colors.Red);
-                Message.Visibility = Visibility.Visible;
-            }
-        }
-
         private void PallePopup_OnPrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             if (txtbox_Palle.Text != "")
@@ -199,6 +160,80 @@ namespace ConsumerUWP
             {
                 //// TODO
                 //// ERROR MSG
+            }
+        }
+        #endregion
+
+        #region TextChanged
+        private void Txtbox_Label_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtbox_Label.Text.Length <= 5
+                || txtbox_ExpireDate.Text.Length <= 5)
+            {
+                Debug.WriteLine("Error in " + txtbox_Label.Header + " or " + txtbox_ExpireDate.Header);
+                termsOfUseContentDialog.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                termsOfUseContentDialog.IsPrimaryButtonEnabled = true;
+            }
+        }
+        private void Txtbox_Palle_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtbox_Palle.Text.Length <= 8)
+            {
+                Debug.WriteLine("Error in " + txtbox_Palle.Header);
+                PallePopup.IsPrimaryButtonEnabled = false;
+            }
+            else
+            {
+                PallePopup.IsPrimaryButtonEnabled = true;
+            }
+        }
+
+        #endregion
+
+
+
+        
+        private void GemLabel(object sender, RoutedEventArgs e)
+        {
+            Labeling l = new Labeling()
+            {
+                ExpireyDate = ET.SelectedLabel.ExpireDate,
+                ProcessOrderNR = this.Id,
+                LableNR = ET.SelectedLabel.LabelNumber,
+                TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                WorkerToSign = 3
+            };
+            EtiketteArkVM.SaveLabelCheck(l);
+            ET.LabelChecks.Add(new EtiketteArkVM.LabelCheck()
+            {
+                ExpireDate = l.ExpireyDate,
+                LabelNumber = l.LableNR,
+                TimeOfTest = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                Worker = new Worker() { WorkerID = 3, WorkerSign = "BOB" }
+            });
+
+
+
+        }
+
+        private void SaveComment_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string s = KommentarTextBox.Text;
+                Debug.WriteLine(EtiketteArkVM.SaveComment(s, Id));
+                Message.Text = "Gemt!";
+                Message.Foreground = new SolidColorBrush(Colors.Green);
+                Message.Visibility = Visibility.Visible;
+            }
+            catch (Exception exception)
+            {
+                Message.Text = exception.Message + " Fejl!";
+                Message.Foreground = new SolidColorBrush(Colors.Red);
+                Message.Visibility = Visibility.Visible;
             }
         }
 
